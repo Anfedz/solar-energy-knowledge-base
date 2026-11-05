@@ -93,5 +93,7 @@ Para regenerar los datos de radiación: `cd 06-datos && python3 -I procesar_dato
 | Datos del propietario y 12 facturas | ✅ [`02-respuestas-propietario.md`](07-diseno-proyecto/02-respuestas-propietario.md), [`03-analisis-consumo.md`](07-diseno-proyecto/03-analisis-consumo.md) |
 | Anteproyecto y alternativas | ✅ v1 [`04-anteproyecto.md`](07-diseno-proyecto/04-anteproyecto.md): on-grid de 7 × 620 W (≈13 M, ahorro ≈4,8 M/año) + respaldo en fase 2 |
 | Diseño de detalle (strings, unifilar, protecciones, estructura) | ⏳ falta: voltaje medido, fotos del medidor, el tablero, el techo y los árboles |
-| Cotización final con proveedores | ⏳ |
+| Análisis de cotización y simulador | ✅ [`05-analisis-cotizacion.md`](07-diseno-proyecto/05-analisis-cotizacion.md), [`08-simulador/`](08-simulador/README.md) |
+| **Decisión** | ✅ Cotización de 12 × Ronma 630 W + SRNE 6,5 kW (sin batería); plan de implementación, hábitos de 9 am–3 pm y batería: [`06-plan-implementacion.md`](07-diseno-proyecto/06-plan-implementacion.md) |
+| Instalación y monitoreo | ⏳ |
 | Trámites (RETIE, Air-e, UPME) | ⏳ |

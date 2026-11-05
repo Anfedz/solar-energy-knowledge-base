@@ -4,6 +4,8 @@
 > Es un **anteproyecto**: las cifras se ajustan cuando lleguen los datos pendientes (sección 8).
 > Simulación reproducible: `python3 -I anteproyecto.py` (ver opciones con `--help`).
 
+> **✅ Decisión del propietario (2026-11-05):** se contrata la **cotización recibida** (12 × Ronma 630 W + SRNE 6,5 kW, sin batería ni inyección). El plan de implementación, los hábitos de 9 am–3 pm y la meta de batería están en [`06-plan-implementacion.md`](06-plan-implementacion.md). El análisis de este documento queda como referencia.
+>
 > **Actualización 2026-11-05:** con el horario real de aires y la cotización recibida (paneles Ronma 630 W a 400 000 c/u), la mejor opción es **8 × Ronma 630 W on-grid (5,04 kWp), ≈ 12,1–13,8 M, ahorro ≈ 5,4 M/año** (simulación hora a hora). Ver [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md).
 
 ## 1. Recomendación en una frase

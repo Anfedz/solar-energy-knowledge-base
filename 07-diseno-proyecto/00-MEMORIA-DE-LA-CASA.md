@@ -89,11 +89,13 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 ## 7. Decisiones tomadas
 | Fecha | Decisión |
 |---|---|
+| 2026-11-05 | ✅ **DECISIÓN: contratar la cotización recibida** (12 × Ronma 630 W + SRNE ASP4865U140-H 6,5 kW, sin batería ni inyección, $14 395 000). Plan: medir el consumo por equipo, mover el uso a **9 am–3 pm** y ahorrar para una **batería** (5 kWh apilable, luego 10 kWh). Ver [`06-plan-implementacion.md`](06-plan-implementacion.md) |
 | 2026-11-05 | El repositorio se actualiza directamente en `main` |
-| 2026-11-05 | Cotización recibida (12 × Ronma 630 W + SRNE 6,5 kW off-grid, sin batería, $14,4 M): análisis en [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md). **Recomendación:** pedir versión on-grid de 8 × Ronma 630 (≈ 12,1–13,8 M, ahorro ≈ 5,4 M/año) — *pendiente de decisión del propietario* |
-| 2026-11-05 | Anteproyecto v1: **on-grid de 7 × ~620 W (4,3 kWp) en la cara este (~13 M COP)** + respaldo en fase 2 (inversor-cargador 48 V + batería de 2,4 kWh, ≈ 5,3 M). Ver [`04-anteproyecto.md`](04-anteproyecto.md) — *propuesta, pendiente de aprobación del propietario* |
+| 2026-11-05 | Cotización recibida (12 × Ronma 630 W + SRNE 6,5 kW off-grid, sin batería, $14,4 M): análisis en [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md). **Recomendación:** pedir versión on-grid de 8 × Ronma 630 (≈ 12,1–13,8 M, ahorro ≈ 5,4 M/año) — *no elegida: el propietario decidió la cotización tal cual* |
+| 2026-11-05 | Anteproyecto v1: **on-grid de 7 × ~620 W (4,3 kWp) en la cara este (~13 M COP)** + respaldo en fase 2 (inversor-cargador 48 V + batería de 2,4 kWh, ≈ 5,3 M). Ver [`04-anteproyecto.md`](04-anteproyecto.md) — *propuesta superada por la decisión del 2026-11-05* |
 
 ## 8. Pendientes del propietario
+0. ⏳ **Antes de firmar:** revisar con el instalador los 12 puntos de [`06-plan-implementacion.md`](06-plan-implementacion.md) §2 (tensión 120/240 vs 208 V, funcionamiento sin batería, Wi-Fi, DPS y tierra, RETIE, trámite Air-e, cableado listo para batería, garantías).
 1. ⏳ Voltaje entre fases y entre cada fase y el neutro.
 2. ⏳ Fotos del medidor y la acometida. Del tablero: la etiqueta interior de cerca (corriente nominal de barras), dónde está el breaker principal y su amperaje, y una foto legible de los rótulos de cada breaker.
 3. ⏳ Techo: orientación de las aguas, edad, tipo de correas; foto desde arriba.
@@ -124,3 +126,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Cotización de un instalador local (22-oct-2026): 12 × Ronma RM-630W TOPCon bifacial + inversor SRNE ASP4865U140-H 6,5 kW (off-grid, 48 V, fase partida 120/240 V) sin batería, $14 395 000; fichas técnicas de panel e inversor. Le recomendaron no vender a Air-e | §7, [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md) |
 | 2026-11-05 | Preguntó por el área de los 12 paneles (32,4 m² de paneles; ~35–40 m² de techo) y qué pasa si usa los aires de día | Respuesta en el chat; sensibilidad en [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md) §9 |
 | 2026-11-05 | Aclaró que "usar los aires de día" significa **mover** horas (prenderlos de día y usarlos menos de noche), no agregar horas. Pidió un simulador interactivo basado en las facturas y que tenga en cuenta los computadores y demás aparatos | Simulador en [`../08-simulador/`](../08-simulador/README.md); sensibilidad en [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md) §9 (caso 1) |
+| 2026-11-05 | **Decidió contratar la cotización** (12 × Ronma 630 W + SRNE 6,5 kW, sin batería). Quiere ver el comportamiento de la casa, identificar los equipos que más consumen, usarlos entre 9 am y 3 pm, e ir ahorrando para una batería | §7, §8, [`06-plan-implementacion.md`](06-plan-implementacion.md) |
