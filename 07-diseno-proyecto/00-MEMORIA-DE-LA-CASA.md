@@ -71,7 +71,9 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | Abanicos | — | Deseable | ⏳ cantidad |
 | Computador(es) | — | Deseable (PC) | ⏳ ¿escritorio o portátil? |
 | Impresora 3D | — | No | ⏳ horas/semana |
-| Lavadoras, microondas, plancha, televisores, impresora | — | No | ⏳ |
+| **Lavadora Mabe LMC70203WDAB0** | Automática, 20 kg, etiqueta RETIQ **A**, **9,4 kWh/mes** (14 ciclos/mes ≈ 0,67 kWh/ciclo), factor 121 l/kWh/ciclo. Conviene lavar en horas de sol | No | ✅ foto de la etiqueta 2026-11-05 · ⏳ ¿hay una segunda lavadora? |
+| **Impresora Epson L4260** (EcoTank) | En espera: **0,733 kWh/mes** (clase B, norma chilena NCh 3107). Despreciable | No | ✅ foto de la etiqueta 2026-11-05 |
+| Microondas, plancha, televisores | — | No | ⏳ |
 
 ## 6. Techo y sitio
 | Dato | Valor | Estado |
@@ -116,3 +118,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Fotos del Aire 2 (habitación): LG VM122C7 DUAL Inverter, 12 000 BTU, 1 060 W nominal (máx. 1 460 W), 220 V | §4, §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
 | 2026-11-05 | Fotos del Aire 3 (habitación): LG VM092C6 DUAL Inverter, 9 000 BTU, 790 W nominal (máx. 1 270 W), 220 V | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
 | 2026-11-05 | Foto del tablero: bifásico, 12 circuitos, lleno; rótulos poco legibles | §4; presupuesto del anteproyecto +0,3–0,8 M (tablero solar adicional) |
+| 2026-11-05 | Fotos de etiquetas: lavadora Mabe LMC70203WDAB0 (9,4 kWh/mes, clase A) e impresora Epson L4260 (0,73 kWh/mes en espera) | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
