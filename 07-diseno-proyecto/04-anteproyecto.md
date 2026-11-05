@@ -41,8 +41,9 @@ La independencia total (c) no es viable con 15 M. Lo más cercano es la ruta A c
 | Puesta a tierra (varilla de cobre, cable, conexión) | Si la casa no la tiene ⚠️ estimado | 300 000 – 600 000 |
 | Cable AC, breaker y canalización hasta el tablero | ⚠️ estimado | ≈ 200 000 |
 | Medidor bidireccional (lo exige Air-e) | 200 000 – 800 000 | ≈ 500 000 |
+| **Tablero:** el actual (bifásico, 12 circuitos) está **lleno** → tablero solar adicional junto al existente o cambio a uno de 18–24 circuitos | ⚠️ estimado; lo define el técnico | 300 000 – 800 000 |
 | Mano de obra, diseño y memoria firmada por ingeniero/técnico con matrícula, declaración RETIE y radicación en Air-e | ⚠️ sin precio publicado; estimado | 2 500 000 – 3 500 000 |
-| **Total fase 1** | | **≈ 11,5 – 15,4 M (típico ≈ 13 M)** |
+| **Total fase 1** | | **≈ 11,8 – 16,2 M (típico ≈ 13,5 M)** |
 
 Precios y enlaces: [`../03-mercado-y-equipos/precios-referencia-2025-2026.md`](../03-mercado-y-equipos/precios-referencia-2025-2026.md).
 Módulos e inversor están exentos de IVA en las tiendas. Estructura, cables, protecciones y medidor llevan 19 % (incluido arriba).
@@ -137,6 +138,7 @@ En cortes de 1 a 4 horas, lo que más te afecta es el **módem, el PC y los aban
 
 ## 8. Lo que necesito para pasar al diseño de detalle
 1. 🔴 **Voltaje medido** entre fase 1 y fase 2, y entre cada fase y el neutro. Define el inversor.
+1b. 🔴 **Tablero:** foto de cerca de la etiqueta interior (corriente nominal de barras) y ubicación y amperaje del **breaker principal** (¿en la caja del medidor?). Define cómo se conecta el inversor (regla del 120 %, NTC 2050 secc. 705).
 2. 🔴 **Fotos del medidor** (con la placa legible), de la **acometida** (cuántos cables llegan) y del **tablero** abierto.
 3. 🔴 **Techo:** confirmar hacia dónde caen las dos aguas, la **edad del techo** y si las correas son de madera o metal. Una foto del techo desde arriba si se puede.
 4. 🔴 **Árboles:** dónde están respecto al techo (norte, sur, este u oeste), qué altura tienen y si son tuyos. Fotos desde el techo hacia los 4 lados.

@@ -50,7 +50,7 @@
 | Tensión entre fases | 240 V o 208 V | ⏳ **medir con multímetro** (define el inversor) |
 | Medidor | Energía activa, lectura real | ✅ factura · ⏳ foto de la placa |
 | Acometida | — | ⏳ foto |
-| Tablero | Probable ubicación del inversor y las baterías: cerca del tablero | ⏳ foto |
+| Tablero | **Bifásico de 12 circuitos, con los 12 espacios ocupados** (breakers de 1 polo, rótulos escritos a mano, entre ellos nevera/cocina, lavadora, aire, terraza ⚠️ lectura parcial). En la foto no se ve breaker principal ni barra de tierra. Probable ubicación del inversor y las baterías: cerca del tablero | ✅ foto 2026-11-05 · ⏳ etiqueta de corriente de barras, breaker principal, rótulos legibles |
 | Puesta a tierra | No sabe | ⏳ |
 
 ## 5. Cargas (aparatos)
@@ -92,7 +92,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 
 ## 8. Pendientes del propietario
 1. ⏳ Voltaje entre fases y entre cada fase y el neutro.
-2. ⏳ Fotos del medidor, la acometida y el tablero.
+2. ⏳ Fotos del medidor y la acometida. Del tablero: la etiqueta interior de cerca (corriente nominal de barras), dónde está el breaker principal y su amperaje, y una foto legible de los rótulos de cada breaker.
 3. ⏳ Techo: orientación de las aguas, edad, tipo de correas; foto desde arriba.
 4. ⏳ Árboles: posición respecto al techo, altura, si son propios; fotos hacia los 4 lados.
 5. ⏳ Placa de la unidad exterior del Aire 1 (voltaje, inverter); horas de uso de los 3 aires.
@@ -115,3 +115,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Foto de la etiqueta del Aire 1 (habitación): Olimpo OLACI12-110MA21, 12 000 BTU, clase C, EER 3,25, ≈ 1,08 kW | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
 | 2026-11-05 | Fotos del Aire 2 (habitación): LG VM122C7 DUAL Inverter, 12 000 BTU, 1 060 W nominal (máx. 1 460 W), 220 V | §4, §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
 | 2026-11-05 | Fotos del Aire 3 (habitación): LG VM092C6 DUAL Inverter, 9 000 BTU, 790 W nominal (máx. 1 270 W), 220 V | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
+| 2026-11-05 | Foto del tablero: bifásico, 12 circuitos, lleno; rótulos poco legibles | §4; presupuesto del anteproyecto +0,3–0,8 M (tablero solar adicional) |

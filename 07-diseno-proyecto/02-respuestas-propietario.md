@@ -16,7 +16,7 @@
 
 ## C. Instalación eléctrica
 - Fotos del medidor y de la acometida: **pendientes** ("tendría que ver").
-- Fotos del tablero: **pendientes**.
+- **Tablero:** bifásico de 12 circuitos, **lleno** (foto, 2026-11-05). Pendiente: etiqueta de barras y breaker principal.
 - **Tiene aires a 220 V** → servicio con dos fases (120/240 V o 120/208 V). **Falta medir** para saber cuál.
 - Puesta a tierra: **no sabe**.
 
