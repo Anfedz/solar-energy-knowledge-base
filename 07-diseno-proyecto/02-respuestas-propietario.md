@@ -21,7 +21,7 @@
 - Puesta a tierra: **no sabe**.
 
 ## D. Cargas
-- **3 aires acondicionados** (BTU, si son inverter y horarios: pendientes).
+- **3 aires acondicionados.** Aire 1 (habitación): **Olimpo OLACI12-110MA21**, 12 000 BTU, clase C, EER 3,25, ≈ 1,08 kW (foto, 2026-11-05). Aires 2 y 3: pendientes.
 - **Nevera: LG LS65SXTX** side-by-side de 592 L, etiqueta RETIQ A, **45,9 kWh/mes** (foto de la etiqueta, 2026-11-05). Inventario en [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv).
 - **Congelador: Electrolux EFUP17P3HRG** vertical de 163 L, etiqueta RETIQ A, **24 kWh/mes**, deshielo manual (foto, 2026-11-05).
 - lavadoras, microondas, plancha, **impresora 3D**, impresora normal, televisores, computadores.

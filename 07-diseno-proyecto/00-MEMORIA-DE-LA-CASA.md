@@ -46,7 +46,7 @@
 ## 4. Instalación eléctrica
 | Dato | Valor | Estado |
 |---|---|---|
-| Fases | Dos fases (tiene aires de 220 V) | ✅ |
+| Fases | Dos fases (el propietario dice que tiene aires de 220 V) | ✅ · ⚠️ el Aire 1 parece de 115 V |
 | Tensión entre fases | 240 V o 208 V | ⏳ **medir con multímetro** (define el inversor) |
 | Medidor | Energía activa, lectura real | ✅ factura · ⏳ foto de la placa |
 | Acometida | — | ⏳ foto |
@@ -62,7 +62,8 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 |---|---|---|---|
 | **Nevera LG LS65SXTX** | Side-by-side, 592 L, etiqueta RETIQ **A**, **45,9 kWh/mes** (≈ 1,5 kWh/día, ≈ 64 W promedio), ahorro del 56 %, deshielo automático, T ambiente 16–38 °C | **Sí (primordial)** | ✅ foto de la etiqueta 2026-11-05 |
 | **Congelador Electrolux EFUP17P3HRG** | Vertical, 163 L, etiqueta RETIQ **A**, **24 kWh/mes** (≈ 0,8 kWh/día, ≈ 33 W promedio), ahorro del 56 %, **deshielo manual**, T ambiente 16–43 °C | Sí | ✅ foto de la etiqueta 2026-11-05 |
-| Aires acondicionados × 3 | 220 V | No | ⏳ placas (BTU, inverter, potencia) y horarios |
+| **Aire 1 (habitación) — Olimpo OLACI12-110MA21** | Mini split **12 000 BTU** (3 517 W de frío), etiqueta RETIQ **C**, EER **3,25 W/W** → **≈ 1,08 kW** de entrada; 142,83 kWh/mes a 132 h/mes (etiqueta); T ambiente 18–43 °C. ⚠️ El "110" del modelo sugiere **115 V**, no 220 V. ⚠️ Falta confirmar si es inverter (la placa de la unidad exterior lo dice) | No | ✅ foto de la etiqueta 2026-11-05 · ⏳ horas reales de uso |
+| Aires 2 y 3 | ¿220 V? | No | ⏳ etiquetas y horarios |
 | Módem / router | ¿El internet sigue durante un corte? | Deseable | ⏳ prueba en el próximo corte |
 | Abanicos | — | Deseable | ⏳ cantidad |
 | Computador(es) | — | Deseable (PC) | ⏳ ¿escritorio o portátil? |
@@ -91,7 +92,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 2. ⏳ Fotos del medidor, la acometida y el tablero.
 3. ⏳ Techo: orientación de las aguas, edad, tipo de correas; foto desde arriba.
 4. ⏳ Árboles: posición respecto al techo, altura, si son propios; fotos hacia los 4 lados.
-5. ⏳ Placas y horarios de los 3 aires.
+5. ⏳ Etiquetas de los aires 2 y 3; placa de la unidad exterior del Aire 1 (voltaje, inverter); horas de uso de los 3.
 6. ⏳ Causa del aumento de consumo en 2026.
 7. ⏳ Tipo de internet (fibra, cable o antena).
 
@@ -108,3 +109,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Foto de la etiqueta de energía de la nevera: LG LS65SXTX, 592 L, clase A, 45,9 kWh/mes | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
 | 2026-11-05 | Pidió anotar todo lo que comparta en esta memoria de la casa | Este archivo + `CLAUDE.md` |
 | 2026-11-05 | Foto de la etiqueta de energía del congelador: Electrolux EFUP17P3HRG, vertical 163 L, clase A, 24 kWh/mes, deshielo manual | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
+| 2026-11-05 | Foto de la etiqueta del Aire 1 (habitación): Olimpo OLACI12-110MA21, 12 000 BTU, clase C, EER 3,25, ≈ 1,08 kW | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
