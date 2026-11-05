@@ -56,10 +56,12 @@
 ## 5. Cargas (aparatos)
 Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv).
 
+**Frío (nevera + congelador): 69,9 kWh/mes según etiqueta ≈ 14 % del consumo promedio.** Las dos cargas críticas suman ≈ 100 W de promedio y son muy eficientes.
+
 | Aparato | Datos | Crítico en corte | Estado |
 |---|---|---|---|
 | **Nevera LG LS65SXTX** | Side-by-side, 592 L, etiqueta RETIQ **A**, **45,9 kWh/mes** (≈ 1,5 kWh/día, ≈ 64 W promedio), ahorro del 56 %, deshielo automático, T ambiente 16–38 °C | **Sí (primordial)** | ✅ foto de la etiqueta 2026-11-05 |
-| Congelador | Nuevo | Sí | ⏳ etiqueta |
+| **Congelador Electrolux EFUP17P3HRG** | Vertical, 163 L, etiqueta RETIQ **A**, **24 kWh/mes** (≈ 0,8 kWh/día, ≈ 33 W promedio), ahorro del 56 %, **deshielo manual**, T ambiente 16–43 °C | Sí | ✅ foto de la etiqueta 2026-11-05 |
 | Aires acondicionados × 3 | 220 V | No | ⏳ placas (BTU, inverter, potencia) y horarios |
 | Módem / router | ¿El internet sigue durante un corte? | Deseable | ⏳ prueba en el próximo corte |
 | Abanicos | — | Deseable | ⏳ cantidad |
@@ -89,7 +91,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 2. ⏳ Fotos del medidor, la acometida y el tablero.
 3. ⏳ Techo: orientación de las aguas, edad, tipo de correas; foto desde arriba.
 4. ⏳ Árboles: posición respecto al techo, altura, si son propios; fotos hacia los 4 lados.
-5. ⏳ Etiqueta del congelador; placas y horarios de los 3 aires.
+5. ⏳ Placas y horarios de los 3 aires.
 6. ⏳ Causa del aumento de consumo en 2026.
 7. ⏳ Tipo de internet (fibra, cable o antena).
 
@@ -105,3 +107,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Enlace de Google Maps de la casa (coordenadas no se publican) | §1, §6 |
 | 2026-11-05 | Foto de la etiqueta de energía de la nevera: LG LS65SXTX, 592 L, clase A, 45,9 kWh/mes | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
 | 2026-11-05 | Pidió anotar todo lo que comparta en esta memoria de la casa | Este archivo + `CLAUDE.md` |
+| 2026-11-05 | Foto de la etiqueta de energía del congelador: Electrolux EFUP17P3HRG, vertical 163 L, clase A, 24 kWh/mes, deshielo manual | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |

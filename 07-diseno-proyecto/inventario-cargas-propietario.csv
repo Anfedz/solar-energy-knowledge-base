@@ -1,6 +1,6 @@
 aparato,cantidad,potencia_W,inverter_si_no,horas_dia,franja_horaria(manana/tarde/noche/madrugada),dias_semana,critico_en_corte_si_no,corriente_arranque_A_o_LRA,notas
 Nevera-congelador LG LS65SXTX side-by-side 592 L,1,64,,24,todo el dia,7,si,,etiqueta RETIQ A: 45.9 kWh/mes (1.53 kWh/dia) = 64 W promedio; ahorro 56 %; T ambiente 16-38 C; potencia de placa y tipo de compresor por confirmar (placa interior)
-Congelador,1,,,24,todo el dia,7,si,,pendiente: foto de etiqueta
+Congelador vertical Electrolux EFUP17P3HRG 163 L,1,33,,24,todo el dia,7,si,,etiqueta RETIQ A: 24 kWh/mes (0.8 kWh/dia) = 33 W promedio; ahorro 56 %; deshielo manual; T ambiente 16-43 C
 Aire acondicionado 1,1,,,,,7,no,,pendiente: placa (BTU / inverter / potencia de entrada / voltaje) y horario
 Aire acondicionado 2,1,,,,,7,no,,pendiente
 Aire acondicionado 3,1,,,,,7,no,,pendiente

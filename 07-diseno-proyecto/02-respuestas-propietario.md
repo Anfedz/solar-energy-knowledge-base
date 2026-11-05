@@ -23,7 +23,8 @@
 ## D. Cargas
 - **3 aires acondicionados** (BTU, si son inverter y horarios: pendientes).
 - **Nevera: LG LS65SXTX** side-by-side de 592 L, etiqueta RETIQ A, **45,9 kWh/mes** (foto de la etiqueta, 2026-11-05). Inventario en [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv).
-- Congelador nuevo, lavadoras, microondas, plancha, **impresora 3D**, impresora normal, televisores, computadores.
+- **Congelador: Electrolux EFUP17P3HRG** vertical de 163 L, etiqueta RETIQ A, **24 kWh/mes**, deshielo manual (foto, 2026-11-05).
+- lavadoras, microondas, plancha, **impresora 3D**, impresora normal, televisores, computadores.
 
 ## E. Techo / sitio
 - Ubicación: casco urbano de Sabanalarga. En la imagen satelital se ve una calle este-oeste, casas alargadas norte-sur y un **árbol grande** junto al punto marcado.
