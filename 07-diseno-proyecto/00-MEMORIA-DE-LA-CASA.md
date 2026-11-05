@@ -1,0 +1,107 @@
+# Memoria de la casa
+
+> Registro vivo de **todo** lo que el propietario comparte sobre la casa y el proyecto solar.
+> Se actualiza con cada dato nuevo: la ficha (secciones 1–7) guarda el **estado actual** y la bitácora (sección 9), el **historial fechado**.
+> 🔒 **El repositorio es público:** no se anotan nombre, dirección, NIU/cuenta, número de medidor, teléfonos ni coordenadas exactas.
+> Las fotos no se suben; se describe aquí lo que muestran.
+> Leyenda: ✅ confirmado · ⚠️ supuesto o por confirmar · ⏳ pendiente.
+
+---
+
+## 1. Datos generales
+| Dato | Valor | Estado |
+|---|---|---|
+| Municipio | Sabanalarga, Atlántico (casco urbano, ~100 m s. n. m.) | ✅ |
+| Tenencia | Vivienda propia | ✅ |
+| Estrato | 3 (residencial) | ✅ factura |
+| Operador de red | Air-e (intervenida por la Superservicios) | ✅ |
+| Propiedad del activo (factura) | "PE" | ⚠️ confirmar si el transformador es de Air-e |
+| Entorno (imagen satelital) | Calle este-oeste, casas alargadas norte-sur, árbol grande junto al punto marcado | ⚠️ imagen de baja resolución |
+
+## 2. Objetivos y restricciones del propietario
+| Tema | Respuesta | Estado |
+|---|---|---|
+| Prioridades | 1) bajar la factura · 2) respaldo en cortes · 3) independencia de la red | ✅ |
+| Presupuesto | Máximo **15 M COP** | ✅ |
+| Modalidad | Comprar equipos y contratar técnico | ✅ |
+| Monitoreo | Sí, desde el celular | ✅ |
+| Robo | No le preocupa | ✅ |
+| Declara renta | Sí (evaluar certificado UPME con el contador) | ✅ |
+| Ampliaciones | Ninguna por ahora; quizá carro eléctrico; una piscina tendría su propio sistema | ✅ |
+
+## 3. Servicio de energía y cortes
+| Dato | Valor | Estado |
+|---|---|---|
+| Consumo 12 meses (nov-25 a oct-26) | **5 887 kWh** ≈ 485 kWh/mes (rango 291–804) | ✅ 12 facturas |
+| Tendencia | +28 % en may–oct 2026 frente a 2025 | ✅ (causa ⏳) |
+| Pago anual | $5 289 350 (promedio $440 779/mes) | ✅ |
+| Tarifa (CU) | $795,93 → $873,69 (oct-26); la tabla de Air-e ya marca $936,40 | ✅ |
+| Subsidio | 15 % sobre la subsistencia (~173 kWh/mes, prorrateada por días) | ✅ |
+| Alumbrado público | 10 % del valor del consumo | ✅ factura |
+| Tasa de seguridad | $16 000–17 000/mes (fija) | ✅ |
+| Programa de meta de consumo | Res. CREG 101 120 de 2026 (El Niño): cobro adicional si se supera la meta | ✅ mencionado en la factura |
+| Cortes | Según la temporada: a veces > 3 por mes, de 1 h a más de 3–4 h | ✅ |
+| Detalle | [`consumo-historico.csv`](consumo-historico.csv), [`03-analisis-consumo.md`](03-analisis-consumo.md) | |
+
+## 4. Instalación eléctrica
+| Dato | Valor | Estado |
+|---|---|---|
+| Fases | Dos fases (tiene aires de 220 V) | ✅ |
+| Tensión entre fases | 240 V o 208 V | ⏳ **medir con multímetro** (define el inversor) |
+| Medidor | Energía activa, lectura real | ✅ factura · ⏳ foto de la placa |
+| Acometida | — | ⏳ foto |
+| Tablero | Probable ubicación del inversor y las baterías: cerca del tablero | ⏳ foto |
+| Puesta a tierra | No sabe | ⏳ |
+
+## 5. Cargas (aparatos)
+Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv).
+
+| Aparato | Datos | Crítico en corte | Estado |
+|---|---|---|---|
+| **Nevera LG LS65SXTX** | Side-by-side, 592 L, etiqueta RETIQ **A**, **45,9 kWh/mes** (≈ 1,5 kWh/día, ≈ 64 W promedio), ahorro del 56 %, deshielo automático, T ambiente 16–38 °C | **Sí (primordial)** | ✅ foto de la etiqueta 2026-11-05 |
+| Congelador | Nuevo | Sí | ⏳ etiqueta |
+| Aires acondicionados × 3 | 220 V | No | ⏳ placas (BTU, inverter, potencia) y horarios |
+| Módem / router | ¿El internet sigue durante un corte? | Deseable | ⏳ prueba en el próximo corte |
+| Abanicos | — | Deseable | ⏳ cantidad |
+| Computador(es) | — | Deseable (PC) | ⏳ ¿escritorio o portátil? |
+| Impresora 3D | — | No | ⏳ horas/semana |
+| Lavadoras, microondas, plancha, televisores, impresora | — | No | ⏳ |
+
+## 6. Techo y sitio
+| Dato | Valor | Estado |
+|---|---|---|
+| Material | Eternit (fibrocemento), en buen estado | ✅ |
+| Forma | Dos aguas, ≈ 10 × 15 m | ⚠️ medidas aproximadas |
+| Orientación de las aguas | Probablemente este y oeste | ⚠️ por confirmar |
+| Pendiente | ~10° asumida | ⚠️ |
+| Edad del techo / asbesto | — | ⏳ (si es anterior a 2021, podría tener asbesto) |
+| Correas (vigas) | ¿Madera o metal? | ⏳ |
+| Sombras | Principalmente árboles | ✅ · ⏳ posición, altura y si son propios |
+
+## 7. Decisiones tomadas
+| Fecha | Decisión |
+|---|---|
+| 2026-11-05 | El repositorio se actualiza directamente en `main` |
+| 2026-11-05 | Anteproyecto v1: **on-grid de 7 × ~620 W (4,3 kWp) en la cara este (~13 M COP)** + respaldo en fase 2 (inversor-cargador 48 V + batería de 2,4 kWh, ≈ 5,3 M). Ver [`04-anteproyecto.md`](04-anteproyecto.md) — *propuesta, pendiente de aprobación del propietario* |
+
+## 8. Pendientes del propietario
+1. ⏳ Voltaje entre fases y entre cada fase y el neutro.
+2. ⏳ Fotos del medidor, la acometida y el tablero.
+3. ⏳ Techo: orientación de las aguas, edad, tipo de correas; foto desde arriba.
+4. ⏳ Árboles: posición respecto al techo, altura, si son propios; fotos hacia los 4 lados.
+5. ⏳ Etiqueta del congelador; placas y horarios de los 3 aires.
+6. ⏳ Causa del aumento de consumo en 2026.
+7. ⏳ Tipo de internet (fibra, cable o antena).
+
+---
+
+## 9. Bitácora
+| Fecha | Qué compartió el propietario | Dónde quedó |
+|---|---|---|
+| 2026-10-28 | Pidió la base de conocimiento solar para Sabanalarga y la lista de datos de entrada | Carpetas 01–06, [`01-DATOS-QUE-NECESITO.md`](01-DATOS-QUE-NECESITO.md) |
+| 2026-11-05 | Repo de GitHub; actualizar en `main` | §7 |
+| 2026-11-05 | Respuestas al cuestionario (objetivos, cortes, presupuesto de 15 M, aires de 220 V, 3 aires, aparatos, techo de eternit a dos aguas ≈ 10 × 15 m, árboles, vivienda propia, declara renta, compra de equipos con técnico, monitoreo) | §2–6, [`02-respuestas-propietario.md`](02-respuestas-propietario.md) |
+| 2026-11-05 | 12 facturas Air-e (nov-25 a oct-26) en ZIP | §3, [`consumo-historico.csv`](consumo-historico.csv) |
+| 2026-11-05 | Enlace de Google Maps de la casa (coordenadas no se publican) | §1, §6 |
+| 2026-11-05 | Foto de la etiqueta de energía de la nevera: LG LS65SXTX, 592 L, clase A, 45,9 kWh/mes | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
+| 2026-11-05 | Pidió anotar todo lo que comparta en esta memoria de la casa | Este archivo + `CLAUDE.md` |

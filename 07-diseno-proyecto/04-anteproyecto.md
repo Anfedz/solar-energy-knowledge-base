@@ -92,6 +92,23 @@ En cortes de 1 a 4 horas, lo que más te afecta es el **módem, el PC y los aban
 | R1. UPS de onda senoidal 1–1,5 kVA | Módem + PC | 30–90 min ⚠️ | ≈ 0,5–1,5 M ⚠️ (precio por verificar) | Cabe ya dentro de los 15 M |
 | **R2. Inversor-cargador Growatt SPF 3000TL LVM 48 V (120 V) + batería LiFePO4 Pylontech US2000C 2,4 kWh + subtablero de cargas críticas** | Nevera + congelador + módem + abanicos + PC (≈ 400–700 W) | ≈ 3–5 h; ampliable con más módulos de batería | ≈ 5,3 M (2,47 + 2,40 + ~0,4 de instalación) | Fase 2 |
 
+- **Dato real de la nevera (2026-11-05):** LG LS65SXTX side-by-side de 592 L, etiqueta A, **45,9 kWh/mes ≈ 1,5 kWh/día ≈ 64 W de promedio**.
+  En una cocina de Sabanalarga (28–34 °C) conviene asumir ~30 % más que la etiqueta (~2 kWh/día). Respaldarla durante un corte de 4 h cuesta apenas **≈ 0,3 kWh**.
+  La etiqueta admite una temperatura ambiente de 16–38 °C, así que no hay que ubicarla en un sitio especial.
+- **Balance del respaldo con la nevera medida** (congelador, abanicos y PC estimados ⚠️):
+
+  | Carga | Promedio W | 4 h de corte (kWh) |
+  |---|---|---|
+  | Nevera LG LS65SXTX | ~85 (con margen por calor) | 0,34 |
+  | Congelador (⚠️ falta etiqueta) | ~60–90 | 0,24–0,36 |
+  | Módem / router | ~15 | 0,06 |
+  | 3 abanicos | ~180 | 0,72 |
+  | PC (⚠️ escritorio o portátil) | ~50–250 | 0,20–1,00 |
+  | Pérdidas del inversor | ~40 | 0,16 |
+  | **Total** | **≈ 430–660 W** | **≈ 1,7–2,6 kWh** |
+
+  → Con la batería de 2,4 kWh (≈ 2,2 kWh útiles) alcanza para **≈ 3,5–5 h** con todo prendido, o **> 10 h** solo con la nevera, el congelador y el módem.
+  Los abanicos y un PC de escritorio son los que más pesan, no la nevera.
 - R2 es independiente del inversor on-grid: un subtablero de "cargas críticas" se alimenta del SPF, y este se carga de la red, que de día alimentan tus paneles. La misma arquitectura usa el kit híbrido de Autosolar (MIN + SPF + Pylontech).
 - ⚠️ El SPF consume en vacío del orden de 30–50 W (0,7–1,2 kWh/día). Hay que usar su modo de ahorro o pasar las cargas a bypass cuando hay red.
 - **¿El módem funciona en un corte?** Depende de la red del proveedor. En fibra óptica (FTTH) la central suele tener respaldo, y en cable (HFC) los amplificadores de calle tienen baterías de pocas horas. **Prueba barata:** en el próximo corte, conecta el módem a un power bank con salida de 12 V (o a la UPS) y verifica si hay internet.
@@ -123,6 +140,6 @@ En cortes de 1 a 4 horas, lo que más te afecta es el **módem, el PC y los aban
 2. 🔴 **Fotos del medidor** (con la placa legible), de la **acometida** (cuántos cables llegan) y del **tablero** abierto.
 3. 🔴 **Techo:** confirmar hacia dónde caen las dos aguas, la **edad del techo** y si las correas son de madera o metal. Una foto del techo desde arriba si se puede.
 4. 🔴 **Árboles:** dónde están respecto al techo (norte, sur, este u oeste), qué altura tienen y si son tuyos. Fotos desde el techo hacia los 4 lados.
-5. 🟡 **Placas de los 3 aires:** BTU, si son inverter, potencia de entrada, y a qué horas se usan.
+5. 🟡 **Etiqueta del congelador** (como la de la nevera) y **placas de los 3 aires:** BTU, si son inverter, potencia de entrada, y a qué horas se usan.
 6. 🟡 ¿Qué cambió en 2026 para que el consumo subiera 28 %?
 7. ⚪ ¿Tu proveedor de internet es por fibra, cable o antena? (Para la prueba del módem en un corte.)

@@ -88,6 +88,7 @@ Para regenerar los datos de radiación: `cd 06-datos && python3 -I procesar_dato
 | Etapa | Estado |
 |---|---|
 | Base de conocimiento | ✅ oct-2026 |
+| **Memoria de la casa** (todo lo compartido) | ✅ [`00-MEMORIA-DE-LA-CASA.md`](07-diseno-proyecto/00-MEMORIA-DE-LA-CASA.md) |
 | Datos del propietario y 12 facturas | ✅ [`02-respuestas-propietario.md`](07-diseno-proyecto/02-respuestas-propietario.md), [`03-analisis-consumo.md`](07-diseno-proyecto/03-analisis-consumo.md) |
 | Anteproyecto y alternativas | ✅ v1 [`04-anteproyecto.md`](07-diseno-proyecto/04-anteproyecto.md): on-grid de 7 × 620 W (≈13 M, ahorro ≈4,8 M/año) + respaldo en fase 2 |
 | Diseño de detalle (strings, unifilar, protecciones, estructura) | ⏳ falta: voltaje medido, fotos del medidor, el tablero, el techo y los árboles |
