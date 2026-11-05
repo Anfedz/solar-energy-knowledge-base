@@ -1,0 +1,12 @@
+aparato,cantidad,potencia_W,inverter_si_no,horas_dia,franja_horaria(manana/tarde/noche/madrugada),dias_semana,critico_en_corte_si_no,corriente_arranque_A_o_LRA,notas
+Aire acondicionado alcoba principal 12000 BTU,1,1100,si,8,noche/madrugada,7,no,,ejemplo - reemplazar
+Nevera,1,150,no,24,todo el dia,7,si,,ciclo compresor ~40% del tiempo
+Abanico de techo,3,60,no,10,tarde/noche,7,si,,
+Bombillos LED,10,9,no,6,noche,7,si,,
+Televisor,1,100,no,5,noche,7,no,,
+Router wifi,1,10,no,24,todo el dia,7,si,,
+Lavadora,1,500,no,1,manana,3,no,,
+Bomba de agua,1,750,no,0.5,manana,7,si,,1 HP
+Plancha,1,1200,no,0.5,manana,2,no,,
+Licuadora/microondas,1,1000,no,0.3,manana,7,no,,
+Cargadores celulares/portatil,3,30,no,3,noche,7,si,,
