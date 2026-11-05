@@ -22,6 +22,7 @@ y precios de mercado publicados en Colombia. Convención: **[P]** fuente primari
 | [`05-herramientas-de-diseno/`](05-herramientas-de-diseno/README.md) | Catálogo de herramientas (PVGIS, SAM, PVsyst, OpenSolar, HOMER, calculadoras de fabricantes…), flujo de trabajo, cómo medir el techo y las sombras |
 | [`06-datos/`](06-datos/resumen_recurso_solar.md) | Datos crudos descargados de las API de PVGIS y NASA POWER + script de procesamiento reproducible |
 | [`07-diseno-proyecto/`](07-diseno-proyecto/01-DATOS-QUE-NECESITO.md) | **Datos que necesito**, plantillas y la calculadora `dimensionar.py` |
+| [`08-simulador/`](08-simulador/README.md) | **Simulador interactivo** hora a hora (página web) con las facturas, los aparatos y los escenarios |
 
 ---
 

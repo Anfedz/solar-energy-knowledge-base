@@ -1,0 +1,674 @@
+<title>Simulador Solar Sabanalarga</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: tablero de control de la casa. Resultados arriba, gráficas al centro, controles al lado; el sol (ámbar) marca la energía solar en todas partes. */
+:root {
+  --bg: #f2f5f4; --surface: #ffffff; --ink: #0f1f1c; --ink-2: #44544f; --muted: #6a7974;
+  --line: #d6dfdb; --line-2: #e8eeec; --accent: #0d6e5f; --accent-ink: #ffffff; --accent-soft: #e0efeb;
+  --sun: #eda100; --bat: #1baf7a; --grid: #2a78d6; --buy: #b7c1bd; --sun-fill: rgba(237, 161, 0, .18);
+  --good: #1a7f37; --warn: #9a5b00; --bad: #b4380c; --good-bg: #e3f3e7; --warn-bg: #fbf0dc; --bad-bg: #fbe6dd;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --f-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1311; --surface: #131c19; --ink: #e6eeeb; --ink-2: #b3c1bc; --muted: #8b9b96;
+    --line: #283531; --line-2: #1c2724; --accent: #4cc2a8; --accent-ink: #062b23; --accent-soft: #163029;
+    --sun: #c98500; --bat: #199e70; --grid: #3987e5; --buy: #4b5955; --sun-fill: rgba(201, 133, 0, .22);
+    --good: #5bd17f; --warn: #f2b84b; --bad: #ff8f5e; --good-bg: #15301e; --warn-bg: #33270f; --bad-bg: #3a1d12;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1311; --surface: #131c19; --ink: #e6eeeb; --ink-2: #b3c1bc; --muted: #8b9b96;
+  --line: #283531; --line-2: #1c2724; --accent: #4cc2a8; --accent-ink: #062b23; --accent-soft: #163029;
+  --sun: #c98500; --bat: #199e70; --grid: #3987e5; --buy: #4b5955; --sun-fill: rgba(201, 133, 0, .22);
+  --good: #5bd17f; --warn: #f2b84b; --bad: #ff8f5e; --good-bg: #15301e; --warn-bg: #33270f; --bad-bg: #3a1d12;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--f-body); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 20px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -.01em; }
+h1 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); font-weight: 700; }
+h2 { font-size: 1.2rem; font-weight: 700; }
+h3 { font-size: .78rem; font-weight: 600; font-family: var(--f-body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+p { margin: 0; }
+.lede { color: var(--ink-2); max-width: 68ch; }
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+header.top { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: end; justify-content: space-between; }
+header.top .meta { display: grid; gap: 6px; }
+.eyebrow { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 600; }
+
+/* Escenarios */
+.presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 500 .88rem var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 7px 12px; border-radius: 999px; cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.chip:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* KPI */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.kpi .v { font: 700 1.7rem/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.kpi .s { color: var(--muted); font-size: .85rem; }
+.kpi.hero { background: var(--accent-soft); border-color: transparent; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; width: fit-content; }
+.pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill.good { color: var(--good); background: var(--good-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.pill.bad { color: var(--bad); background: var(--bad-bg); }
+
+/* Rejilla principal */
+.main { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
+.controls { display: grid; }
+.controls details { border-bottom: 1px solid var(--line-2); }
+.controls details:last-child { border-bottom: 0; }
+.controls summary { cursor: pointer; padding: 12px 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 8px; }
+.controls summary::-webkit-details-marker { display: none; }
+.controls summary::after { content: "+"; color: var(--muted); font-family: var(--f-mono); }
+.controls details[open] summary::after { content: "−"; }
+.fields { display: grid; gap: 12px; padding: 0 16px 16px; }
+.field { display: grid; gap: 4px; }
+.field label, .lbl { font-size: .84rem; color: var(--ink-2); display: flex; justify-content: space-between; gap: 8px; }
+.field label output { font-family: var(--f-mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+input[type="number"], input[type="text"], select { width: 100%; font: 400 .9rem var(--f-body); color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 7px; padding: 6px 8px; min-width: 0; }
+input[type="number"] { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: 500 .84rem var(--f-body); padding: 8px 6px; border: 0; background: var(--bg); color: var(--ink-2); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.check { display: flex; gap: 8px; align-items: flex-start; font-size: .86rem; color: var(--ink-2); }
+.check input { margin-top: 3px; accent-color: var(--accent); }
+.note { font-size: .82rem; color: var(--muted); }
+.callout { font-size: .84rem; padding: 10px 12px; border-radius: 8px; background: var(--bg); color: var(--ink-2); }
+.callout strong { color: var(--ink); }
+
+/* Gráficas */
+.charts { display: grid; gap: 20px; min-width: 0; }
+.card { padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .84rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.sw.line { height: 3px; border-radius: 2px; width: 16px; }
+svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+svg.chart text { fill: var(--muted); font: 11px var(--f-mono); }
+.tip { position: fixed; z-index: 20; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px 10px; font-size: .8rem; box-shadow: 0 6px 24px rgba(0,0,0,.14); min-width: 180px; }
+.tip .t { font-weight: 600; margin-bottom: 4px; }
+.tip .r { display: flex; justify-content: space-between; gap: 14px; }
+.tip .r span:last-child { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.linkbtn { font: 500 .84rem var(--f-body); color: var(--accent); background: none; border: 0; cursor: pointer; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .84rem; }
+th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line-2); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 600; font-size: .76rem; text-transform: uppercase; letter-spacing: .05em; }
+td { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+td.txt { font-family: var(--f-body); }
+tr.activo td { background: var(--accent-soft); }
+
+/* Consumo */
+.loads td, .loads th { text-align: left; padding: 6px 4px; }
+.loads td { font-family: var(--f-body); }
+.loads input[type="number"] { width: 78px; }
+.loads input[type="text"] { min-width: 190px; }
+.loads select { width: 64px; padding: 6px 4px; }
+.loads .hr { display: inline-flex; gap: 4px; align-items: center; }
+.del { border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 2px 6px; }
+.del:hover { color: var(--bad); }
+.btn { font: 600 .86rem var(--f-body); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--accent); background: var(--surface); color: var(--accent); cursor: pointer; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } }
+footer { color: var(--muted); font-size: .82rem; display: grid; gap: 6px; max-width: 90ch; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="meta">
+      <span class="eyebrow">Casa en Sabanalarga · estrato 3 · Air-e</span>
+      <h1>Simulador solar de la casa</h1>
+      <p class="lede">Cada mes suma lo mismo que tu factura real (nov-2025 a oct-2026). Tus aparatos y horarios definen a qué hora consumes, y la producción sale hora a hora de PVGIS (2011–2015) para cada cara del techo. Cambia lo que quieras: todo se recalcula al instante.</p>
+    </div>
+  </header>
+
+  <section aria-label="Escenarios" class="presets" id="presets"></section>
+
+  <section class="kpis" id="kpis" aria-live="polite"></section>
+
+  <div class="main">
+    <aside class="panel controls" aria-label="Controles">
+      <details open>
+        <summary>Sistema solar</summary>
+        <div class="fields">
+          <div class="field">
+            <span class="lbl">Conexión con Air-e</span>
+            <div class="seg" role="group" aria-label="Conexión">
+              <button type="button" id="modo-ongrid" data-modo="ongrid">Entrega excedentes</button>
+              <button type="button" id="modo-cero" data-modo="cero">Sin inyección</button>
+            </div>
+            <p class="note" id="modo-nota"></p>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="nE">Paneles cara este <output id="o-nE"></output></label><input type="range" id="nE" min="0" max="14" step="1"></div>
+            <div class="field"><label for="nO">Paneles cara oeste <output id="o-nO"></output></label><input type="range" id="nO" min="0" max="14" step="1"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="panelW">Potencia panel (W)</label><input type="number" id="panelW" min="300" max="800" step="5"></div>
+            <div class="field"><label for="sombra">Sombra árboles <output id="o-sombra"></output></label><input type="range" id="sombra" min="0" max="40" step="1"></div>
+          </div>
+          <div class="field"><label for="batKWh">Batería (kWh) <output id="o-batKWh"></output></label><input type="range" id="batKWh" min="0" max="20" step="0.5"></div>
+          <p class="callout" id="respaldo" hidden></p>
+          <div class="row2">
+            <div class="field"><label for="eta">Eficiencia relativa (%)</label><input type="number" id="eta" min="80" max="100" step="1"></div>
+            <div class="field"><label for="idleW">Consumo en vacío (W)</label><input type="number" id="idleW" min="0" max="200" step="5"></div>
+          </div>
+          <label class="check" id="conmuta-wrap"><input type="checkbox" id="conmuta"> <span>Sin batería, el inversor conmuta (no mezcla solar y red al mismo tiempo)</span></label>
+        </div>
+      </details>
+      <details>
+        <summary>Costos (COP)</summary>
+        <div class="fields">
+          <div class="row2">
+            <div class="field"><label for="precioPanel">Panel c/u</label><input type="number" id="precioPanel" step="10000"></div>
+            <div class="field"><label for="precioEstructura">Estructura por panel</label><input type="number" id="precioEstructura" step="10000"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="precioInversor">Inversor</label><input type="number" id="precioInversor" step="50000"></div>
+            <div class="field"><label for="precioBatKWh">Batería por kWh</label><input type="number" id="precioBatKWh" step="10000"></div>
+          </div>
+          <div class="field"><label for="otros">Instalación, cables, protecciones, medidor, trámites</label><input type="number" id="otros" step="50000"></div>
+          <p class="callout">Inversión estimada: <strong class="num" id="costo-total"></strong></p>
+        </div>
+      </details>
+      <details>
+        <summary>Tarifa y finanzas</summary>
+        <div class="fields">
+          <div class="row2">
+            <div class="field"><label for="cu">Tarifa Air-e ($/kWh)</label><input type="number" id="cu" step="0.01"></div>
+            <div class="field"><label for="estrato">Estrato</label>
+              <select id="estrato"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="cv">Cobro por kWh de crédito ($)</label><input type="number" id="cv" step="0.01"></div>
+            <div class="field"><label for="bolsa">Pago excedente neto ($/kWh)</label><input type="number" id="bolsa" step="10"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="alumbrado">Alumbrado público (%)</label><input type="number" id="alumbrado" step="1"></div>
+            <div class="field"><label for="alzaTarifa">Alza anual tarifa (%)</label><input type="number" id="alzaTarifa" step="0.5"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="degradacion">Degradación paneles (%/año)</label><input type="number" id="degradacion" step="0.1"></div>
+            <div class="field"><label for="anioReemplazo">Cambio de inversor (año)</label><input type="number" id="anioReemplazo" min="5" max="25" step="1"></div>
+          </div>
+          <p class="note">La tarifa de oct-2026 es $936,40/kWh, y el crédito 1:1 cobra $133,39/kWh (CREG 174). El pago del excedente neto es un supuesto ⚠️.</p>
+        </div>
+      </details>
+    </aside>
+
+    <div class="charts">
+      <section class="panel card">
+        <div class="card-head">
+          <h2>¿De dónde sale tu energía cada mes?</h2>
+          <button class="linkbtn" id="ver-tabla" aria-expanded="false">Ver tabla</button>
+        </div>
+        <div class="legend" id="leg-mes"></div>
+        <svg class="chart" id="ch-mes" viewBox="0 0 720 300" role="img" aria-label="Consumo mensual por fuente de energía"></svg>
+        <p class="note" id="nota-mes"></p>
+        <div class="scroll" id="tabla-mes" hidden></div>
+      </section>
+      <div class="split">
+        <section class="panel card">
+          <div class="card-head">
+            <h2>Un día promedio</h2>
+            <select id="mes-dia" aria-label="Mes" style="width:auto"></select>
+          </div>
+          <div class="legend"><span><i class="sw line" style="background:var(--ink)"></i>Consumo</span><span><i class="sw" style="background:var(--sun)"></i>Producción solar</span></div>
+          <svg class="chart" id="ch-dia" viewBox="0 0 360 230" role="img" aria-label="Consumo y producción en un día promedio"></svg>
+        </section>
+        <section class="panel card">
+          <div class="card-head"><h2>Plata acumulada</h2><span class="note" id="nota-flujo"></span></div>
+          <svg class="chart" id="ch-flujo" viewBox="0 0 360 230" role="img" aria-label="Ahorro acumulado menos la inversión"></svg>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <section class="panel card" aria-labelledby="t-consumo">
+    <div class="card-head">
+      <h2 id="t-consumo">Tus aparatos y horarios</h2>
+      <div class="toolbar">
+        <button class="btn" id="aires-actual" type="button">Horario actual de aires</button>
+        <button class="btn" id="aires-dia" type="button">Ejemplo: aires más de día, menos de noche</button>
+      </div>
+    </div>
+    <label class="check"><input type="checkbox" id="calibrar"> <span><strong>Ajustar a mis facturas.</strong> El total de cada mes queda igual a tu factura y los horarios solo deciden <em>a qué hora</em> consumes. Si mueves horas de aire, cambia el horario, no el total. Los aires ("clima") se ajustan mes a mes con el calor; lo "fijo" se mantiene igual.</span></label>
+    <div class="scroll"><table class="loads" id="tabla-cargas"></table></div>
+    <div class="toolbar"><button class="btn" id="add-carga" type="button">+ Agregar aparato</button><span class="note" id="nota-calib"></span></div>
+    <h3>Consumo nuevo (no está en tus facturas)</h3>
+    <div class="scroll"><table class="loads" id="tabla-extras"></table></div>
+    <div class="toolbar"><button class="btn" id="add-extra" type="button">+ Agregar consumo nuevo</button></div>
+  </section>
+
+  <section class="panel card" aria-labelledby="t-comp">
+    <div class="card-head"><h2 id="t-comp">Comparar escenarios con tu consumo actual</h2><span class="note">La fila resaltada es el escenario que estás viendo</span></div>
+    <div class="scroll" id="tabla-comp"></div>
+  </section>
+
+  <footer>
+    <p><strong>Cómo calcula.</strong> La producción sale de PVGIS-NSRDB, hora a hora 2011–2015, para techo a 10° hacia el este y el oeste, con 14 % de pérdidas. El consumo de cada mes es el de tus 12 facturas de Air-e. La liquidación aplica la CREG 174: crédito 1:1 dentro de cada mes, cobrando la comercialización, y el excedente neto a precio de bolsa. Incluye el subsidio del estrato y el alumbrado público del 10 %; no incluye la tasa de seguridad, que es fija.</p>
+    <p>Es una herramienta de anteproyecto: las cifras orientan y no reemplazan el diseño firmado por un profesional. Repositorio: Anfedz/solar-energy-knowledge-base (carpeta 08-simulador).</p>
+    <button class="linkbtn" id="reset" type="button">Restablecer todo</button>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+/*__DATOS__*/
+</script>
+<script>
+/*__MOTOR__*/
+</script>
+<script>
+(() => {
+const $ = (id) => document.getElementById(id);
+const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const fmtM = (v) => (v / 1e6).toLocaleString("es-CO", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " M";
+const fmtCOP = (v) => "$" + Math.round(v).toLocaleString("es-CO");
+const fmtN = (v, d = 0) => Number(v).toLocaleString("es-CO", { minimumFractionDigits: d, maximumFractionDigits: d });
+const R = (desde, hasta, w) => ({ desde, hasta, w });
+
+const AIRES_ACTUAL = {
+  a1: [R(13, 16, 750), R(21, 23, 850)],
+  a2: [R(14, 17, 545), R(21, 23, 550)],
+  a3: [R(23, 7, 440), R(14, 17, 500)],
+};
+const AIRES_DIA = { // mismas horas totales, movidas hacia el día
+  a1: [R(10, 13, 800), R(13, 15, 800)],
+  a2: [R(10, 12, 600), R(14, 17, 545)],
+  a3: [R(1, 7, 420), R(12, 17, 520)],
+};
+const CARGAS0 = () => [
+  { id: "nev", nombre: "Nevera LG LS65SXTX (45,9 kWh/mes)", tipo: "base", critico: true, activo: true, rangos: [R(0, 24, 85)] },
+  { id: "cong", nombre: "Congelador Electrolux (24 kWh/mes)", tipo: "base", critico: true, activo: true, rangos: [R(0, 24, 41)] },
+  { id: "modem", nombre: "Módem, cargadores y standby", tipo: "base", critico: true, activo: true, rangos: [R(0, 24, 60)] },
+  { id: "luz", nombre: "Iluminación", tipo: "base", critico: false, activo: true, rangos: [R(18, 23, 150)] },
+  { id: "pcd", nombre: "Computadores (día)", tipo: "base", critico: true, activo: true, rangos: [R(9, 17, 120)] },
+  { id: "pcn", nombre: "TV y computadores (noche)", tipo: "base", critico: false, activo: true, rangos: [R(19, 23, 250)] },
+  { id: "coc", nombre: "Cocina: microondas, plancha", tipo: "base", critico: false, activo: true, rangos: [R(7, 8, 400), R(12, 13, 400)] },
+  { id: "lav", nombre: "Lavadora Mabe", tipo: "base", critico: false, activo: true, rangos: [R(9, 10, 300)] },
+  { id: "imp3d", nombre: "Impresora 3D", tipo: "base", critico: false, activo: true, rangos: [R(10, 18, 50)] },
+  { id: "aban", nombre: "Abanicos (3)", tipo: "base", critico: true, activo: false, rangos: [R(13, 17, 180)] },
+  { id: "a1", nombre: "Aire 1 · Olimpo 12 000 BTU (fijo)", tipo: "clima", critico: false, activo: true, rangos: AIRES_ACTUAL.a1.map((r) => ({ ...r })) },
+  { id: "a2", nombre: "Aire 2 · LG 12 000 BTU inverter", tipo: "clima", critico: false, activo: true, rangos: AIRES_ACTUAL.a2.map((r) => ({ ...r })) },
+  { id: "a3", nombre: "Aire 3 · LG 9 000 BTU inverter", tipo: "clima", critico: false, activo: true, rangos: AIRES_ACTUAL.a3.map((r) => ({ ...r })) },
+];
+const EXTRAS0 = () => [
+  { id: "ev", nombre: "Carro eléctrico (carga de día)", tipo: "base", critico: false, activo: false, rangos: [R(10, 13, 2300)] },
+  { id: "aex", nombre: "Horas extra de aire de día", tipo: "base", critico: false, activo: false, rangos: [R(11, 15, 600)] },
+];
+
+const SISTEMA_CAMPOS = ["modo", "nE", "nO", "panelW", "eta", "idleW", "batKWh", "conmuta", "precioPanel", "precioEstructura", "precioInversor", "precioBatKWh", "otros"];
+const PRESETS = [
+  { id: "rec8", nombre: "Recomendado: 8 paneles a la red", s: { modo: "ongrid", nE: 8, nO: 0, panelW: 630, eta: 100, idleW: 0, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 2500000, precioBatKWh: 960000, otros: 5750000 } },
+  { id: "on7", nombre: "7 paneles a la red", s: { modo: "ongrid", nE: 7, nO: 0, panelW: 630, eta: 100, idleW: 0, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 2500000, precioBatKWh: 960000, otros: 5750000 } },
+  { id: "on12", nombre: "12 paneles a la red", s: { modo: "ongrid", nE: 6, nO: 6, panelW: 630, eta: 100, idleW: 0, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 2500000, precioBatKWh: 960000, otros: 5750000 } },
+  { id: "cot", nombre: "Cotización recibida (12 + SRNE, sin batería)", s: { modo: "cero", nE: 6, nO: 6, panelW: 630, eta: 96, idleW: 50, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 3600000, precioBatKWh: 960000, otros: 4555000 } },
+  { id: "cot10", nombre: "Cotización + batería 10 kWh", s: { modo: "cero", nE: 6, nO: 6, panelW: 630, eta: 96, idleW: 50, batKWh: 10, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 3600000, precioBatKWh: 960000, otros: 4555000 } },
+  { id: "hib5", nombre: "Híbrido a la red + batería 5 kWh", s: { modo: "ongrid", nE: 8, nO: 0, panelW: 630, eta: 98, idleW: 30, batKWh: 5, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 11460000, precioBatKWh: 960000, otros: 5750000 } },
+];
+
+const DEFAULT = () => ({
+  ...PRESETS[0].s, preset: "rec8", sombra: 10, dod: 90,
+  cu: 936.40, cv: 133.39, bolsa: 300, alumbrado: 10, estrato: 3, alzaTarifa: 3, degradacion: 0.4, anioReemplazo: 13, anios: 25,
+  calibrar: true, cargas: CARGAS0(), extras: EXTRAS0(), mesDia: 9,
+});
+
+const KEY = "simSolarSabanalarga.v1";
+let S;
+try { S = JSON.parse(localStorage.getItem(KEY)) || DEFAULT(); } catch (e) { S = DEFAULT(); }
+if (!S.cargas) S = DEFAULT();
+const guardar = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+
+function cfgDe(st) {
+  return {
+    modo: st.modo, nE: +st.nE, nO: +st.nO, panelW: +st.panelW, sombra: st.sombra / 100, eta: st.eta / 100,
+    idleW: +st.idleW, batKWh: +st.batKWh, dod: st.dod / 100, conmuta: !!st.conmuta,
+    cargas: st.cargas, extras: st.extras, calibrar: !!st.calibrar,
+    tarifa: { cu: +st.cu, cv: +st.cv, bolsa: +st.bolsa, alumbrado: st.alumbrado / 100, estrato: +st.estrato,
+      subsidio: { 1: 0.407, 2: 0.259, 3: 0.15, 4: 0 }, contribucion: 0.2 },
+    precioPanel: +st.precioPanel, precioEstructura: +st.precioEstructura, precioInversor: +st.precioInversor,
+    precioBatKWh: +st.precioBatKWh, otros: +st.otros,
+    anios: +st.anios, alzaTarifa: st.alzaTarifa / 100, degradacion: st.degradacion / 100, anioReemplazo: +st.anioReemplazo,
+  };
+}
+
+/* ---------- Controles ---------- */
+const NUM = ["nE", "nO", "panelW", "sombra", "batKWh", "eta", "idleW", "precioPanel", "precioEstructura", "precioInversor", "precioBatKWh", "otros",
+  "cu", "cv", "bolsa", "alumbrado", "alzaTarifa", "degradacion", "anioReemplazo"];
+function pintarControles() {
+  for (const k of NUM) { const el = $(k); if (el && document.activeElement !== el) el.value = S[k]; }
+  $("estrato").value = S.estrato;
+  $("conmuta").checked = !!S.conmuta;
+  $("calibrar").checked = !!S.calibrar;
+  $("modo-ongrid").setAttribute("aria-pressed", S.modo === "ongrid");
+  $("modo-cero").setAttribute("aria-pressed", S.modo === "cero");
+  $("o-nE").textContent = S.nE; $("o-nO").textContent = S.nO;
+  $("o-sombra").textContent = S.sombra + " %"; $("o-batKWh").textContent = S.batKWh > 0 ? fmtN(S.batKWh, 1) + " kWh" : "sin batería";
+  $("conmuta-wrap").hidden = !(S.modo === "cero" && +S.batKWh === 0);
+  $("modo-nota").textContent = S.modo === "ongrid"
+    ? "Lo que sobra de día se vuelve crédito 1:1 para la noche (CREG 174). Requiere medidor bidireccional."
+    : "Lo que sobra y no cabe en la batería se pierde. Sigue requiriendo trámite ante Air-e (AGPE sin excedentes).";
+  for (const b of document.querySelectorAll(".chip")) b.setAttribute("aria-pressed", b.dataset.id === S.preset);
+}
+for (const k of NUM) $(k).addEventListener("input", (e) => { S[k] = e.target.value === "" ? 0 : Number(e.target.value); marcarPersonal(k); programar(); });
+$("estrato").addEventListener("change", (e) => { S.estrato = +e.target.value; programar(); });
+$("conmuta").addEventListener("change", (e) => { S.conmuta = e.target.checked; marcarPersonal("conmuta"); programar(); });
+$("calibrar").addEventListener("change", (e) => { S.calibrar = e.target.checked; programar(); });
+for (const id of ["modo-ongrid", "modo-cero"]) $(id).addEventListener("click", (e) => { S.modo = e.currentTarget.dataset.modo; marcarPersonal("modo"); programar(); });
+function marcarPersonal(k) { if (SISTEMA_CAMPOS.includes(k)) S.preset = "personal"; }
+
+function pintarPresets() {
+  const cont = $("presets");
+  cont.innerHTML = "";
+  for (const p of [...PRESETS, { id: "personal", nombre: "Personalizado" }]) {
+    const b = document.createElement("button");
+    b.className = "chip"; b.type = "button"; b.dataset.id = p.id; b.textContent = p.nombre;
+    if (p.id === "personal") b.disabled = true;
+    b.addEventListener("click", () => { Object.assign(S, p.s); S.preset = p.id; programar(); });
+    cont.appendChild(b);
+  }
+}
+
+/* ---------- Tabla de aparatos ---------- */
+function opcionesHora(sel, max) {
+  let h = "";
+  for (let i = max === 24 ? 1 : 0; i <= (max === 24 ? 24 : 23); i++) h += `<option value="${i}"${i === sel ? " selected" : ""}>${i}h</option>`;
+  return h;
+}
+function pintarCargas(lista, tablaId, conTipo) {
+  const t = $(tablaId);
+  let h = `<thead><tr><th>Usar</th><th>Aparato</th>${conTipo ? "<th>Tipo</th>" : ""}<th>Horario 1 · W</th><th>Horario 2 · W</th>${conTipo ? "<th>En corte</th>" : ""}<th></th></tr></thead><tbody>`;
+  lista.forEach((c, i) => {
+    const r = [c.rangos[0] || R(0, 0, 0), c.rangos[1] || R(0, 0, 0)];
+    const rango = (j) => `<span class="hr"><select data-i="${i}" data-j="${j}" data-f="desde" aria-label="Desde">${opcionesHora(+r[j].desde, 23)}</select>–<select data-i="${i}" data-j="${j}" data-f="hasta" aria-label="Hasta">${opcionesHora(+r[j].hasta || 24, 24)}</select><input type="number" min="0" step="10" value="${r[j].w}" data-i="${i}" data-j="${j}" data-f="w" aria-label="Vatios"></span>`;
+    h += `<tr><td><input type="checkbox" data-i="${i}" data-f="activo" ${c.activo !== false ? "checked" : ""} aria-label="Usar"></td>
+      <td><input type="text" value="${c.nombre.replace(/"/g, "&quot;")}" data-i="${i}" data-f="nombre" aria-label="Nombre"></td>
+      ${conTipo ? `<td><select data-i="${i}" data-f="tipo" style="width:84px"><option value="base"${c.tipo === "base" ? " selected" : ""}>Fijo</option><option value="clima"${c.tipo === "clima" ? " selected" : ""}>Clima</option></select></td>` : ""}
+      <td>${rango(0)}</td><td>${rango(1)}</td>
+      ${conTipo ? `<td><input type="checkbox" data-i="${i}" data-f="critico" ${c.critico ? "checked" : ""} aria-label="Crítico en un corte"></td>` : ""}
+      <td><button class="del" data-i="${i}" data-f="del" aria-label="Eliminar">×</button></td></tr>`;
+  });
+  t.innerHTML = h + "</tbody>";
+  t.oninput = t.onchange = (e) => {
+    const el = e.target, i = +el.dataset.i, f = el.dataset.f;
+    if (!f || f === "del") return;
+    const c = lista[i];
+    if (f === "activo" || f === "critico") c[f] = el.checked;
+    else if (f === "nombre") { c.nombre = el.value; guardar(); return; }
+    else if (f === "tipo") c.tipo = el.value;
+    else {
+      const j = +el.dataset.j;
+      while (c.rangos.length <= j) c.rangos.push(R(0, 0, 0));
+      c.rangos[j][f] = Number(el.value);
+    }
+    programar(false);
+  };
+  t.onclick = (e) => {
+    if (e.target.dataset.f !== "del") return;
+    lista.splice(+e.target.dataset.i, 1);
+    pintarCargas(lista, tablaId, conTipo); programar(false);
+  };
+}
+$("add-carga").addEventListener("click", () => { S.cargas.push({ id: "n" + Date.now(), nombre: "Nuevo aparato", tipo: "base", critico: false, activo: true, rangos: [R(18, 22, 100)] }); pintarCargas(S.cargas, "tabla-cargas", true); programar(false); });
+$("add-extra").addEventListener("click", () => { S.extras.push({ id: "x" + Date.now(), nombre: "Consumo nuevo", tipo: "base", activo: true, rangos: [R(10, 14, 500)] }); pintarCargas(S.extras, "tabla-extras", false); programar(false); });
+function ponerAires(h) {
+  for (const k of ["a1", "a2", "a3"]) { const c = S.cargas.find((x) => x.id === k); if (c) c.rangos = h[k].map((r) => ({ ...r })); }
+  pintarCargas(S.cargas, "tabla-cargas", true); programar(false);
+}
+$("aires-actual").addEventListener("click", () => ponerAires(AIRES_ACTUAL));
+$("aires-dia").addEventListener("click", () => ponerAires(AIRES_DIA));
+$("reset").addEventListener("click", () => { S = DEFAULT(); pintarCargas(S.cargas, "tabla-cargas", true); pintarCargas(S.extras, "tabla-extras", false); programar(); });
+
+/* ---------- Tooltip ---------- */
+const tip = $("tip");
+function mostrarTip(ev, html) {
+  tip.innerHTML = html; tip.hidden = false;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
+  tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px";
+}
+const ocultarTip = () => { tip.hidden = true; };
+const filaTip = (sw, n, v) => `<div class="r"><span>${sw ? `<i class="sw" style="background:${sw}"></i> ` : ""}${n}</span><span>${v}</span></div>`;
+
+/* ---------- Gráficas (SVG) ---------- */
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function ticks(max, n = 4) {
+  if (max <= 0) return [0, 1];
+  const raw = max / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= raw);
+  const out = []; for (let v = 0; v <= max + step * 0.001; v += step) out.push(v);
+  if (out[out.length - 1] < max) out.push(out[out.length - 1] + step);
+  return out;
+}
+function barTop(x, y, w, h, r) { // rectángulo con esquinas superiores redondeadas
+  r = Math.min(r, w / 2, h);
+  return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`;
+}
+const SERIES = [
+  { k: "directo", n: "Solar directo", c: "var(--sun)" },
+  { k: "bateria", n: "Batería", c: "var(--bat)" },
+  { k: "credito", n: "Crédito 1:1 con Air-e", c: "var(--grid)" },
+  { k: "comprado", n: "Comprada a la red", c: "var(--buy)" },
+];
+function etiquetaMes(f) { const [y, m] = f.mes.split("-"); return MESES[+m - 1] + "-" + y.slice(2); }
+
+function graficaMes(res) {
+  const svg = $("ch-mes"); svg.innerHTML = "";
+  const W = Math.max(320, Math.round(svg.getBoundingClientRect().width) || 720), H = W < 560 ? 250 : 300;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const L = 46, Rr = 8, T = 24, B = 28, iw = W - L - Rr, ih = H - T - B;
+  const max = Math.max(...res.meses.map((m) => m.carga));
+  const tk = ticks(max), top = tk[tk.length - 1];
+  const y = (v) => T + ih - (v / top) * ih;
+  for (const v of tk) {
+    el("line", { x1: L, x2: W - Rr, y1: y(v), y2: y(v), stroke: "var(--line-2)", "stroke-width": 1 }, svg);
+    el("text", { x: L - 6, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = fmtN(v);
+  }
+  el("text", { x: 0, y: 12 }, svg).textContent = "kWh";
+  const bw = iw / res.meses.length, w = Math.min(34, bw * 0.62), paso = bw < 46 ? 2 : 1;
+  res.meses.forEach((m, i) => {
+    const x = L + i * bw + (bw - w) / 2;
+    let acc = 0;
+    const visibles = SERIES.filter((s) => m[s.k] > 0.5);
+    visibles.forEach((s, j) => {
+      const v = m[s.k], y0 = y(acc), y1 = y(acc + v);
+      const h = Math.max(0, y0 - y1 - (j < visibles.length - 1 ? 0 : 0));
+      const gap = j > 0 ? 2 : 0;
+      if (j === visibles.length - 1) el("path", { d: barTop(x, y1, w, Math.max(0, h - gap), 4), fill: s.c }, svg);
+      else el("rect", { x, y: y1 + (j === visibles.length - 1 ? 0 : 0), width: w, height: Math.max(0, h - gap), fill: s.c }, svg);
+      acc += v;
+    });
+    if (i % paso === 0) el("text", { x: x + w / 2, y: H - 8, "text-anchor": "middle" }, svg).textContent = etiquetaMes(m);
+    const hit = el("rect", { x: L + i * bw, y: T, width: bw, height: ih, fill: "transparent" }, svg);
+    const html = `<div class="t">Factura ${etiquetaMes(m)} · ${fmtN(m.carga)} kWh</div>` +
+      SERIES.map((s) => filaTip(s.c, s.n, fmtN(m[s.k]) + " kWh")).join("") +
+      (m.bolsa > 0.5 ? filaTip(null, "Excedente a bolsa", fmtN(m.bolsa) + " kWh") : "") +
+      (m.desperdicio > 0.5 ? filaTip(null, "Solar desperdiciada", fmtN(m.desperdicio) + " kWh") : "") +
+      `<div class="r" style="margin-top:4px"><span>Factura</span><span>${fmtCOP(m.antes)} → ${fmtCOP(m.despues)}</span></div>`;
+    hit.addEventListener("pointermove", (ev) => mostrarTip(ev, html));
+    hit.addEventListener("pointerleave", ocultarTip);
+  });
+  $("leg-mes").innerHTML = SERIES.map((s) => `<span><i class="sw" style="background:${s.c}"></i>${s.n}</span>`).join("");
+  const t = res.tot;
+  $("nota-mes").textContent = `En el año: ${fmtN(t.pv)} kWh producidos. ` +
+    (t.desperdicio > 1 ? `${fmtN(t.desperdicio)} kWh se desperdician (${fmtN(t.desperdicio / Math.max(t.pv, 1) * 100)} %). ` : "") +
+    (t.bolsa > 1 ? `${fmtN(t.bolsa)} kWh superan tu consumo y se pagan a precio de bolsa.` : "");
+}
+
+function tablaMes(res) {
+  let h = "<table><thead><tr><th>Factura</th><th>Consumo</th><th>Solar producida</th><th>Solar directo</th><th>Batería</th><th>Crédito 1:1</th><th>Comprada</th><th>A bolsa</th><th>Desperdicio</th><th>Factura hoy</th><th>Con solar</th></tr></thead><tbody>";
+  for (const m of res.meses) h += `<tr><td class="txt">${etiquetaMes(m)}</td><td>${fmtN(m.carga)}</td><td>${fmtN(m.pv)}</td><td>${fmtN(m.directo)}</td><td>${fmtN(m.bateria)}</td><td>${fmtN(m.credito)}</td><td>${fmtN(m.comprado)}</td><td>${fmtN(m.bolsa)}</td><td>${fmtN(m.desperdicio)}</td><td>${fmtCOP(m.antes)}</td><td>${fmtCOP(m.despues)}</td></tr>`;
+  const t = res.tot;
+  h += `<tr><td class="txt"><strong>Año</strong></td><td>${fmtN(t.carga)}</td><td>${fmtN(t.pv)}</td><td>${fmtN(t.directo)}</td><td>${fmtN(t.bateria)}</td><td>${fmtN(t.credito)}</td><td>${fmtN(t.comprado)}</td><td>${fmtN(t.bolsa)}</td><td>${fmtN(t.desperdicio)}</td><td>${fmtCOP(t.antes)}</td><td>${fmtCOP(t.despues)}</td></tr>`;
+  $("tabla-mes").innerHTML = h + "</tbody></table><p class='note'>Energía en kWh; facturas de energía + alumbrado, sin la tasa de seguridad.</p>";
+}
+$("ver-tabla").addEventListener("click", (e) => { const t = $("tabla-mes"); t.hidden = !t.hidden; e.currentTarget.setAttribute("aria-expanded", !t.hidden); e.currentTarget.textContent = t.hidden ? "Ver tabla" : "Ocultar tabla"; });
+
+function graficaDia(res) {
+  const sel = $("mes-dia");
+  if (!sel.options.length) {
+    res.meses.forEach((m, i) => { const o = document.createElement("option"); o.value = i; o.textContent = "Factura " + etiquetaMes(m); sel.appendChild(o); });
+    sel.addEventListener("change", () => { S.mesDia = +sel.value; guardar(); graficaDia(ultimo); });
+  }
+  sel.value = Math.min(S.mesDia, res.meses.length - 1);
+  const m = res.meses[+sel.value];
+  const svg = $("ch-dia"); svg.innerHTML = "";
+  const W = 360, H = 230, L = 34, Rr = 8, T = 22, B = 24, iw = W - L - Rr, ih = H - T - B;
+  const max = Math.max(...m.perfilCarga, ...m.perfilPV);
+  const tk = ticks(max), top = tk[tk.length - 1];
+  const x = (h) => L + (h / 23) * iw, y = (v) => T + ih - (v / top) * ih;
+  for (const v of tk) {
+    el("line", { x1: L, x2: W - Rr, y1: y(v), y2: y(v), stroke: "var(--line-2)" }, svg);
+    el("text", { x: L - 5, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = fmtN(v, v < 1 && v > 0 ? 1 : 0);
+  }
+  el("text", { x: 0, y: 12 }, svg).textContent = "kW";
+  for (let h = 0; h <= 21; h += 3) el("text", { x: x(h), y: H - 6, "text-anchor": "middle" }, svg).textContent = h + "h";
+  const pts = (arr) => arr.map((v, h) => `${x(h)},${y(v)}`).join(" ");
+  el("polygon", { points: `${x(0)},${y(0)} ${pts(m.perfilPV)} ${x(23)},${y(0)}`, fill: "var(--sun-fill)" }, svg);
+  el("polyline", { points: pts(m.perfilPV), fill: "none", stroke: "var(--sun)", "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+  el("polyline", { points: pts(m.perfilCarga), fill: "none", stroke: "var(--ink)", "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+  const cross = el("line", { y1: T, y2: T + ih, stroke: "var(--muted)", "stroke-dasharray": "3 3", visibility: "hidden" }, svg);
+  const hit = el("rect", { x: L, y: T, width: iw, height: ih, fill: "transparent" }, svg);
+  hit.addEventListener("pointermove", (ev) => {
+    const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) * (W / r.width);
+    const h = Math.max(0, Math.min(23, Math.round(((px - L) / iw) * 23)));
+    cross.setAttribute("x1", x(h)); cross.setAttribute("x2", x(h)); cross.setAttribute("visibility", "visible");
+    mostrarTip(ev, `<div class="t">${h}:00 – ${h + 1}:00</div>` + filaTip("var(--ink)", "Consumo", fmtN(m.perfilCarga[h], 2) + " kW") + filaTip("var(--sun)", "Solar", fmtN(m.perfilPV[h], 2) + " kW"));
+  });
+  hit.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); ocultarTip(); });
+}
+
+function graficaFlujo(fin) {
+  const svg = $("ch-flujo"); svg.innerHTML = "";
+  const W = 360, H = 230, L = 42, Rr = 8, T = 22, B = 24, iw = W - L - Rr, ih = H - T - B;
+  const vals = [-fin.costo, ...fin.flujo.map((f) => f.acumulado)];
+  let lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
+  const tk = ticks(Math.max(hi, -lo) || 1, 3), st = tk[1] - tk[0];
+  lo = Math.floor(lo / st) * st; hi = Math.ceil(hi / st) * st || st;
+  const x = (i) => L + (i / (vals.length - 1)) * iw, y = (v) => T + ih - ((v - lo) / (hi - lo)) * ih;
+  for (let v = lo; v <= hi + 1; v += st) {
+    el("line", { x1: L, x2: W - Rr, y1: y(v), y2: y(v), stroke: v === 0 ? "var(--muted)" : "var(--line-2)" }, svg);
+    el("text", { x: L - 5, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = fmtN(v / 1e6);
+  }
+  el("text", { x: 0, y: 12 }, svg).textContent = "Millones $";
+  for (let a = 0; a <= 25; a += 5) el("text", { x: x(a), y: H - 6, "text-anchor": "middle" }, svg).textContent = "año " + a;
+  el("polyline", { points: vals.map((v, i) => `${x(i)},${y(v)}`).join(" "), fill: "none", stroke: "var(--accent)", "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+  if (fin.payback !== null) {
+    const px = x(fin.payback);
+    el("circle", { cx: px, cy: y(0), r: 5, fill: "var(--accent)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
+  }
+  const last = vals.length - 1;
+  el("circle", { cx: x(last), cy: y(vals[last]), r: 4, fill: "var(--accent)" }, svg);
+  const hit = el("rect", { x: L, y: T, width: iw, height: ih, fill: "transparent" }, svg);
+  hit.addEventListener("pointermove", (ev) => {
+    const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) * (W / r.width);
+    const i = Math.max(0, Math.min(last, Math.round(((px - L) / iw) * last)));
+    mostrarTip(ev, `<div class="t">Año ${i}</div>` + filaTip(null, "Acumulado", fmtM(vals[i])) + (i > 0 ? filaTip(null, "Ahorro del año", fmtM(fin.flujo[i - 1].ahorro)) : ""));
+  });
+  hit.addEventListener("pointerleave", ocultarTip);
+  $("nota-flujo").textContent = fin.payback !== null ? `recupera la inversión en el año ${fmtN(fin.payback, 1)}` : "no recupera la inversión en 25 años";
+}
+
+/* ---------- KPI ---------- */
+function estadoPayback(p) {
+  if (p === null) return `<span class="pill bad">No se paga</span>`;
+  if (p <= 4) return `<span class="pill good">Muy rentable</span>`;
+  if (p <= 7) return `<span class="pill warn">Rentable a largo plazo</span>`;
+  return `<span class="pill bad">Poco rentable</span>`;
+}
+function pintarKPI(res, fin, cfg) {
+  const t = res.tot, pct = t.antes > 0 ? (fin.ahorro1 / t.antes) * 100 : 0;
+  const desp = t.pv > 0 ? (t.desperdicio / t.pv) * 100 : 0;
+  $("kpis").innerHTML = `
+    <div class="kpi hero"><h3>Factura de energía al año</h3><div class="v num">${fmtM(t.despues)}</div><div class="s">hoy ${fmtM(t.antes)} · ${fmtCOP(t.despues / 12)}/mes con solar</div></div>
+    <div class="kpi"><h3>Ahorro primer año</h3><div class="v num">${fmtM(fin.ahorro1)}</div><div class="s">${fmtN(pct)} % de tu factura de energía</div></div>
+    <div class="kpi"><h3>Se paga en</h3><div class="v num">${fin.payback !== null ? fmtN(fin.payback, 1) + " años" : "—"}</div>${estadoPayback(fin.payback)}<div class="s">inversión ${fmtM(fin.costo)}</div></div>
+    <div class="kpi"><h3>Ganancia neta en ${cfg.anios} años</h3><div class="v num">${fmtM(fin.neto)}</div><div class="s">con alza de tarifa ${fmtN(cfg.alzaTarifa * 100, 1)} %/año y cambio de inversor</div></div>
+    <div class="kpi"><h3>Solar desperdiciada</h3><div class="v num">${fmtN(desp)} %</div>${desp > 15 ? `<span class="pill bad">Se pierde mucha energía</span>` : desp > 3 ? `<span class="pill warn">Algo de pérdida</span>` : `<span class="pill good">Se aprovecha toda</span>`}<div class="s">${fmtN(t.desperdicio)} kWh/año${t.bolsa > 1 ? ` · ${fmtN(t.bolsa)} kWh a bolsa` : ""}</div></div>`;
+  $("costo-total").textContent = fmtCOP(fin.costo);
+  // Respaldo en cortes
+  const r = $("respaldo");
+  if (cfg.batKWh > 0) {
+    const crit = cfg.cargas.filter((c) => c.critico && c.activo !== false);
+    const kw = crit.reduce((s, c) => s + perfilDe([c], null).reduce((a, b) => a + b, 0) / 24, 0) + (cfg.idleW || 0) / 1000;
+    const horas = (cfg.batKWh * cfg.dod * 0.95) / Math.max(kw, 0.05);
+    r.hidden = false;
+    r.innerHTML = `<strong>Respaldo en un corte:</strong> ≈ ${fmtN(horas, 1)} h con las cargas marcadas "En corte" (≈ ${fmtN(kw * 1000)} W en promedio), con la batería llena.` +
+      (cfg.modo === "ongrid" ? " Para inyectar a la red y tener respaldo se necesita un inversor híbrido." : "");
+  } else r.hidden = true;
+  // Calibración
+  const base = perfilDe(cfg.cargas, "base").reduce((a, b) => a + b, 0);
+  const minDia = Math.min(...DATOS.facturas.map((f) => f.kwh / f.dias));
+  $("nota-calib").textContent = cfg.calibrar
+    ? `Consumo fijo: ${fmtN(base, 1)} kWh/día. El mes más bajo de tus facturas: ${fmtN(minDia, 1)} kWh/día.` + (base > minDia ? " ⚠️ Lo fijo supera algún mes; revisa vatios u horas." : "")
+    : "Sin ajuste: se usan los vatios y horas tal cual, y el total puede no coincidir con tus facturas.";
+}
+
+/* ---------- Comparación ---------- */
+function pintarComparacion() {
+  const filas = [...PRESETS.map((p) => ({ id: p.id, nombre: p.nombre, st: { ...S, ...p.s } }))];
+  if (S.preset === "personal") filas.push({ id: "personal", nombre: "Tu escenario personalizado", st: S });
+  let h = "<table><thead><tr><th>Escenario</th><th>Inversión</th><th>Ahorro año 1</th><th>Se paga en</th><th>Neto 25 años</th><th>Desperdicio</th><th></th></tr></thead><tbody>";
+  for (const f of filas) {
+    const cfg = cfgDe(f.st), res = simular(DATOS, cfg), fin = finanzas(cfg, res);
+    h += `<tr class="${f.id === S.preset ? "activo" : ""}"><td class="txt">${f.nombre}</td><td>${fmtM(fin.costo)}</td><td>${fmtM(fin.ahorro1)}</td><td>${fin.payback !== null ? fmtN(fin.payback, 1) + " años" : "—"}</td><td>${fmtM(fin.neto)}</td><td>${fmtN(res.tot.desperdicio)} kWh</td><td>${f.id !== "personal" && f.id !== S.preset ? `<button class="linkbtn" data-p="${f.id}">Ver</button>` : ""}</td></tr>`;
+  }
+  $("tabla-comp").innerHTML = h + "</tbody></table>";
+  $("tabla-comp").onclick = (e) => { const id = e.target.dataset.p; if (!id) return; const p = PRESETS.find((x) => x.id === id); Object.assign(S, p.s); S.preset = id; programar(); window.scrollTo({ top: 0, behavior: "smooth" }); };
+}
+
+/* ---------- Ciclo ---------- */
+let ultimo, tA, tB;
+function recalcular() {
+  pintarControles();
+  const cfg = cfgDe(S);
+  ultimo = simular(DATOS, cfg);
+  const fin = finanzas(cfg, ultimo);
+  pintarKPI(ultimo, fin, cfg);
+  graficaMes(ultimo); tablaMes(ultimo); graficaDia(ultimo); graficaFlujo(fin);
+  guardar();
+}
+function programar() {
+  clearTimeout(tA); clearTimeout(tB);
+  tA = setTimeout(recalcular, 40);
+  tB = setTimeout(pintarComparacion, 300);
+}
+let tR;
+addEventListener("resize", () => { clearTimeout(tR); tR = setTimeout(() => ultimo && graficaMes(ultimo), 120); });
+pintarPresets();
+pintarCargas(S.cargas, "tabla-cargas", true);
+pintarCargas(S.extras, "tabla-extras", false);
+recalcular();
+pintarComparacion();
+})();
+</script>

@@ -184,3 +184,4 @@ Simulación: `python3 -I escenarios_aires_dia.py`. Lo que se paga al año por en
 - **Si vas a usar mucho más aire de día** (por ejemplo, trabajo en casa), conviene **más paneles on-grid** (10–12). En el caso 3, 12 paneles on-grid dejan la factura en ~0,3 M/año.
 - El inversor on-grid de 5–6 kW recomendado permite crecer de 8 a 10–12 paneles sin cambiar de equipo (≈ 0,52 M por panel adicional, con estructura).
 
+> **Aclaración del propietario (2026-11-05):** se refiere a **mover** horas (caso 1), no a agregarlas. Con 8 paneles on-grid el efecto es pequeño (−$80 000/año); con la cotización sin inyección mejora ~$670 000/año, pero sigue por detrás del on-grid. Se puede explorar en el simulador (`08-simulador`, botón "Ejemplo: aires más de día, menos de noche").
