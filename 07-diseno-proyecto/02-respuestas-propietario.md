@@ -1,49 +1,38 @@
-# Respuestas del propietario (llenar)
+# Respuestas del propietario
 
-> Copia las respuestas aquí o envíalas en el chat. Ver explicación en `01-DATOS-QUE-NECESITO.md`.
+> Recibidas el 2026-11-05. **El repositorio es público:** aquí no se guardan nombre, dirección, NIU, número de
+> medidor ni coordenadas exactas. Los consumos y tarifas están en [`consumo-historico.csv`](consumo-historico.csv).
 
 ## A. Objetivo
-- Prioridad (ahorro / respaldo / autonomía / vender excedentes):
-- Cortes de luz (veces/mes, horas/corte):
-- Cargas que deben funcionar en un corte:
-- Presupuesto (COP) / financiación:
-- Ampliaciones futuras previstas:
+- **Prioridad:** (a) bajar la factura → (b) respaldo en cortes → (c) independencia de la red.
+- **Cortes:** depende de la temporada; a veces más de 3 al mes, de 1 hora a más de 3–4 horas.
+- **Cargas para el corte:** lo primordial es la **nevera**. También serían útiles el módem (no sabe si el proveedor de internet sigue funcionando en un corte), los abanicos y el PC.
+- **Presupuesto:** máximo **15 millones COP**.
+- **Ampliaciones:** ninguna por ahora. Quizás un carro eléctrico en el futuro. Si hace piscina, le haría un sistema propio.
 
 ## B. Factura Air-e
-| Mes | kWh | COP/kWh | Total COP |
-|---|---|---|---|
-| | | | |
-
-- Estrato:
-- Tipo de servicio (mono/bi/trifásico):
-- NIC/NIU:
-- Subsidio/contribución:
+- 12 facturas (nov-2025 a oct-2026), además del histórico desde may-2025. Ver [`03-analisis-consumo.md`](03-analisis-consumo.md).
+- **Estrato 3**, residencial, consumo "REAL" (medido). La factura indica "Propiedad del activo: PE" ⚠️ (confirmar si el transformador es de Air-e).
 
 ## C. Instalación eléctrica
-- Medidor (marca, tipo, placa):
-- Acometida (# cables):
-- Tablero (# circuitos, breakers de 2 polos):
-- Puesta a tierra (sí/no/no sé):
-- ¿Aires a 220 V?:
+- Fotos del medidor y de la acometida: **pendientes** ("tendría que ver").
+- Fotos del tablero: **pendientes**.
+- **Tiene aires a 220 V** → servicio con dos fases (120/240 V o 120/208 V). **Falta medir** para saber cuál.
+- Puesta a tierra: **no sabe**.
 
 ## D. Cargas
-Ver `plantilla-inventario-cargas.csv` (llenar y devolver).
+- **3 aires acondicionados** (BTU, si son inverter y horarios: pendientes).
+- Nevera y congelador nuevos, lavadoras, microondas, plancha, **impresora 3D**, impresora normal, televisores, computadores.
 
 ## E. Techo / sitio
-- Ubicación (coordenadas o enlace de Google Maps):
-- Tipo de techo y estado:
-- Medidas y orientación de cada plano:
-- Inclinación:
-- Sombras:
-- Alternativa en piso:
-- Distancia techo → tablero (m):
-- Lugar para inversor/baterías:
+- Ubicación: casco urbano de Sabanalarga. En la imagen satelital se ve una calle este-oeste, casas alargadas norte-sur y un **árbol grande** junto al punto marcado.
+- **Techo de eternit (fibrocemento), en buen estado.**
+- **Dos aguas**, aproximadamente 10 m × 15 m (no está seguro). Por la orientación de las casas vecinas, lo más probable es que las aguas caigan hacia el **este y el oeste** ⚠️ por confirmar.
+- **Sombras:** principalmente árboles.
+- Inversor y baterías: probablemente cerca al tablero actual.
 
 ## F. Preferencias
-- Marcas:
-- Compra propia vs llave en mano:
-- Monitoreo:
-- Estética:
-- Riesgo de robo:
-- Tenencia (propia / arriendo / PH):
-- ¿Declara renta?:
+- Vivienda **propia**.
+- **Declara renta.**
+- Prefiere **comprar los equipos y contratar un técnico**.
+- No le preocupa el robo. **Sí le interesa monitorear** desde el celular.

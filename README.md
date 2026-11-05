@@ -83,9 +83,13 @@ Para regenerar los datos de radiación: `cd 06-datos && python3 -I procesar_dato
 - Falta el costo publicado del dictamen RETIE y de la mano de obra desglosada, y no hay precios en COP para Fronius, SMA, Enphase ni BYD.
 - Está pendiente saber cuándo se traspasa Air-e a un nuevo operador y si se expidió la sobretasa de ≈$8/kWh a estratos 4–6.
 
-## Próximos pasos
-1. Tú: enviar los datos de [`01-DATOS-QUE-NECESITO.md`](07-diseno-proyecto/01-DATOS-QUE-NECESITO.md).
-2. Análisis de consumo y eficiencia, con los aires acondicionados primero.
-3. Alternativas on-grid / híbrido / off-grid y su análisis financiero.
-4. Diseño de detalle: strings, protecciones, cableado, puesta a tierra, estructura.
-5. Cotización con proveedores y ruta legal (RETIE, Air-e, UPME).
+## Estado del proyecto
+
+| Etapa | Estado |
+|---|---|
+| Base de conocimiento | ✅ oct-2026 |
+| Datos del propietario y 12 facturas | ✅ [`02-respuestas-propietario.md`](07-diseno-proyecto/02-respuestas-propietario.md), [`03-analisis-consumo.md`](07-diseno-proyecto/03-analisis-consumo.md) |
+| Anteproyecto y alternativas | ✅ v1 [`04-anteproyecto.md`](07-diseno-proyecto/04-anteproyecto.md): on-grid de 7 × 620 W (≈13 M, ahorro ≈4,8 M/año) + respaldo en fase 2 |
+| Diseño de detalle (strings, unifilar, protecciones, estructura) | ⏳ falta: voltaje medido, fotos del medidor, el tablero, el techo y los árboles |
+| Cotización final con proveedores | ⏳ |
+| Trámites (RETIE, Air-e, UPME) | ⏳ |
