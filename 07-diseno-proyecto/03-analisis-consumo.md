@@ -50,3 +50,31 @@
 
 - Para el on-grid, dimensionar **para ~480–580 kWh/mes** sin pasarse en los meses bajos, porque el excedente que supera el consumo del mes se paga a precio de bolsa.
 - La **eficiencia** es la medida más barata. Revisar si los aires son inverter, mantenerlos limpios y ponerlos a 24–25 °C. Cambiar un aire convencional de 12 000 BTU por uno inverter ahorra ~30–60 % de su consumo (Gokarakonda et al., 2023; ver [`../04-tecnico-cientifico/consumo-residencial-caribe-y-eficiencia.md`](../04-tecnico-cientifico/consumo-residencial-caribe-y-eficiencia.md)).
+
+## 6. Aires acondicionados (placas recibidas el 2026-11-05)
+
+| Aire | Equipo | BTU | Tipo | Entrada nominal / máx. | Voltaje |
+|---|---|---|---|---|---|
+| 1 | Olimpo OLACI12-110MA21 | 12 000 | Clase C, EER 3,25; probablemente de **velocidad fija** ⚠️ | 1 082 W | 115 V ⚠️ (por el "110" del modelo) |
+| 2 | LG VM122C7 | 12 000 | **DUAL Inverter** | 1 060 / 1 460 W | 220 V |
+| 3 | LG VM092C6 | 9 000 | **DUAL Inverter** | 790 / 1 270 W | 220 V |
+
+### Estimación de consumo por aire (⚠️ supuesto: 9 h por noche, todos los días, en temporada de calor)
+Un aire de velocidad fija trabaja ~75–85 % del tiempo a plena potencia. Un inverter, una vez que la habitación se enfría, trabaja a carga parcial (~40–55 % de la potencia nominal) ⚠️.
+
+| Aire | Potencia media estimada | kWh/noche | kWh/mes |
+|---|---|---|---|
+| 1 Olimpo (fijo) | 0,80–0,90 kW | 7,2–8,1 | **≈ 220–245** |
+| 2 LG 12 000 inverter | 0,45–0,60 kW | 4,1–5,4 | ≈ 125–165 |
+| 3 LG 9 000 inverter | 0,35–0,45 kW | 3,2–4,1 | ≈ 95–120 |
+| **Los 3, todas las noches** | | | **≈ 440–530** |
+
+**Lectura:**
+- Si los 3 se usaran 9 h todas las noches, sumarían casi toda la factura promedio (485 kWh/mes). Como la carga base sin aires ronda 200–270 kWh/mes (abr-2026), lo más probable es que **no se usen los 3 todas las noches**.
+  Los picos de mar, ago y sep 2026 (650–800 kWh) sí son consistentes con un uso intenso de los 3.
+- **El Aire 1 es el menos eficiente.** Con el mismo uso, gasta ≈ 80–110 kWh/mes más que el LG de 12 000. Eso equivale a ≈ 1,0–1,3 M COP/año (a ≈ $960/kWh), o a 1–2 paneles.
+  - Reemplazarlo por un inverter de 12 000 BTU podría pagarse en ~2–3 años si se usa a diario ⚠️ (precio de aires inverter no investigado aún).
+  - **Recomendación provisional:** primero la solar, que tiene mejor retorno y ya está presupuestada. Cambiar el Aire 1 cuando falle, o antes si es el que más horas trabaja.
+- **Mientras tanto:** usar más el Aire 2 o 3 que el 1, con el termostato a 24–25 °C, filtros limpios y la puerta cerrada.
+- **Para afinar:** necesito las horas reales de uso de cada aire (⏳). Con eso recalibro la fracción diurna y el balance mensual del anteproyecto.
+

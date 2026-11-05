@@ -3,7 +3,7 @@ Nevera-congelador LG LS65SXTX side-by-side 592 L,1,64,,24,todo el dia,7,si,,etiq
 Congelador vertical Electrolux EFUP17P3HRG 163 L,1,33,,24,todo el dia,7,si,,etiqueta RETIQ A: 24 kWh/mes (0.8 kWh/dia) = 33 W promedio; ahorro 56 %; deshielo manual; T ambiente 16-43 C
 Aire 1 (habitacion) Olimpo OLACI12-110MA21 mini split 12000 BTU,1,1082,,,noche (por confirmar),7,no,,etiqueta RETIQ C: 3517 W frio / EER 3.25 W/W = 1082 W entrada; 142.83 kWh/mes a 132 h/mes; T amb 18-43 C; '110' en el modelo sugiere 115 V (por confirmar en placa unidad exterior); inverter por confirmar; horas reales pendientes
 Aire 2 (habitacion) LG VM122C7 split DUAL Inverter 12000 BTU,1,1060,si,,noche (por confirmar),7,no,,placa unidad interior: 3517 W frio nominal / 1060 W entrada / 4.8 A; rango frio 703-4044 W; entrada max 1460 W / 6.6 A; 220 V 1~ 50/60 Hz; R410A 0.85 kg; fusible max 15 A; arranque suave (inverter); horas reales pendientes
-Aire acondicionado 3,1,,,,,7,no,,pendiente
+Aire 3 (habitacion) LG VM092C6 split DUAL Inverter 9000 BTU,1,790,si,,noche (por confirmar),7,no,,placa unidad interior: 2638 W frio nominal / 790 W entrada / 4.30 A; rango frio 879-3311 W; entrada max 1270 W / 7.20 A; 220 V 1~ 50/60 Hz; R410A 0.60 kg; fusible max 15 A; horas reales pendientes
 Modem/router,1,,no,24,todo el dia,7,si,,pendiente: confirmar si el internet sigue en un corte
 Abanicos,,,no,,,7,si,,pendiente: cantidad
 Computador(es),,,no,,,7,si,,pendiente: tipo (escritorio/portatil)
