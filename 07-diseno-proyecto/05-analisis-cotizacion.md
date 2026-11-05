@@ -167,3 +167,20 @@ Ahorro de **≈ 5,4 M/año**, con 1–3 M de margen dentro de tu presupuesto par
 - **El resto de la carga** se ajustó para que cada mes coincida con tu factura.
 - **Excedente neto** pagado a $300/kWh. **Consumo en vacío del SRNE**: 50 W. **Eficiencia del SRNE**: 4 puntos menos que la de un inversor on-grid.
 - **Costo de las baterías:** Felicity 5,12 kWh (4,87 M) y 10 kWh (9,32 M), más instalación.
+
+## 9. Sensibilidad: ¿y si los aires se usan de día? (consulta del 2026-11-05)
+Simulación: `python3 -I escenarios_aires_dia.py`. Lo que se paga al año por energía + alumbrado (hoy, sin solar: **5,77 M**).
+
+| Caso | Cotización tal cual (sin inyección) | 8 × 630 on-grid | 12 × 630 on-grid |
+|---|---|---|---|
+| Horario actual | 3,29 M | **0,35 M** | −0,80 M ⚠️ (pago de bolsa) |
+| 1. Mover las 2 h nocturnas de los Aires 1 y 2 a las 10–12 h (mismo consumo) | 2,62 M | 0,27 M | −0,89 M |
+| 2. Agregar 4 h de día al Aire 3 (+800 kWh/año; sin solar costarían +0,8 M) | 3,36 M | 0,75 M | −0,55 M |
+| 3. Agregar 4 h de día a los 3 aires (+3 070 kWh/año; sin solar costarían +3,2 M) | 3,83 M (5,23 M si conmuta) | 2,39 M | 0,30 M |
+
+**Lectura:**
+- **Mover consumo al día casi no cambia nada en on-grid** (−0,08 M/año): el crédito 1:1 ya "lleva" la energía del día a la noche pagando solo $133/kWh. En la cotización sin inyección sí ayuda (−0,67 M/año), pero sigue muy por detrás del on-grid.
+- **Con un sistema sin inyección, el aire de día sale casi gratis**, porque usa energía que de otro modo se desperdicia. Pero eso no compensa los ~7 000 kWh/año que siguen perdiéndose.
+- **Si vas a usar mucho más aire de día** (por ejemplo, trabajo en casa), conviene **más paneles on-grid** (10–12). En el caso 3, 12 paneles on-grid dejan la factura en ~0,3 M/año.
+- El inversor on-grid de 5–6 kW recomendado permite crecer de 8 a 10–12 paneles sin cambiar de equipo (≈ 0,52 M por panel adicional, con estructura).
+
