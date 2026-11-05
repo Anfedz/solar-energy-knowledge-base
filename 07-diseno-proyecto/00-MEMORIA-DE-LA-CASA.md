@@ -64,9 +64,9 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 |---|---|---|---|
 | **Nevera LG LS65SXTX** | Side-by-side, 592 L, etiqueta RETIQ **A**, **45,9 kWh/mes** (≈ 1,5 kWh/día, ≈ 64 W promedio), ahorro del 56 %, deshielo automático, T ambiente 16–38 °C | **Sí (primordial)** | ✅ foto de la etiqueta 2026-11-05 |
 | **Congelador Electrolux EFUP17P3HRG** | Vertical, 163 L, etiqueta RETIQ **A**, **24 kWh/mes** (≈ 0,8 kWh/día, ≈ 33 W promedio), ahorro del 56 %, **deshielo manual**, T ambiente 16–43 °C | Sí | ✅ foto de la etiqueta 2026-11-05 |
-| **Aire 1 (habitación) — Olimpo OLACI12-110MA21** | Mini split **12 000 BTU** (3 517 W de frío), etiqueta RETIQ **C**, EER **3,25 W/W** → **≈ 1,08 kW** de entrada; 142,83 kWh/mes a 132 h/mes (etiqueta); T ambiente 18–43 °C. ⚠️ El "110" del modelo sugiere **115 V**, no 220 V. ⚠️ Falta confirmar si es inverter (la placa de la unidad exterior lo dice) | No | ✅ foto de la etiqueta 2026-11-05 · ⏳ horas reales de uso |
-| **Aire 2 (habitación) — LG VM122C7, DUAL Inverter** | Split **12 000 BTU**: nominal 3 517 W de frío / **1 060 W** de entrada / 4,8 A; rango de frío 703–4 044 W; entrada máx. **1 460 W** / 6,6 A; **220 V** monofásico, 50/60 Hz; R410A 0,85 kg; fusible máx. 15 A. Compresor inverter (arranque suave, consumo bajo en carga parcial) | No | ✅ fotos de la placa y el frente 2026-11-05 · ⏳ horas de uso |
-| **Aire 3 (habitación) — LG VM092C6, DUAL Inverter** | Split **9 000 BTU**: nominal 2 638 W de frío / **790 W** de entrada / 4,30 A; rango de frío 879–3 311 W; entrada máx. **1 270 W** / 7,20 A; **220 V** monofásico; R410A 0,60 kg; fusible máx. 15 A | No | ✅ fotos de la placa y el frente 2026-11-05 · ⏳ horas de uso |
+| **Aire 1 (habitación) — Olimpo OLACI12-110MA21** | Mini split **12 000 BTU** (3 517 W de frío), etiqueta RETIQ **C**, EER **3,25 W/W** → **≈ 1,08 kW** de entrada; 142,83 kWh/mes a 132 h/mes (etiqueta); T ambiente 18–43 °C. ⚠️ El "110" del modelo sugiere **115 V**, no 220 V. ⚠️ Falta confirmar si es inverter (la placa de la unidad exterior lo dice) | No | ✅ foto de la etiqueta 2026-11-05 · ✅ uso: **2–3 h de día + 2 h de noche** |
+| **Aire 2 (habitación) — LG VM122C7, DUAL Inverter** | Split **12 000 BTU**: nominal 3 517 W de frío / **1 060 W** de entrada / 4,8 A; rango de frío 703–4 044 W; entrada máx. **1 460 W** / 6,6 A; **220 V** monofásico, 50/60 Hz; R410A 0,85 kg; fusible máx. 15 A. Compresor inverter (arranque suave, consumo bajo en carga parcial) | No | ✅ fotos de la placa y el frente 2026-11-05 · ✅ uso: **2–3 h de día + 2 h de noche** |
+| **Aire 3 (habitación) — LG VM092C6, DUAL Inverter** | Split **9 000 BTU**: nominal 2 638 W de frío / **790 W** de entrada / 4,30 A; rango de frío 879–3 311 W; entrada máx. **1 270 W** / 7,20 A; **220 V** monofásico; R410A 0,60 kg; fusible máx. 15 A | No | ✅ fotos de la placa y el frente 2026-11-05 · ✅ uso: **toda la noche, ~23 h a 7 h (a veces más) + 2–3 h de día** → es el aire que más horas trabaja |
 | Módem / router | ¿El internet sigue durante un corte? | Deseable | ⏳ prueba en el próximo corte |
 | Abanicos | — | Deseable | ⏳ cantidad |
 | Computador(es) | — | Deseable (PC) | ⏳ ¿escritorio o portátil? |
@@ -90,6 +90,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | Fecha | Decisión |
 |---|---|
 | 2026-11-05 | El repositorio se actualiza directamente en `main` |
+| 2026-11-05 | Cotización recibida (12 × Ronma 630 W + SRNE 6,5 kW off-grid, sin batería, $14,4 M): análisis en [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md). **Recomendación:** pedir versión on-grid de 8 × Ronma 630 (≈ 12,1–13,8 M, ahorro ≈ 5,4 M/año) — *pendiente de decisión del propietario* |
 | 2026-11-05 | Anteproyecto v1: **on-grid de 7 × ~620 W (4,3 kWp) en la cara este (~13 M COP)** + respaldo en fase 2 (inversor-cargador 48 V + batería de 2,4 kWh, ≈ 5,3 M). Ver [`04-anteproyecto.md`](04-anteproyecto.md) — *propuesta, pendiente de aprobación del propietario* |
 
 ## 8. Pendientes del propietario
@@ -97,7 +98,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 2. ⏳ Fotos del medidor y la acometida. Del tablero: la etiqueta interior de cerca (corriente nominal de barras), dónde está el breaker principal y su amperaje, y una foto legible de los rótulos de cada breaker.
 3. ⏳ Techo: orientación de las aguas, edad, tipo de correas; foto desde arriba.
 4. ⏳ Árboles: posición respecto al techo, altura, si son propios; fotos hacia los 4 lados.
-5. ⏳ Placa de la unidad exterior del Aire 1 (voltaje, inverter); horas de uso de los 3 aires.
+5. ⏳ Placa de la unidad exterior del Aire 1 (voltaje, inverter). ⏳ ¿A qué hora del día se usan los aires (mañana o tarde)?
 6. ⏳ Causa del aumento de consumo en 2026.
 7. ⏳ Tipo de internet (fibra, cable o antena).
 
@@ -119,3 +120,5 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Fotos del Aire 3 (habitación): LG VM092C6 DUAL Inverter, 9 000 BTU, 790 W nominal (máx. 1 270 W), 220 V | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
 | 2026-11-05 | Foto del tablero: bifásico, 12 circuitos, lleno; rótulos poco legibles | §4; presupuesto del anteproyecto +0,3–0,8 M (tablero solar adicional) |
 | 2026-11-05 | Fotos de etiquetas: lavadora Mabe LMC70203WDAB0 (9,4 kWh/mes, clase A) e impresora Epson L4260 (0,73 kWh/mes en espera) | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
+| 2026-11-05 | Horario de aires: Aires 1 y 2, 2–3 h de día + 2 h de noche cada uno; Aire 3, de ~23 h a 7 h (a veces más) + 2–3 h de día | §5, [`inventario-cargas-propietario.csv`](inventario-cargas-propietario.csv) |
+| 2026-11-05 | Cotización de un instalador local (22-oct-2026): 12 × Ronma RM-630W TOPCon bifacial + inversor SRNE ASP4865U140-H 6,5 kW (off-grid, 48 V, fase partida 120/240 V) sin batería, $14 395 000; fichas técnicas de panel e inversor. Le recomendaron no vender a Air-e | §7, [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md) |
