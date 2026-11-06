@@ -255,10 +255,17 @@ footer { color: var(--muted); font-size: .82rem; display: grid; gap: 6px; max-wi
       <h2 id="t-consumo">Tus aparatos y horarios</h2>
       <div class="toolbar">
         <button class="btn" id="aires-actual" type="button">Horario actual de aires</button>
-        <button class="btn" id="aires-dia" type="button">Ejemplo: aires más de día, menos de noche</button>
+        <button class="btn" id="aires-dia" type="button">Ejemplo: Aires 1 y 2 de 9 am a 3 pm</button>
+        <button class="btn" id="aire3-5h" type="button">Ejemplo: Aire 3 solo 5 h de noche</button>
       </div>
     </div>
-    <label class="check"><input type="checkbox" id="calibrar"> <span><strong>Ajustar a mis facturas.</strong> El total de cada mes queda igual a tu factura y los horarios solo deciden <em>a qué hora</em> consumes. Si mueves horas de aire, cambia el horario, no el total. Los aires ("clima") se ajustan mes a mes con el calor; lo "fijo" se mantiene igual.</span></label>
+    <div class="field" style="max-width:640px"><label for="modoConsumo">Cómo usar tus facturas</label>
+      <select id="modoConsumo">
+        <option value="habitos">Partir de mis facturas y simular cambios de hábito (recomendado)</option>
+        <option value="factura">Mantener exactamente el total de cada factura (solo cambia la hora)</option>
+        <option value="libre">Sin ajuste: vatios y horas tal cual</option>
+      </select>
+      <p class="note" id="modo-consumo-nota"></p></div>
     <div class="scroll"><table class="loads" id="tabla-cargas"></table></div>
     <div class="toolbar"><button class="btn" id="add-carga" type="button">+ Agregar aparato</button><span class="note" id="nota-calib"></span></div>
     <h3>Consumo nuevo (no está en tus facturas)</h3>
@@ -321,12 +328,22 @@ function perfilDe(cargas, tipo) {
 function sumar(a) { return a.reduce((s, v) => s + v, 0); }
 
 // Perfil del mes: si "calibrar", los aires (tipo clima) se escalan para que el día promedio iguale la factura.
+// Con cfg.cargasRef (modo "cambio de hábitos"), el ajuste mensual se calcula con el horario de referencia
+// (el de las facturas) y se aplica al horario nuevo: quitar o agregar horas cambia el total del mes.
 function perfilMes(cfg, kwhDia) {
   const base = perfilDe(cfg.cargas, "base");
   const clima = perfilDe(cfg.cargas, "clima");
   const extra = perfilDe(cfg.extras || [], null);
   let p;
-  if (!cfg.calibrar) {
+  if (cfg.calibrar && cfg.cargasRef) {
+    const bR = sumar(perfilDe(cfg.cargasRef, "base")), aR = sumar(perfilDe(cfg.cargasRef, "clima"));
+    const s = aR > 0 ? (kwhDia - bR) / aR : 0;
+    if (aR > 0 && s >= 0.1) p = base.map((v, i) => v + s * clima[i]);
+    else {
+      const k = kwhDia / (bR + 0.1 * aR || 1);
+      p = base.map((v, i) => k * (v + 0.1 * clima[i]));
+    }
+  } else if (!cfg.calibrar) {
     p = base.map((v, i) => v + clima[i]);
   } else {
     const b = sumar(base), a = sumar(clima);
@@ -408,7 +425,8 @@ function simular(D, cfg) {
     } else {
       despues = costoMes(c.imp, f.sub, t);
     }
-    const antes = costoMes(sumar(carga) * f.dias, f.sub, t); // mismo consumo, sin sistema solar
+    const cargaRef = cfg.cargasRef ? perfilMes({ ...cfg, cargas: cfg.cargasRef, cargasRef: null, extras: [] }, kwhDia) : carga;
+    const antes = costoMes(sumar(cargaRef) * f.dias, f.sub, t); // factura sin solar con los hábitos de referencia
     const m = {
       mes: f.mes, mesConsumo: mes, dias: f.dias, carga: c.carga, pv: c.pv, directo: c.directo, bateria: c.bateria,
       credito, comprado: c.imp - credito, bolsa, desperdicio: c.desperdicio, antes, despues,
@@ -460,11 +478,12 @@ const AIRES_ACTUAL = {
   a2: [R(14, 17, 545), R(21, 23, 550)],
   a3: [R(23, 7, 440), R(14, 17, 500)],
 };
-const AIRES_DIA = { // mismas horas totales, movidas hacia el día
-  a1: [R(10, 13, 800), R(13, 15, 800)],
-  a2: [R(10, 12, 600), R(14, 17, 545)],
-  a3: [R(1, 7, 420), R(12, 17, 520)],
+const AIRES_DIA = { // misma energía diaria, movida hacia 9 am-3 pm
+  a1: [R(9, 12, 700), R(12, 15, 617)],
+  a2: [R(9, 11, 550), R(12, 15, 545)],
+  a3: [R(23, 7, 440), R(12, 15, 500)],
 };
+const AIRE3_5H = { a3: [R(23, 4, 470), R(14, 17, 500)] };
 const CARGAS0 = () => [
   { id: "nev", nombre: "Nevera LG LS65SXTX (45,9 kWh/mes)", tipo: "base", critico: true, activo: true, rangos: [R(0, 24, 85)] },
   { id: "cong", nombre: "Congelador Electrolux (24 kWh/mes)", tipo: "base", critico: true, activo: true, rangos: [R(0, 24, 41)] },
@@ -487,31 +506,34 @@ const EXTRAS0 = () => [
 
 const SISTEMA_CAMPOS = ["modo", "nE", "nO", "panelW", "eta", "idleW", "batKWh", "conmuta", "precioPanel", "precioEstructura", "precioInversor", "precioBatKWh", "otros"];
 const PRESETS = [
+  { id: "cot", nombre: "✓ Elegido: cotización (12 + SRNE, sin batería)", s: { modo: "cero", nE: 6, nO: 6, panelW: 630, eta: 96, idleW: 50, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 3600000, precioBatKWh: 960000, otros: 4555000 } },
+  { id: "cot5", nombre: "Elegido + batería 5 kWh", s: { modo: "cero", nE: 6, nO: 6, panelW: 630, eta: 96, idleW: 50, batKWh: 5, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 3600000, precioBatKWh: 1020000, otros: 4555000 } },
+  { id: "cot10", nombre: "Elegido + batería 10 kWh", s: { modo: "cero", nE: 6, nO: 6, panelW: 630, eta: 96, idleW: 50, batKWh: 10, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 3600000, precioBatKWh: 960000, otros: 4555000 } },
   { id: "rec8", nombre: "Recomendado: 8 paneles a la red", s: { modo: "ongrid", nE: 8, nO: 0, panelW: 630, eta: 100, idleW: 0, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 2500000, precioBatKWh: 960000, otros: 5750000 } },
   { id: "on7", nombre: "7 paneles a la red", s: { modo: "ongrid", nE: 7, nO: 0, panelW: 630, eta: 100, idleW: 0, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 2500000, precioBatKWh: 960000, otros: 5750000 } },
   { id: "on12", nombre: "12 paneles a la red", s: { modo: "ongrid", nE: 6, nO: 6, panelW: 630, eta: 100, idleW: 0, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 2500000, precioBatKWh: 960000, otros: 5750000 } },
-  { id: "cot", nombre: "Cotización recibida (12 + SRNE, sin batería)", s: { modo: "cero", nE: 6, nO: 6, panelW: 630, eta: 96, idleW: 50, batKWh: 0, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 3600000, precioBatKWh: 960000, otros: 4555000 } },
-  { id: "cot10", nombre: "Cotización + batería 10 kWh", s: { modo: "cero", nE: 6, nO: 6, panelW: 630, eta: 96, idleW: 50, batKWh: 10, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 3600000, precioBatKWh: 960000, otros: 4555000 } },
   { id: "hib5", nombre: "Híbrido a la red + batería 5 kWh", s: { modo: "ongrid", nE: 8, nO: 0, panelW: 630, eta: 98, idleW: 30, batKWh: 5, conmuta: false, precioPanel: 400000, precioEstructura: 120000, precioInversor: 11460000, precioBatKWh: 960000, otros: 5750000 } },
 ];
 
 const DEFAULT = () => ({
-  ...PRESETS[0].s, preset: "rec8", sombra: 10, dod: 90,
+  ...PRESETS.find((p) => p.id === "cot").s, preset: "cot", sombra: 10, dod: 90,
   cu: 936.40, cv: 133.39, bolsa: 300, alumbrado: 10, estrato: 3, alzaTarifa: 3, degradacion: 0.4, anioReemplazo: 13, anios: 25,
-  calibrar: true, cargas: CARGAS0(), extras: EXTRAS0(), mesDia: 9,
+  modoConsumo: "habitos", cargas: CARGAS0(), extras: EXTRAS0(), mesDia: 9,
 });
 
-const KEY = "simSolarSabanalarga.v1";
+const KEY = "simSolarSabanalarga.v2";
 let S;
 try { S = JSON.parse(localStorage.getItem(KEY)) || DEFAULT(); } catch (e) { S = DEFAULT(); }
 if (!S.cargas) S = DEFAULT();
+if (!S.modoConsumo) S.modoConsumo = "habitos";
 const guardar = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
 function cfgDe(st) {
   return {
     modo: st.modo, nE: +st.nE, nO: +st.nO, panelW: +st.panelW, sombra: st.sombra / 100, eta: st.eta / 100,
     idleW: +st.idleW, batKWh: +st.batKWh, dod: st.dod / 100, conmuta: !!st.conmuta,
-    cargas: st.cargas, extras: st.extras, calibrar: !!st.calibrar,
+    cargas: st.cargas, extras: st.extras, calibrar: st.modoConsumo !== "libre",
+    cargasRef: st.modoConsumo === "habitos" ? CARGAS0() : null,
     tarifa: { cu: +st.cu, cv: +st.cv, bolsa: +st.bolsa, alumbrado: st.alumbrado / 100, estrato: +st.estrato,
       subsidio: { 1: 0.407, 2: 0.259, 3: 0.15, 4: 0 }, contribucion: 0.2 },
     precioPanel: +st.precioPanel, precioEstructura: +st.precioEstructura, precioInversor: +st.precioInversor,
@@ -527,7 +549,12 @@ function pintarControles() {
   for (const k of NUM) { const el = $(k); if (el && document.activeElement !== el) el.value = S[k]; }
   $("estrato").value = S.estrato;
   $("conmuta").checked = !!S.conmuta;
-  $("calibrar").checked = !!S.calibrar;
+  $("modoConsumo").value = S.modoConsumo;
+  $("modo-consumo-nota").textContent = {
+    habitos: "Con tus horarios actuales, cada mes suma lo mismo que tu factura. Si mueves horas, el total se mantiene; si quitas o agregas horas de aire, el consumo baja o sube según el calor de cada mes. Para corregir un dato de un aparato (no un hábito), usa la segunda opción.",
+    factura: "Cada mes suma exactamente tu factura: los horarios solo deciden a qué hora consumes. Útil para corregir vatios u horas de un aparato sin cambiar el total.",
+    libre: "Se usan los vatios y horas tal cual, sin ajuste por mes; el total puede no coincidir con tus facturas.",
+  }[S.modoConsumo];
   $("modo-ongrid").setAttribute("aria-pressed", S.modo === "ongrid");
   $("modo-cero").setAttribute("aria-pressed", S.modo === "cero");
   $("o-nE").textContent = S.nE; $("o-nO").textContent = S.nO;
@@ -541,7 +568,7 @@ function pintarControles() {
 for (const k of NUM) $(k).addEventListener("input", (e) => { S[k] = e.target.value === "" ? 0 : Number(e.target.value); marcarPersonal(k); programar(); });
 $("estrato").addEventListener("change", (e) => { S.estrato = +e.target.value; programar(); });
 $("conmuta").addEventListener("change", (e) => { S.conmuta = e.target.checked; marcarPersonal("conmuta"); programar(); });
-$("calibrar").addEventListener("change", (e) => { S.calibrar = e.target.checked; programar(); });
+$("modoConsumo").addEventListener("change", (e) => { S.modoConsumo = e.target.value; programar(); });
 for (const id of ["modo-ongrid", "modo-cero"]) $(id).addEventListener("click", (e) => { S.modo = e.currentTarget.dataset.modo; marcarPersonal("modo"); programar(); });
 function marcarPersonal(k) { if (SISTEMA_CAMPOS.includes(k)) S.preset = "personal"; }
 
@@ -600,11 +627,12 @@ function pintarCargas(lista, tablaId, conTipo) {
 $("add-carga").addEventListener("click", () => { S.cargas.push({ id: "n" + Date.now(), nombre: "Nuevo aparato", tipo: "base", critico: false, activo: true, rangos: [R(18, 22, 100)] }); pintarCargas(S.cargas, "tabla-cargas", true); programar(false); });
 $("add-extra").addEventListener("click", () => { S.extras.push({ id: "x" + Date.now(), nombre: "Consumo nuevo", tipo: "base", activo: true, rangos: [R(10, 14, 500)] }); pintarCargas(S.extras, "tabla-extras", false); programar(false); });
 function ponerAires(h) {
-  for (const k of ["a1", "a2", "a3"]) { const c = S.cargas.find((x) => x.id === k); if (c) c.rangos = h[k].map((r) => ({ ...r })); }
+  for (const k of Object.keys(h)) { const c = S.cargas.find((x) => x.id === k); if (c) c.rangos = h[k].map((r) => ({ ...r })); }
   pintarCargas(S.cargas, "tabla-cargas", true); programar(false);
 }
 $("aires-actual").addEventListener("click", () => ponerAires(AIRES_ACTUAL));
 $("aires-dia").addEventListener("click", () => ponerAires(AIRES_DIA));
+$("aire3-5h").addEventListener("click", () => { const c = S.cargas.find((x) => x.id === "a3"); if (c) c.rangos = AIRE3_5H.a3.map((r) => ({ ...r })); pintarCargas(S.cargas, "tabla-cargas", true); programar(false); });
 $("reset").addEventListener("click", () => { S = DEFAULT(); pintarCargas(S.cargas, "tabla-cargas", true); pintarCargas(S.extras, "tabla-extras", false); programar(); });
 
 /* ---------- Tooltip ---------- */
@@ -791,7 +819,7 @@ function pintarKPI(res, fin, cfg) {
   const base = perfilDe(cfg.cargas, "base").reduce((a, b) => a + b, 0);
   const minDia = Math.min(...DATOS.facturas.map((f) => f.kwh / f.dias));
   $("nota-calib").textContent = cfg.calibrar
-    ? `Consumo fijo: ${fmtN(base, 1)} kWh/día. El mes más bajo de tus facturas: ${fmtN(minDia, 1)} kWh/día.` + (base > minDia ? " ⚠️ Lo fijo supera algún mes; revisa vatios u horas." : "")
+    ? (cfg.cargasRef ? `Consumo simulado: ${fmtN(res.tot.carga - (cfg.idleW || 0) / 1000 * 24 * 364)} kWh/año frente a ${fmtN(DATOS.facturas.reduce((a, f) => a + f.kwh, 0))} kWh de tus facturas. ` : "") + `Consumo fijo: ${fmtN(base, 1)} kWh/día. El mes más bajo de tus facturas: ${fmtN(minDia, 1)} kWh/día.` + (base > minDia ? " ⚠️ Lo fijo supera algún mes; revisa vatios u horas." : "")
     : "Sin ajuste: se usan los vatios y horas tal cual, y el total puede no coincidir con tus facturas.";
 }
 

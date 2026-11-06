@@ -8,7 +8,10 @@ Página web que simula hora a hora el sistema solar de la casa con las 12 factur
   - los costos y la tarifa: CU, estrato, crédito, bolsa, alumbrado, alza de tarifa, degradación;
   - los aparatos y sus horarios, incluidos los aires y los computadores;
   - consumos nuevos, como un carro eléctrico.
-- **Modo "Ajustar a mis facturas":** el total de cada mes es el de la factura y los horarios solo deciden *a qué hora* se consume. Así, mover horas de aire al día cambia el horario sin cambiar el total.
+- **Modos de consumo:**
+  - *Partir de mis facturas* (por defecto): con el horario actual cada mes suma la factura. Al mover horas el total se mantiene; al quitar o agregar horas de aire el consumo cambia según el calor del mes.
+  - *Mantener el total*: cada mes suma exactamente la factura y los horarios solo deciden a qué hora se consume.
+  - *Sin ajuste*: vatios y horas tal cual.
 - **Archivos:**
 
   | Archivo | Qué es |

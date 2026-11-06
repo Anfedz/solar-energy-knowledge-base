@@ -36,12 +36,22 @@ function perfilDe(cargas, tipo) {
 function sumar(a) { return a.reduce((s, v) => s + v, 0); }
 
 // Perfil del mes: si "calibrar", los aires (tipo clima) se escalan para que el día promedio iguale la factura.
+// Con cfg.cargasRef (modo "cambio de hábitos"), el ajuste mensual se calcula con el horario de referencia
+// (el de las facturas) y se aplica al horario nuevo: quitar o agregar horas cambia el total del mes.
 function perfilMes(cfg, kwhDia) {
   const base = perfilDe(cfg.cargas, "base");
   const clima = perfilDe(cfg.cargas, "clima");
   const extra = perfilDe(cfg.extras || [], null);
   let p;
-  if (!cfg.calibrar) {
+  if (cfg.calibrar && cfg.cargasRef) {
+    const bR = sumar(perfilDe(cfg.cargasRef, "base")), aR = sumar(perfilDe(cfg.cargasRef, "clima"));
+    const s = aR > 0 ? (kwhDia - bR) / aR : 0;
+    if (aR > 0 && s >= 0.1) p = base.map((v, i) => v + s * clima[i]);
+    else {
+      const k = kwhDia / (bR + 0.1 * aR || 1);
+      p = base.map((v, i) => k * (v + 0.1 * clima[i]));
+    }
+  } else if (!cfg.calibrar) {
     p = base.map((v, i) => v + clima[i]);
   } else {
     const b = sumar(base), a = sumar(clima);
@@ -123,7 +133,8 @@ function simular(D, cfg) {
     } else {
       despues = costoMes(c.imp, f.sub, t);
     }
-    const antes = costoMes(sumar(carga) * f.dias, f.sub, t); // mismo consumo, sin sistema solar
+    const cargaRef = cfg.cargasRef ? perfilMes({ ...cfg, cargas: cfg.cargasRef, cargasRef: null, extras: [] }, kwhDia) : carga;
+    const antes = costoMes(sumar(cargaRef) * f.dias, f.sub, t); // factura sin solar con los hábitos de referencia
     const m = {
       mes: f.mes, mesConsumo: mes, dias: f.dias, carga: c.carga, pv: c.pv, directo: c.directo, bateria: c.bateria,
       credito, comprado: c.imp - credito, bolsa, desperdicio: c.desperdicio, antes, despues,

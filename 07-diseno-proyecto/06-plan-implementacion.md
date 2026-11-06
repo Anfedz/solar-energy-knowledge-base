@@ -93,3 +93,43 @@
 - **Producción solar del mes** (app) y **autoconsumo**: qué fracción de la producción se usó.
 - **Consumo de 9 am a 3 pm** frente al consumo nocturno.
 - **Plata ahorrada acumulada**, para la meta de la batería.
+
+## 8. Consumo en las horas sin sol (consulta del 2026-11-06)
+
+Según PVGIS, los paneles producen de **7 am a 5 pm**: a las 7 am y a las 5 pm, apenas el 15–17 % del pico; de 9 am a 3 pm, el 60–100 %. **De 6 pm a 6 am la producción es cero**: unas 13 horas por noche que salen de la red, o de la batería cuando la tengas.
+
+| Equipo | Consumo de 6 pm a 7 am | Al mes | Costo/mes (≈ $1 030/kWh con alumbrado) |
+|---|---|---|---|
+| Nevera LG (etiqueta 45,9 kWh/mes; +30 % por calor) | 0,8–1,1 kWh | 25–33 kWh | $26 000–34 000 |
+| Congelador Electrolux (etiqueta 24 kWh/mes; +30 %) | 0,4–0,6 kWh | 13–17 kWh | $13 000–17 000 |
+| Aire 1 Olimpo, 2 h (velocidad fija, ~0,85–1,05 kW) | 1,7–2,1 kWh | 51–63 kWh* | $53 000–65 000 |
+| Aire 2 LG 12 000 inverter, 2 h (~0,55–0,8 kW) | 1,1–1,6 kWh | 33–48 kWh* | $34 000–49 000 |
+| **Subtotal: nevera + congelador + Aires 1 y 2 de noche** | **4,0–5,4 kWh** | **120–160 kWh*** | **$125 000–165 000** |
+| Aire 3 LG 9 000, 8 h (23–7 h; ~0,44 kW) | 3,2–3,8 kWh | 95–115 kWh* | $100 000–120 000 |
+| Aire 3, **5 h** (23–4 h) | 2,2–2,5 kWh | 65–75 kWh* | $67 000–77 000 |
+| Resto: módem, luces, TV/PC de noche | ≈ 2,5 kWh | ≈ 75 kWh | ≈ $77 000 |
+
+\* En meses de calor con uso todas las noches. En meses frescos o lluviosos tus facturas muestran menos uso de aire: según el ajuste con las facturas, el uso real promedio es ~65 % de ese horario.
+
+**Lectura:** una **batería de 5 kWh** (≈ 4,4 kWh útiles) cubre justo la nevera, el congelador y las 2 h nocturnas de los Aires 1 y 2. Si además mueves esas 2 h al día, la batería alcanza para buena parte del Aire 3.
+
+### Escenario: Aire 3 solo 5 h de noche (23–4 h) en vez de 8 h
+Simulación hora a hora con el sistema elegido (12 × 630 W + SRNE), en modo "partir de mis facturas":
+
+| Escenario | Consumo/año | Pagas sin batería | Con 5 kWh | Con 10 kWh |
+|---|---|---|---|---|
+| Hoy: Aire 3 8 h de noche | 5 887 kWh | 3,31 M | 1,70 M | 0,59 M |
+| **Aire 3 5 h de noche** | **5 612 kWh (−275)** | **3,03 M (−0,28 M)** | 1,43 M | 0,41 M |
+| **Aire 3 5 h + plan 9 am–3 pm** (Aires 1 y 2 de día, lavadora, plancha e impresora 3D de día) | 5 612 kWh | **2,21 M (−1,10 M)** | **0,69 M** | 0,09 M |
+
+- Sin paneles, el cambio del Aire 3 bajaría tu factura de 5,77 a 5,49 M/año.
+- El consumo no incluye el del inversor en vacío, que se asumió de 50 W.
+- Apagar el aire a las 4 am suele ser cómodo: es la hora más fresca de la noche. Para que no se caliente la alcoba, ayuda dejar el abanico o el modo sueño del LG.
+
+### Iluminación: ¿bombillos inteligentes para medirla?
+**No hace falta.** La iluminación se estimó en ~150 W durante 5 h, unos 0,75 kWh por noche: ≈ 23 kWh/mes, unos $23 000/mes.
+- **Para saber cuánto gasta:** cuenta los bombillos y lee los vatios impresos en cada uno. Vatios × horas = consumo.
+- **Si queda algún bombillo que no sea LED** (incandescente o ahorrador espiral), cámbialo por LED de 7–12 W: es la mejora más barata.
+- **Los bombillos inteligentes no consumen menos** que un LED normal, y suman un pequeño consumo en espera, ~0,2–0,5 W cada uno ⚠️. Sirven para automatizar, no para ahorrar.
+- **Si quieres medir el circuito de luces completo,** un medidor de pinza en el tablero (el mismo tipo que para los aires) lo hace sin cambiar bombillos.
+
