@@ -80,7 +80,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 |---|---|---|
 | Material | Eternit (fibrocemento), en buen estado | ✅ |
 | Forma | Dos aguas, ≈ 10 × 15 m | ⚠️ medidas aproximadas |
-| Orientación de las aguas | Probablemente este y oeste | ⚠️ por confirmar |
+| Orientación de las aguas | **Este y oeste** | ✅ confirmado por el propietario (2026-11-08) |
 | Pendiente | ~10° asumida | ⚠️ |
 | Edad del techo / asbesto | — | ⏳ (si es anterior a 2021, podría tener asbesto) |
 | Correas (vigas) | ¿Madera o metal? | ⏳ |
@@ -89,6 +89,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 ## 7. Decisiones tomadas
 | Fecha | Decisión |
 |---|---|
+| 2026-11-08 | ⏳ **Montaje en discusión:** propuesta familiar de una estructura metálica sobre el techo con los 12 paneles al **sur a 10°**, en lugar de 6 este + 6 oeste. Análisis: con el sistema sin inyección el ahorro es igual en las tres opciones y la estructura no se paga con energía. Recomendación: 6 E + 6 O sobre el techo, salvo que el eternit no aguante. Ver [`../09-orientacion/README.md`](../09-orientacion/README.md) |
 | 2026-11-05 | ✅ **DECISIÓN: contratar la cotización recibida** (12 × Ronma 630 W + SRNE ASP4865U140-H 6,5 kW, sin batería ni inyección, $14 395 000). Plan: medir el consumo por equipo, mover el uso a **9 am–3 pm** y ahorrar para una **batería** (5 kWh apilable, luego 10 kWh). Ver [`06-plan-implementacion.md`](06-plan-implementacion.md) |
 | 2026-11-05 | El repositorio se actualiza directamente en `main` |
 | 2026-11-05 | Cotización recibida (12 × Ronma 630 W + SRNE 6,5 kW off-grid, sin batería, $14,4 M): análisis en [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md). **Recomendación:** pedir versión on-grid de 8 × Ronma 630 (≈ 12,1–13,8 M, ahorro ≈ 5,4 M/año) — *no elegida: el propietario decidió la cotización tal cual* |
@@ -128,3 +129,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Aclaró que "usar los aires de día" significa **mover** horas (prenderlos de día y usarlos menos de noche), no agregar horas. Pidió un simulador interactivo basado en las facturas y que tenga en cuenta los computadores y demás aparatos | Simulador en [`../08-simulador/`](../08-simulador/README.md); sensibilidad en [`05-analisis-cotizacion.md`](05-analisis-cotizacion.md) §9 (caso 1) |
 | 2026-11-05 | **Decidió contratar la cotización** (12 × Ronma 630 W + SRNE 6,5 kW, sin batería). Quiere ver el comportamiento de la casa, identificar los equipos que más consumen, usarlos entre 9 am y 3 pm, e ir ahorrando para una batería | §7, §8, [`06-plan-implementacion.md`](06-plan-implementacion.md) |
 | 2026-11-06 | Preguntó el consumo en horas sin sol de la nevera, el congelador y 2 h de aire; si conviene usar bombillos inteligentes para medir la iluminación; y pidió un escenario con el Aire 3 encendido 5 h de noche | [`06-plan-implementacion.md`](06-plan-implementacion.md) §8; simulador v2 (modo "partir de mis facturas", botón Aire 3 5 h) |
+| 2026-11-08 | Confirmó que el techo cae al este y al oeste. En la familia se propone una estructura metálica sobre el techo con los paneles al sur a 10° (en vez de 6 + 6). Preguntó si yo había recomendado ponerlos todos al este y pidió un modelo visual | §6, §7; [`../09-orientacion/`](../09-orientacion/README.md) (maqueta 3D publicada) |

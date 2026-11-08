@@ -13,6 +13,7 @@ function prepararDatos(D) {
   if (D._listo) return D;
   D.pvE = decodificarPV(D.pv_este);
   D.pvO = decodificarPV(D.pv_oeste);
+  D.pvS = D.pv_sur ? decodificarPV(D.pv_sur) : new Float32Array(D.pvE.length);
   D._listo = true;
   return D;
 }
@@ -75,9 +76,10 @@ function costoMes(kwh, kwhSub, t) {
 function simular(D, cfg) {
   D = prepararDatos(D);
   const t = cfg.tarifa;
-  const kwp = { e: (cfg.nE * cfg.panelW) / 1000, o: (cfg.nO * cfg.panelW) / 1000 };
+  const nS = cfg.nS || 0; // paneles hacia el sur a 10° (estructura sobre el techo)
+  const kwp = { e: (cfg.nE * cfg.panelW) / 1000, o: (cfg.nO * cfg.panelW) / 1000, s: (nS * cfg.panelW) / 1000 };
   const factorPV = (1 - cfg.sombra) * cfg.eta;
-  const hayFV = cfg.nE + cfg.nO > 0;
+  const hayFV = cfg.nE + cfg.nO + nS > 0;
   const idle = hayFV || cfg.batKWh > 0 ? (cfg.idleW || 0) / 1000 : 0;
   const bat = cfg.batKWh || 0;
   const socMin = bat * (1 - cfg.dod), socMax = bat, etaB = 0.95;
@@ -97,7 +99,7 @@ function simular(D, cfg) {
         nDias++;
         const o = (bloque[0] + d) * 24;
         for (let h = 0; h < 24; h++) {
-          const pv = (kwp.e * D.pvE[o + h] + kwp.o * D.pvO[o + h]) * factorPV;
+          const pv = (kwp.e * D.pvE[o + h] + kwp.o * D.pvO[o + h] + kwp.s * D.pvS[o + h]) * factorPV;
           const ld = carga[h] + idle;
           pvProm[h] += pv;
           acc.carga += ld; acc.pv += pv;
@@ -147,8 +149,9 @@ function simular(D, cfg) {
 }
 
 function costoSistema(cfg) {
-  const n = cfg.nE + cfg.nO;
-  return n * (cfg.precioPanel + cfg.precioEstructura) + (n > 0 || cfg.batKWh > 0 ? cfg.precioInversor + cfg.otros : 0)
+  const nS = cfg.nS || 0, n = cfg.nE + cfg.nO + nS;
+  return n * (cfg.precioPanel + cfg.precioEstructura) + nS * (cfg.extraEstructuraSur || 0)
+    + (n > 0 || cfg.batKWh > 0 ? cfg.precioInversor + cfg.otros : 0)
     + cfg.batKWh * cfg.precioBatKWh;
 }
 

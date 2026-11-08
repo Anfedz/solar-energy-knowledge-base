@@ -45,7 +45,7 @@
 ## 3. Durante la instalación
 
 - **Ubicación del inversor:** bajo techo, ventilado, a la sombra y lejos del alcance de niños. Es IP20 y reduce su potencia por encima de 45 °C. Debe quedar cerca del tablero y con espacio al lado para la batería futura.
-- **Paneles:** 6 en la cara este y 6 en la oeste, cada grupo de 6 en su propia entrada MPPT. Esto ya está verificado: 307 V de Voc máximo y 16,3 A, dentro de los límites del SRNE. Separación de 10–15 cm del techo para ventilar. Fijación a las **correas**, no solo a la lámina de eternit. Si el techo es anterior a 2021, perforar en húmedo y con protección (posible asbesto).
+- **Paneles:** 6 en la cara este y 6 en la oeste, cada grupo de 6 en su propia entrada MPPT. Una estructura metálica mirando al sur produce 2,7 % más pero ahorra lo mismo con este sistema (ver `09-orientacion/`). Esto ya está verificado: 307 V de Voc máximo y 16,3 A, dentro de los límites del SRNE. Separación de 10–15 cm del techo para ventilar. Fijación a las **correas**, no solo a la lámina de eternit. Si el techo es anterior a 2021, perforar en húmedo y con protección (posible asbesto).
 - **Circuitos detrás del inversor** (los que podrán usar la energía solar): los **3 aires**, la nevera y el congelador, la lavadora, los tomas de computadores e impresora 3D, y la iluminación.
   - Si la casa completa pasa por el inversor, hay que verificar que la carga total no supere los **40 A del bypass**.
 - **Configuración:** prioridad "solar primero" (en el SRNE suele llamarse SOL o SUB ⚠️, según el manual) y la red como respaldo.

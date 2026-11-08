@@ -46,7 +46,8 @@ def facturas():
 def main():
     este, indice = serie("pvgis_horario_este_10deg_2011_2015.csv")
     oeste, _ = serie("pvgis_horario_oeste_10deg_2011_2015.csv")
-    datos = {"pv_este": este, "pv_oeste": oeste, "indice": indice, "facturas": facturas()}
+    sur, _ = serie("pvgis_horario_sur_10deg_2011_2015.csv")
+    datos = {"pv_este": este, "pv_oeste": oeste, "pv_sur": sur, "indice": indice, "facturas": facturas()}
     (HERE / "datos.json").write_text(json.dumps(datos))
     html = (HERE / "plantilla.html").read_text()
     html = html.replace("/*__DATOS__*/", "const DATOS = " + json.dumps(datos) + ";")

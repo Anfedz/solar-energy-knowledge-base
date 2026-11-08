@@ -1,0 +1,350 @@
+<title>Orientación de los Paneles</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: maqueta de la casa a la izquierda y el sol que la recorre; a la derecha, lo que produce cada montaje. Misma identidad que el simulador. */
+:root {
+  --bg: #f2f5f4; --surface: #ffffff; --ink: #0f1f1c; --ink-2: #44544f; --muted: #6a7974;
+  --line: #d6dfdb; --line-2: #e8eeec; --accent: #0d6e5f; --accent-ink: #ffffff; --accent-soft: #e0efeb;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --sun: #eda100;
+  --wall: #e9e3d8; --wall-2: #d9d1c3; --roof: #b9b4aa; --roof-2: #a39e94; --ground: #dfe8e2;
+  --panel-lo: #1d2b3a; --panel-hi: #7fb2e6; --steel: #6d7780;
+  --good: #1a7f37; --good-bg: #e3f3e7; --warn: #9a5b00; --warn-bg: #fbf0dc;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --f-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1311; --surface: #131c19; --ink: #e6eeeb; --ink-2: #b3c1bc; --muted: #8b9b96;
+    --line: #283531; --line-2: #1c2724; --accent: #4cc2a8; --accent-ink: #062b23; --accent-soft: #163029;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --sun: #c98500;
+    --wall: #3a3833; --wall-2: #2e2c28; --roof: #5a5853; --roof-2: #4a4843; --ground: #18221e;
+    --panel-lo: #0f1823; --panel-hi: #6aa3dc; --steel: #8a949c;
+    --good: #5bd17f; --good-bg: #15301e; --warn: #f2b84b; --warn-bg: #33270f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1311; --surface: #131c19; --ink: #e6eeeb; --ink-2: #b3c1bc; --muted: #8b9b96;
+  --line: #283531; --line-2: #1c2724; --accent: #4cc2a8; --accent-ink: #062b23; --accent-soft: #163029;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --sun: #c98500;
+  --wall: #3a3833; --wall-2: #2e2c28; --roof: #5a5853; --roof-2: #4a4843; --ground: #18221e;
+  --panel-lo: #0f1823; --panel-hi: #6aa3dc; --steel: #8a949c;
+  --good: #5bd17f; --good-bg: #15301e; --warn: #f2b84b; --warn-bg: #33270f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--f-body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 20px; }
+h1, h2 { font-family: var(--f-display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h1 { font-size: clamp(1.6rem, 3.2vw, 2.25rem); }
+h2 { font-size: 1.15rem; }
+p { margin: 0; }
+.eyebrow { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 600; }
+.lede { color: var(--ink-2); max-width: 70ch; }
+.verdict { background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; max-width: 900px; }
+.verdict strong { font-family: var(--f-display); font-size: 1.05rem; }
+.grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 920px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 500 .88rem var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 7px 12px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.chip:focus-visible, input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+svg { width: 100%; height: auto; display: block; }
+svg text { font: 11px var(--f-mono); fill: var(--muted); }
+.ctrl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .ctrl { grid-template-columns: minmax(0, 1fr); } }
+.field { display: grid; gap: 4px; }
+.field label { font-size: .84rem; color: var(--ink-2); display: flex; justify-content: space-between; gap: 8px; }
+.field output { font-family: var(--f-mono); color: var(--ink); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.readout { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ro { border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 10px; display: grid; gap: 2px; }
+.ro .k { font-size: .76rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.ro .v { font: 600 1.15rem var(--f-mono); font-variant-numeric: tabular-nums; }
+.note { color: var(--muted); font-size: .82rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .84rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .86rem; }
+th, td { padding: 7px 8px; border-bottom: 1px solid var(--line-2); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+td { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+td.t { font-family: var(--f-body); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; width: fit-content; }
+.pill.good { color: var(--good); background: var(--good-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.tip { position: fixed; z-index: 20; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: .8rem; box-shadow: 0 6px 24px rgba(0,0,0,.14); }
+.tip .r { display: flex; justify-content: space-between; gap: 14px; }
+.tip .r span:last-child { font-family: var(--f-mono); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:8px">
+    <span class="eyebrow">Casa en Sabanalarga · 10,6° N · techo de eternit a dos aguas (este / oeste)</span>
+    <h1>¿Hacia dónde mirar los 12 paneles?</h1>
+    <p class="lede">Compara las tres opciones: 6 paneles en cada cara del techo (lo que propuso el contratista), los 12 en la cara este, y los 12 mirando al sur a 10° sobre una estructura metálica (propuesta familiar). Mueve el mes y la hora para ver cómo les pega el sol.</p>
+  </header>
+
+  <div class="verdict">
+    <strong>Conclusión: con tu sistema sin inyección, las tres opciones ahorran lo mismo.</strong>
+    <p>Mirando al sur se produce solo un 2,7 % más que con 6 + 6 en el techo. Como al mediodía tus paneles ya producen más de lo que la casa consume, esa energía extra se desperdicia, y el ahorro queda igual: 2,46 M/año hoy y 3,56 M/año con el plan de 9 am a 3 pm. Una estructura metálica cuesta más, recibe más viento y no se paga con energía. Solo tendría sentido por otras razones (ver abajo).</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-labelledby="t-maqueta">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline">
+        <h2 id="t-maqueta">Maqueta y sol</h2>
+        <span class="note" id="sol-txt"></span>
+      </div>
+      <div class="opts" id="opts" role="group" aria-label="Montaje"></div>
+      <svg id="maqueta" viewBox="0 0 640 430" role="img" aria-label="Maqueta de la casa con los paneles y la posición del sol"></svg>
+      <div class="ctrl">
+        <div class="field"><label for="mes">Mes <output id="o-mes"></output></label><input type="range" id="mes" min="1" max="12" step="1" value="3"></div>
+        <div class="field"><label for="hora">Hora <output id="o-hora"></output></label><input type="range" id="hora" min="6" max="18" step="0.25" value="9"></div>
+        <div class="field"><label for="giro">Girar la vista <output id="o-giro"></output></label><input type="range" id="giro" min="0" max="359" step="1" value="150"></div>
+      </div>
+      <div class="readout" id="readout"></div>
+      <p class="note">El color de cada panel muestra qué tan de frente le llega el sol (más claro = más directo). Los kW son el promedio de PVGIS para ese mes y esa hora con los 12 paneles (7,56 kWp), sin sombra de árboles.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="t-curva">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline">
+        <h2 id="t-curva">Producción en un día promedio</h2>
+        <span class="note" id="curva-mes"></span>
+      </div>
+      <div class="legend" id="leg"></div>
+      <svg id="curva" viewBox="0 0 440 280" role="img" aria-label="Producción por hora de cada montaje"></svg>
+      <p class="note">Las tres curvas casi se superponen: con 10° de inclinación tan cerca del ecuador, la orientación cambia poco. Entre fines de abril y mediados de agosto el sol del mediodía pasa <strong>al norte</strong> de la casa, y en esos meses mirar al sur produce algo menos.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Montaje</th><th>kWh/año*</th><th>Hoy</th><th>Plan 9–15</th><th>Plan + 5 kWh</th><th>Si inyectara a la red</th></tr></thead>
+          <tbody id="tabla"></tbody>
+        </table>
+      </div>
+      <p class="note">*Con 10 % de sombra. Ahorro en M COP/año frente a la factura sin solar (5,77 M), sistema elegido (SRNE sin inyección, 50 W en vacío). La última columna es la hipótesis de un inversor on-grid con crédito 1:1.</p>
+    </section>
+  </div>
+
+  <section class="panel" aria-labelledby="t-estr">
+    <h2 id="t-estr">La estructura metálica hacia el sur</h2>
+    <div class="cols">
+      <div style="display:grid;gap:8px">
+        <span class="pill good">A favor</span>
+        <ul>
+          <li><strong>+2,7 % de producción</strong> al año frente a 6 + 6 en el techo (+1,5 % frente a todos al este). Con tu sistema sin inyección ese extra se desperdicia; solo valdría si algún día inyectas a la red (≈ +$80 000/año).</li>
+          <li><strong>Podría no apoyarse en el eternit:</strong> si se apoya en muros o columnas, evita perforar láminas viejas (posible asbesto en techos anteriores a 2021) y no carga las correas.</li>
+          <li><strong>Más ventilación</strong> bajo los paneles, que trabajan un poco más fríos (≈ 1 %).</li>
+          <li><strong>Más altura</strong> sobre la sombra de los árboles, si los árboles están del lado este u oeste.</li>
+        </ul>
+      </div>
+      <div style="display:grid;gap:8px">
+        <span class="pill warn">En contra</span>
+        <ul>
+          <li><strong>Costo extra:</strong> tubería, soldadura, galvanizado o pintura anticorrosiva y mano de obra. No está en la cotización (que trae estructura de aluminio a $120 000 por panel) y no se recupera con energía.</li>
+          <li><strong>Viento:</strong> Sabanalarga está en la zona 5 de la NSR-10 (36–46 m/s). Un panel elevado e inclinado recibe más empuje y succión que uno pegado al techo, así que la estructura necesita cálculo de un ingeniero y anclaje a la estructura de la casa.</li>
+          <li><strong>Peso:</strong> 12 paneles pesan ~400 kg, más el acero.</li>
+          <li><strong>Corrosión:</strong> a ~32 km del mar el acero necesita protección (galvanizado en caliente).</li>
+          <li><strong>Mantenimiento y cableado</strong> más complejos; queda más visible desde la calle.</li>
+          <li><strong>En los meses de sol al norte</strong> (may–ago), mirar al sur produce menos que el techo.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note"><strong>Recomendación:</strong> instalar sobre el techo con la estructura de aluminio cotizada, 6 paneles al este y 6 al oeste, cada cara en su propia entrada (MPPT) del SRNE. Si alguna cara tiene sombra de árboles, conviene más paneles en la cara despejada (12 al este produce casi igual). Considera la estructura solo si el techo de eternit no aguanta perforaciones o peso, y en ese caso con diseño estructural firmado.</p>
+  </section>
+
+  <footer class="note">Fuentes: PVGIS-NSRDB 2011–2015 (hora a hora, 10° de inclinación, 14 % de pérdidas) para la ubicación de la casa; simulación del repositorio Anfedz/solar-energy-knowledge-base (08-simulador/motor.js). Posición del sol calculada para 10,6° N.</footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const CURVAS = {"este": [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0908, 0.3002, 0.473, 0.5849, 0.6323, 0.62, 0.5465, 0.4532, 0.3457, 0.1801, 0.0335, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0997, 0.3149, 0.4875, 0.6064, 0.649, 0.6357, 0.5608, 0.4871, 0.387, 0.2248, 0.0568, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1297, 0.3233, 0.4905, 0.6029, 0.633, 0.6119, 0.5291, 0.4798, 0.3835, 0.2222, 0.0655, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0027, 0.1585, 0.3273, 0.4822, 0.5658, 0.6052, 0.5576, 0.5034, 0.4145, 0.3104, 0.1894, 0.0659, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0174, 0.1838, 0.3457, 0.4669, 0.5518, 0.5742, 0.5678, 0.4684, 0.3985, 0.2865, 0.1741, 0.0582, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0161, 0.1704, 0.3362, 0.4724, 0.5616, 0.5918, 0.5786, 0.5226, 0.4248, 0.3046, 0.1683, 0.0652, 0.008, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0054, 0.1595, 0.339, 0.4748, 0.572, 0.6029, 0.6052, 0.5459, 0.4257, 0.3155, 0.1858, 0.0735, 0.0168, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0005, 0.1461, 0.3174, 0.468, 0.5622, 0.5988, 0.5909, 0.5239, 0.4403, 0.3078, 0.1682, 0.061, 0.0022, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0007, 0.1448, 0.3063, 0.445, 0.5216, 0.5427, 0.5309, 0.4722, 0.3647, 0.2398, 0.1321, 0.0395, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0009, 0.1421, 0.311, 0.4525, 0.5324, 0.558, 0.518, 0.4472, 0.3434, 0.2322, 0.1059, 0.0244, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.154, 0.3076, 0.4395, 0.5184, 0.5299, 0.506, 0.4381, 0.3363, 0.2202, 0.0914, 0.021, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1192, 0.2951, 0.4508, 0.5491, 0.5622, 0.5366, 0.4935, 0.3977, 0.2619, 0.1172, 0.0245, 0.0, 0, 0, 0, 0, 0]], "oeste": [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0248, 0.1272, 0.3135, 0.4713, 0.5724, 0.6129, 0.5839, 0.5332, 0.4806, 0.3536, 0.1567, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0282, 0.1397, 0.3293, 0.4909, 0.5879, 0.625, 0.5929, 0.5608, 0.516, 0.3986, 0.1983, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0373, 0.1781, 0.3576, 0.5067, 0.584, 0.606, 0.5574, 0.5456, 0.4932, 0.3564, 0.1747, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0015, 0.0674, 0.2173, 0.3797, 0.4974, 0.5711, 0.5575, 0.5284, 0.4616, 0.3785, 0.2775, 0.1339, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0071, 0.0806, 0.2311, 0.374, 0.4882, 0.5457, 0.5695, 0.4918, 0.4442, 0.3453, 0.2444, 0.1242, 0.0008, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0068, 0.0739, 0.2223, 0.3725, 0.4917, 0.5581, 0.5785, 0.5508, 0.4757, 0.373, 0.2438, 0.1374, 0.0097, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0026, 0.06, 0.2113, 0.3664, 0.4945, 0.5649, 0.6021, 0.5747, 0.4742, 0.3854, 0.2673, 0.1533, 0.0203, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0005, 0.0544, 0.204, 0.3648, 0.4905, 0.5635, 0.589, 0.5499, 0.4927, 0.3744, 0.2404, 0.1163, 0.0027, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0007, 0.0567, 0.1984, 0.35, 0.4591, 0.5153, 0.5336, 0.5016, 0.4145, 0.2957, 0.1978, 0.089, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0009, 0.0575, 0.207, 0.3628, 0.4737, 0.5339, 0.5251, 0.477, 0.3929, 0.2963, 0.1702, 0.0541, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0396, 0.1829, 0.3381, 0.4542, 0.5049, 0.5135, 0.4739, 0.3951, 0.3051, 0.184, 0.0552, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0239, 0.1461, 0.3198, 0.4588, 0.5222, 0.5389, 0.5345, 0.4736, 0.369, 0.2431, 0.0875, 0.0, 0, 0, 0, 0, 0]], "sur": [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0621, 0.2599, 0.4486, 0.5843, 0.6567, 0.6675, 0.6109, 0.5388, 0.4641, 0.3166, 0.118, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0617, 0.2592, 0.4468, 0.5888, 0.6566, 0.6662, 0.6088, 0.556, 0.4874, 0.3476, 0.1462, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0813, 0.263, 0.4403, 0.5724, 0.6258, 0.625, 0.5575, 0.5272, 0.4535, 0.302, 0.1241, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0014, 0.1056, 0.2692, 0.4296, 0.5315, 0.5889, 0.5583, 0.5166, 0.4381, 0.3435, 0.231, 0.0945, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0061, 0.1163, 0.2742, 0.408, 0.5091, 0.551, 0.5603, 0.4734, 0.4137, 0.3079, 0.2003, 0.0802, 0.0001, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.006, 0.1028, 0.2594, 0.4031, 0.509, 0.5593, 0.5647, 0.5236, 0.4373, 0.3256, 0.1928, 0.0868, 0.0078, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0026, 0.0907, 0.2558, 0.403, 0.5172, 0.5703, 0.5905, 0.5481, 0.4392, 0.3387, 0.2141, 0.0993, 0.0162, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0005, 0.0894, 0.2528, 0.4098, 0.5212, 0.5773, 0.5865, 0.5336, 0.4626, 0.3369, 0.1994, 0.0827, 0.0021, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0007, 0.0995, 0.2571, 0.4041, 0.4979, 0.5365, 0.5395, 0.4933, 0.395, 0.2713, 0.1673, 0.0619, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0009, 0.1085, 0.2766, 0.4285, 0.5245, 0.5665, 0.5396, 0.4773, 0.3822, 0.2766, 0.1474, 0.0378, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1178, 0.2791, 0.4254, 0.522, 0.5494, 0.54, 0.4839, 0.3914, 0.2892, 0.1597, 0.0382, 0.0, 0, 0, 0, 0, 0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0894, 0.2666, 0.438, 0.5575, 0.5904, 0.5818, 0.5579, 0.4779, 0.3568, 0.2177, 0.0645, 0.0, 0, 0, 0, 0, 0]]};
+(() => {
+const $ = (id) => document.getElementById(id);
+const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+const KWP = 7.56, LAT = 10.635 * Math.PI / 180, RAD = Math.PI / 180, T10 = 10 * RAD;
+const OPC = [
+  { id: "eo", n: "6 este + 6 oeste", c: "var(--s1)", curva: (m, h) => (CURVAS.este[m][h] + CURVAS.oeste[m][h]) / 2 },
+  { id: "e", n: "12 al este", c: "var(--s2)", curva: (m, h) => CURVAS.este[m][h] },
+  { id: "s", n: "12 al sur 10° (estructura)", c: "var(--s3)", curva: (m, h) => CURVAS.sur[m][h] },
+];
+const TABLA = { // simulación anual (motor.js), M COP/año
+  eo: [9585, 2.46, 3.56, 5.05, 6.57], e: [9711, 2.45, 3.56, 5.05, 6.61], s: [9846, 2.46, 3.56, 5.05, 6.65],
+};
+let opcion = "eo";
+
+/* ---------- Geometría ---------- */
+const PW = 1.134, PL = 2.382, HALF = 5, LEN = 15, WALL = 3, RIDGE = WALL + HALF * Math.tan(T10);
+function panelesTecho(cara, filas, cols) {
+  const out = [], sgn = cara === "e" ? 1 : -1, n = [sgn * Math.sin(T10), 0, Math.cos(T10)];
+  const off = 0.12, s0 = 0.16, ancho = cols * PW + (cols - 1) * 0.02;
+  for (let f = 0; f < filas; f++) for (let c = 0; c < cols; c++) {
+    const a = s0 + f * (PL + 0.02), b = a + PL, y0 = -ancho / 2 + c * (PW + 0.02), y1 = y0 + PW;
+    const P = (s, y) => [sgn * (HALF - s * Math.cos(T10)) + n[0] * off, y, WALL + s * Math.sin(T10) + n[2] * off];
+    out.push({ pts: [P(a, y0), P(a, y1), P(b, y1), P(b, y0)], n });
+  }
+  return out;
+}
+function panelesSur() {
+  const out = [], n = [0, -Math.sin(T10), Math.cos(T10)], z0 = RIDGE + 0.35, cols = 6, ancho = cols * PW + (cols - 1) * 0.02;
+  const dy = PL * Math.cos(T10), dz = PL * Math.sin(T10), postes = [];
+  for (let f = 0; f < 2; f++) {
+    const y0 = -3.2 + f * (dy + 0.7);
+    for (let c = 0; c < cols; c++) {
+      const x0 = -ancho / 2 + c * (PW + 0.02), x1 = x0 + PW;
+      out.push({ pts: [[x0, y0, z0], [x1, y0, z0], [x1, y0 + dy, z0 + dz], [x0, y0 + dy, z0 + dz]], n });
+    }
+    for (const x of [-ancho / 2, -ancho / 6, ancho / 6, ancho / 2]) for (const [y, z] of [[y0, z0], [y0 + dy, z0 + dz]]) {
+      postes.push([[x, y, z], [x, y, WALL + (HALF - Math.abs(x)) * Math.tan(T10)]]);
+    }
+  }
+  return { paneles: out, postes };
+}
+function casa() {
+  const r = RIDGE, Y = LEN / 2;
+  return [
+    { pts: [[-HALF, -Y, 0], [HALF, -Y, 0], [HALF, -Y, WALL], [0, -Y, r], [-HALF, -Y, WALL]], n: [0, -1, 0], f: "var(--wall)" },
+    { pts: [[HALF, Y, 0], [-HALF, Y, 0], [-HALF, Y, WALL], [0, Y, r], [HALF, Y, WALL]], n: [0, 1, 0], f: "var(--wall)" },
+    { pts: [[HALF, -Y, 0], [HALF, Y, 0], [HALF, Y, WALL], [HALF, -Y, WALL]], n: [1, 0, 0], f: "var(--wall-2)" },
+    { pts: [[-HALF, Y, 0], [-HALF, -Y, 0], [-HALF, -Y, WALL], [-HALF, Y, WALL]], n: [-1, 0, 0], f: "var(--wall-2)" },
+    { pts: [[HALF, -Y, WALL], [HALF, Y, WALL], [0, Y, r], [0, -Y, r]], n: [Math.sin(T10), 0, Math.cos(T10)], f: "var(--roof)", techo: "e" },
+    { pts: [[-HALF, Y, WALL], [-HALF, -Y, WALL], [0, -Y, r], [0, Y, r]], n: [-Math.sin(T10), 0, Math.cos(T10)], f: "var(--roof-2)", techo: "o" },
+  ];
+}
+
+/* ---------- Sol ---------- */
+function sol(mes, hora) {
+  const dia = [17, 47, 75, 105, 135, 162, 198, 228, 258, 288, 318, 344][mes - 1];
+  const B = (360 / 365) * (dia - 81) * RAD;
+  const eot = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B); // minutos
+  const tsol = hora + (4 * (-74.924 + 75) + eot) / 60;
+  const dec = 23.45 * Math.sin((360 / 365) * (284 + dia) * RAD) * RAD;
+  const H = 15 * (tsol - 12) * RAD;
+  const sa = Math.sin(LAT) * Math.sin(dec) + Math.cos(LAT) * Math.cos(dec) * Math.cos(H);
+  const alt = Math.asin(sa);
+  const az = (Math.atan2(Math.sin(H), Math.cos(H) * Math.sin(LAT) - Math.tan(dec) * Math.cos(LAT)) / RAD + 180 + 360) % 360;
+  return { alt: alt / RAD, az, v: [Math.sin(az * RAD) * Math.cos(alt), Math.cos(az * RAD) * Math.cos(alt), Math.sin(alt)] };
+}
+const cardinal = (az) => ["norte", "noreste", "este", "sureste", "sur", "suroeste", "oeste", "noroeste"][Math.round(az / 45) % 8];
+
+/* ---------- Dibujo ---------- */
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, a, p) { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+function hex(v) { v = v.trim(); if (v.startsWith("#")) { const n = parseInt(v.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; } return [0, 0, 0]; }
+function mezcla(t) {
+  const cs = getComputedStyle(document.documentElement);
+  const a = hex(cs.getPropertyValue("--panel-lo")), b = hex(cs.getPropertyValue("--panel-hi"));
+  return `rgb(${a.map((x, i) => Math.round(x + (b[i] - x) * t)).join(",")})`;
+}
+
+function dibujar() {
+  const mes = +$("mes").value, hora = +$("hora").value, giro = +$("giro").value;
+  $("o-mes").textContent = MESES[mes - 1];
+  const hh = Math.floor(hora), mm = Math.round((hora - hh) * 60);
+  $("o-hora").textContent = `${hh}:${String(mm).padStart(2, "0")}`;
+  $("o-giro").textContent = "vista desde el " + cardinal(giro);
+  const S = sol(mes, hora);
+  const el_ = 32 * RAD, az = giro * RAD;
+  const c = [Math.sin(az) * Math.cos(el_), Math.cos(az) * Math.cos(el_), Math.sin(el_)];
+  const right = [-Math.cos(az), Math.sin(az), 0];
+  const up = [c[1] * right[2] - c[2] * right[1], c[2] * right[0] - c[0] * right[2], c[0] * right[1] - c[1] * right[0]];
+  const W = 640, H = 430, k = 22, cx = W / 2, cy = H * 0.6;
+  const P = (p) => [cx + k * dot(p, right), cy - k * dot(p, up)];
+  const svg = $("maqueta"); svg.innerHTML = "";
+  // suelo
+  const g = [[-11, -12, 0], [11, -12, 0], [11, 12, 0], [-11, 12, 0]].map(P);
+  el("polygon", { points: g.map((q) => q.join(",")).join(" "), fill: "var(--ground)" }, svg);
+  // rosa de los vientos en el suelo
+  for (const [t, v] of [["N", [0, 11.3, 0]], ["S", [0, -11.3, 0]], ["E", [10.3, 0, 0]], ["O", [-10.3, 0, 0]]]) {
+    const q = P(v); el("text", { x: q[0], y: q[1] + 4, "text-anchor": "middle", style: "font-weight:600" }, svg).textContent = t;
+  }
+  const prof = (pts) => pts.reduce((s, p) => s + dot(p, c), 0) / pts.length;
+  // 1) casa: solo caras visibles, de atrás hacia adelante
+  const caras = casa().filter((f) => dot(f.n, c) > 0).sort((a, b) => prof(a.pts) - prof(b.pts));
+  for (const f of caras) el("polygon", { points: f.pts.map(P).map((q) => q.join(",")).join(" "), fill: f.f, stroke: "var(--surface)", "stroke-width": 1, "stroke-linejoin": "round" }, svg);
+  // 2) paneles y postes (siempre por encima del techo)
+  let lista = [], postes = [];
+  if (opcion === "eo") lista = [...panelesTecho("e", 2, 3), ...panelesTecho("o", 2, 3)];
+  if (opcion === "e") lista = panelesTecho("e", 2, 6);
+  if (opcion === "s") { const r = panelesSur(); lista = r.paneles; postes = r.postes; }
+  for (const [a, b] of postes) { const A = P(a), B = P(b); el("line", { x1: A[0], y1: A[1], x2: B[0], y2: B[1], stroke: "var(--steel)", "stroke-width": 2 }, svg); }
+  lista.sort((a, b) => prof(a.pts) - prof(b.pts));
+  for (const f of lista) {
+    const vis = dot(f.n, c) > 0;
+    if (!vis && opcion !== "s") continue; // panel en la cara del techo que no se ve
+    const inc = S.alt > 0 ? Math.max(0, dot(f.n, S.v)) : 0;
+    el("polygon", { points: f.pts.map(P).map((q) => q.join(",")).join(" "), fill: vis ? mezcla(inc) : "var(--steel)", stroke: "var(--surface)", "stroke-width": 0.8 }, svg);
+  }
+  // sol
+  if (S.alt > 0) {
+    const pos = P([S.v[0] * 13, S.v[1] * 13, S.v[2] * 13]), base = P([0, 0, RIDGE]);
+    el("line", { x1: base[0], y1: base[1], x2: pos[0], y2: pos[1], stroke: "var(--sun)", "stroke-width": 1.5, "stroke-dasharray": "4 4" }, svg);
+    el("circle", { cx: pos[0], cy: pos[1], r: 13, fill: "var(--sun)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
+  }
+  $("sol-txt").textContent = S.alt > 0
+    ? `Sol a ${Math.round(S.alt)}° de altura, hacia el ${cardinal(S.az)} (${Math.round(S.az)}°)`
+    : "El sol está bajo el horizonte";
+  // lectura de potencia
+  const h = Math.min(23, Math.floor(hora));
+  const fr = hora - h;
+  $("readout").innerHTML = OPC.map((o) => {
+    const v = KWP * ((1 - fr) * o.curva(mes - 1, h) + fr * o.curva(mes - 1, Math.min(23, h + 1)));
+    return `<div class="ro"><span class="k"><i class="dot" style="background:${o.c}"></i>${o.n}</span><span class="v">${v.toFixed(1)} kW</span></div>`;
+  }).join("");
+  curva(mes, hora);
+}
+
+function curva(mes, hora) {
+  const svg = $("curva"); svg.innerHTML = "";
+  const W = 440, H = 280, L = 34, R = 10, T = 22, B = 26, iw = W - L - R, ih = H - T - B;
+  const h0 = 5, h1 = 19, top = 5;
+  const x = (h) => L + ((h - h0) / (h1 - h0)) * iw, y = (v) => T + ih - (v / top) * ih;
+  for (let v = 0; v <= top; v++) {
+    el("line", { x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "var(--line-2)" }, svg);
+    el("text", { x: L - 6, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = v;
+  }
+  el("text", { x: 0, y: 12 }, svg).textContent = "kW";
+  for (let h = 6; h <= 18; h += 2) el("text", { x: x(h), y: H - 8, "text-anchor": "middle" }, svg).textContent = h + "h";
+  el("line", { x1: x(hora), x2: x(hora), y1: T, y2: T + ih, stroke: "var(--sun)", "stroke-width": 1.5, "stroke-dasharray": "3 3" }, svg);
+  for (const o of OPC) {
+    const pts = []; for (let h = h0; h <= h1; h++) pts.push(`${x(h)},${y(KWP * o.curva(mes - 1, h))}`);
+    el("polyline", { points: pts.join(" "), fill: "none", stroke: o.c, "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+  }
+  const hit = el("rect", { x: L, y: T, width: iw, height: ih, fill: "transparent" }, svg);
+  const tip = $("tip");
+  hit.addEventListener("pointermove", (ev) => {
+    const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) * (W / r.width);
+    const h = Math.max(h0, Math.min(h1, Math.round(h0 + ((px - L) / iw) * (h1 - h0))));
+    tip.innerHTML = `<div style="font-weight:600;margin-bottom:4px">${h}:00 · ${MESES[mes - 1]}</div>` + OPC.map((o) => `<div class="r"><span><i class="dot" style="background:${o.c}"></i> ${o.n}</span><span>${(KWP * o.curva(mes - 1, h)).toFixed(2)} kW</span></div>`).join("");
+    tip.hidden = false;
+    const w = tip.offsetWidth; let X = ev.clientX + 14; if (X + w > innerWidth - 8) X = ev.clientX - w - 14;
+    tip.style.left = Math.max(8, X) + "px"; tip.style.top = (ev.clientY + 14) + "px";
+  });
+  hit.addEventListener("pointerleave", () => { tip.hidden = true; });
+  const tot = OPC.map((o) => { let s = 0; for (let h = 0; h < 24; h++) s += KWP * o.curva(mes - 1, h); return s; });
+  $("curva-mes").textContent = `${MESES[mes - 1]}: ` + OPC.map((o, i) => `${tot[i].toFixed(1)}`).join(" / ") + " kWh/día";
+}
+
+// UI
+$("leg").innerHTML = OPC.map((o) => `<span><i class="dot" style="background:${o.c}"></i>${o.n}</span>`).join("");
+$("opts").innerHTML = OPC.map((o) => `<button class="chip" type="button" data-id="${o.id}" aria-pressed="${o.id === opcion}"><i class="dot" style="background:${o.c}"></i>${o.n}</button>`).join("");
+$("opts").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; opcion = b.dataset.id; for (const x of $("opts").children) x.setAttribute("aria-pressed", x.dataset.id === opcion); dibujar(); });
+for (const id of ["mes", "hora", "giro"]) $(id).addEventListener("input", dibujar);
+$("tabla").innerHTML = OPC.map((o) => { const t = TABLA[o.id]; return `<tr><td class="t"><i class="dot" style="background:${o.c}"></i> ${o.n}</td><td>${t[0].toLocaleString("es-CO")}</td><td>${t[1].toFixed(2).replace(".", ",")}</td><td>${t[2].toFixed(2).replace(".", ",")}</td><td>${t[3].toFixed(2).replace(".", ",")}</td><td>${t[4].toFixed(2).replace(".", ",")}</td></tr>`; }).join("");
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", dibujar);
+new MutationObserver(dibujar).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+dibujar();
+})();
+</script>
