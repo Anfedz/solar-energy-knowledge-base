@@ -173,7 +173,7 @@ ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
 (() => {
 const $ = (id) => document.getElementById(id);
 const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-const KWP = 7.56, LAT = 10.635 * Math.PI / 180, RAD = Math.PI / 180, T10 = 10 * RAD;
+const KWP = 7.56, LAT = 10.63 * Math.PI / 180, RAD = Math.PI / 180, T10 = 10 * RAD;
 const OPC = [
   { id: "eo", n: "6 este + 6 oeste", c: "var(--s1)", curva: (m, h) => (CURVAS.este[m][h] + CURVAS.oeste[m][h]) / 2 },
   { id: "e", n: "12 al este", c: "var(--s2)", curva: (m, h) => CURVAS.este[m][h] },
@@ -228,7 +228,7 @@ function sol(mes, hora) {
   const dia = [17, 47, 75, 105, 135, 162, 198, 228, 258, 288, 318, 344][mes - 1];
   const B = (360 / 365) * (dia - 81) * RAD;
   const eot = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B); // minutos
-  const tsol = hora + (4 * (-74.924 + 75) + eot) / 60;
+  const tsol = hora + (4 * (-74.92 + 75) + eot) / 60;
   const dec = 23.45 * Math.sin((360 / 365) * (284 + dia) * RAD) * RAD;
   const H = 15 * (tsol - 12) * RAD;
   const sa = Math.sin(LAT) * Math.sin(dec) + Math.cos(LAT) * Math.cos(dec) * Math.cos(H);

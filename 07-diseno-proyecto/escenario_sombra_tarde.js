@@ -20,9 +20,9 @@ for (const [hab, cargas] of [["Hábitos actuales", REF], ["Plan 9-15 + Aire 3 5 
   }
 }
 // sol a las 4:10 pm en noviembre
-const RAD = Math.PI / 180, LAT = 10.635 * RAD;
+const RAD = Math.PI / 180, LAT = 10.63 * RAD;
 for (const [mes, dia] of [["nov", 313], ["dic", 344], ["mar", 75], ["jun", 162]]) for (const hora of [15, 16 + 10/60]) {
-  const B = (360/365)*(dia-81)*RAD, eot = 9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B), ts = hora + (4*0.076+eot)/60;
+  const B = (360/365)*(dia-81)*RAD, eot = 9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B), ts = hora + (4*0.08+eot)/60;
   const dec = 23.45*Math.sin((360/365)*(284+dia)*RAD)*RAD, H = 15*(ts-12)*RAD;
   const alt = Math.asin(Math.sin(LAT)*Math.sin(dec)+Math.cos(LAT)*Math.cos(dec)*Math.cos(H));
   const az = (Math.atan2(Math.sin(H), Math.cos(H)*Math.sin(LAT)-Math.tan(dec)*Math.cos(LAT))/RAD+180+360)%360;
