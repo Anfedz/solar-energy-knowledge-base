@@ -159,3 +159,29 @@ Simulación hora a hora con el sistema elegido (12 × 630 W + SRNE), en modo "pa
    - ⚠️ Si el techo es anterior a 2021 puede contener **asbesto** (Ley 1968 de 2019). No lijar, cepillar ni lavar a presión; perforar en húmedo y con protección respiratoria; no caminar directamente sobre las láminas, porque se rompen y causan caídas.
    - Si el eternit está muy deteriorado, gana sentido la idea de una estructura que **se apoye en muros o columnas** y no en las láminas, o cambiar las láminas de esa zona por cubierta nueva.
 
+### Actualización: horizonte de árboles estimado con fotos (2026-11-09, ~4:40 pm)
+Las fotos desde el centro del techo hacia el **oeste** muestran el sol detrás de los árboles. A esa hora el sol está a ~12° de altura (azimut 249°). Con el campo de visión típico de un celular, las copas llegan a ~**26–30°** entre el suroeste y el noroeste, y a ~15–20° hacia el sur-suroeste. El lado este no se midió: se asumió un horizonte de 10°.
+Ese perfil (`06-datos/raw/horizonte_estimado_fotos_2026-11-09.txt`) se cargó en PVGIS (`userhorizon`):
+
+| Cara (10°) | Sin árboles | Con árboles estimados | Pérdida |
+|---|---|---|---|
+| **Este** | 1 491 kWh/kWp | **1 465** | −1,7 % |
+| Sur (estructura) | 1 513 | 1 462 | −3,4 % |
+| Oeste | 1 453 | 1 388 | −4,5 % |
+
+Simulación hora a hora con el sistema elegido y el horizonte de árboles (`07-diseno-proyecto/escenario_horizonte_arboles.js`):
+
+| Montaje | Producción/año | Hábitos actuales | Plan 9–15 | Plan + 5 kWh |
+|---|---|---|---|---|
+| 6 este + 6 oeste | 10 009 kWh | 2,42 M | 3,57 M | 5,05 M |
+| 8 este + 4 oeste | 10 099 kWh | 2,42 M | 3,57 M | 5,05 M |
+| 12 este | 10 279 kWh | 2,41 M | 3,57 M | 5,05 M |
+| 12 sur (estructura) | 10 259 kWh | 2,42 M | 3,57 M | 5,05 M |
+
+**Conclusiones:**
+- Los árboles del oeste quitan ~6 % de la producción anual, sobre todo después de las 4 pm. Es menos que el 10 % parejo que se había supuesto.
+- Con los árboles, **la cara este es la mejor**, incluso un poco más que el sur con estructura.
+- **El ahorro es igual en todos los montajes**, porque en el sistema sin inyección sobra energía al mediodía. La estructura al sur sigue sin justificarse por energía.
+- **Sugerencia práctica:** si da igual, preferir la cara **este** para los paneles cercanos al níspero del alero oeste, por ejemplo 8 este + 4 oeste, con los 4 del oeste lejos del árbol. Además, **podar** las ramas sobre el techo.
+- ⚠️ Es una estimación con fotos: depende de la hora exacta y del lente del celular. Para confirmarla: capturas de una app de trayectoria solar hacia el oeste y el este.
+
