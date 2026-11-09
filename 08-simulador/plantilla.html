@@ -173,6 +173,9 @@ footer { color: var(--muted); font-size: .82rem; display: grid; gap: 6px; max-wi
             <div class="field"><label for="panelW">Potencia panel (W)</label><input type="number" id="panelW" min="300" max="800" step="5"></div>
             <div class="field"><label for="sombra">Sombra árboles <output id="o-sombra"></output></label><input type="range" id="sombra" min="0" max="40" step="1"></div>
           </div>
+          <div class="field"><label for="sombraDesde">Sombra de árboles en la tarde</label>
+            <select id="sombraDesde"><option value="0">Sin sombra en la tarde</option><option value="17">Desde las 5 pm</option><option value="16">Desde las 4 pm (observado en noviembre)</option><option value="15">Desde las 3 pm</option><option value="14">Desde las 2 pm</option><option value="13">Desde la 1 pm</option></select>
+            <p class="note">Desde esa hora solo llega luz difusa (~25 %). "Sombra árboles" arriba es una pérdida pareja durante todo el día.</p></div>
           <div class="field"><label for="batKWh">Batería (kWh) <output id="o-batKWh"></output></label><input type="range" id="batKWh" min="0" max="20" step="0.5"></div>
           <p class="callout" id="respaldo" hidden></p>
           <div class="row2">
@@ -344,21 +347,23 @@ const PRESETS = [
 ];
 
 const DEFAULT = () => ({
-  ...PRESETS.find((p) => p.id === "cot").s, preset: "cot", sombra: 10, dod: 90,
+  ...PRESETS.find((p) => p.id === "cot").s, preset: "cot", sombra: 5, sombraDesde: 16, dod: 90,
   cu: 936.40, cv: 133.39, bolsa: 300, alumbrado: 10, estrato: 3, alzaTarifa: 3, degradacion: 0.4, anioReemplazo: 13, anios: 25,
   modoConsumo: "habitos", cargas: CARGAS0(), extras: EXTRAS0(), mesDia: 9,
 });
 
-const KEY = "simSolarSabanalarga.v2";
+const KEY = "simSolarSabanalarga.v3";
 let S;
 try { S = JSON.parse(localStorage.getItem(KEY)) || DEFAULT(); } catch (e) { S = DEFAULT(); }
 if (!S.cargas) S = DEFAULT();
 if (!S.modoConsumo) S.modoConsumo = "habitos";
+if (S.sombraDesde === undefined) S.sombraDesde = 16;
 const guardar = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
 function cfgDe(st) {
   return {
     modo: st.modo, nE: +st.nE, nO: +st.nO, panelW: +st.panelW, sombra: st.sombra / 100, eta: st.eta / 100,
+    sombraHoras: +st.sombraDesde ? Array.from({ length: 24 }, (_, h) => (h >= +st.sombraDesde ? 0.25 : 1)) : null,
     idleW: +st.idleW, batKWh: +st.batKWh, dod: st.dod / 100, conmuta: !!st.conmuta,
     cargas: st.cargas, extras: st.extras, calibrar: st.modoConsumo !== "libre",
     cargasRef: st.modoConsumo === "habitos" ? CARGAS0() : null,
@@ -376,6 +381,7 @@ const NUM = ["nE", "nO", "panelW", "sombra", "batKWh", "eta", "idleW", "precioPa
 function pintarControles() {
   for (const k of NUM) { const el = $(k); if (el && document.activeElement !== el) el.value = S[k]; }
   $("estrato").value = S.estrato;
+  $("sombraDesde").value = S.sombraDesde;
   $("conmuta").checked = !!S.conmuta;
   $("modoConsumo").value = S.modoConsumo;
   $("modo-consumo-nota").textContent = {
@@ -395,6 +401,7 @@ function pintarControles() {
 }
 for (const k of NUM) $(k).addEventListener("input", (e) => { S[k] = e.target.value === "" ? 0 : Number(e.target.value); marcarPersonal(k); programar(); });
 $("estrato").addEventListener("change", (e) => { S.estrato = +e.target.value; programar(); });
+$("sombraDesde").addEventListener("change", (e) => { S.sombraDesde = +e.target.value; programar(); });
 $("conmuta").addEventListener("change", (e) => { S.conmuta = e.target.checked; marcarPersonal("conmuta"); programar(); });
 $("modoConsumo").addEventListener("change", (e) => { S.modoConsumo = e.target.value; programar(); });
 for (const id of ["modo-ongrid", "modo-cero"]) $(id).addEventListener("click", (e) => { S.modo = e.currentTarget.dataset.modo; marcarPersonal("modo"); programar(); });

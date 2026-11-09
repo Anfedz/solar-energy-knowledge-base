@@ -133,3 +133,29 @@ Simulación hora a hora con el sistema elegido (12 × 630 W + SRNE), en modo "pa
 - **Los bombillos inteligentes no consumen menos** que un LED normal, y suman un pequeño consumo en espera, ~0,2–0,5 W cada uno ⚠️. Sirven para automatizar, no para ahorrar.
 - **Si quieres medir el circuito de luces completo,** un medidor de pinza en el tablero (el mismo tipo que para los aires) lo hace sin cambiar bombillos.
 
+## 9. Sombra de árboles y estado del techo (fotos del 2026-11-09)
+
+**Lo observado:** a las 4:10 pm de noviembre la sombra de los árboles cubre todo el techo. A esa hora el sol está a solo **18°** de altura, desde el oeste-suroeste (247°), y un árbol de 12 m a 8 m del alero proyecta sombra hasta ~25 m. En marzo, a la misma hora, el sol está a 29° y la sombra es más corta.
+
+**Impacto (simulación hora a hora, sistema elegido de 12 paneles sin inyección):**
+
+| Sombra de la tarde | Producción/año | Ahorro con hábitos actuales | Ahorro con plan 9 am–3 pm | Plan + 5 kWh |
+|---|---|---|---|---|
+| Sin sombra de árboles | 10 650 kWh | 2,50 M | 3,58 M | 5,06 M |
+| **Desde las 4 pm** (observado) | 9 749 kWh | **2,25 M** | **3,53 M** | 5,01 M |
+| Desde las 3 pm | 9 092 kWh | 1,96 M | 3,52 M | 4,98 M |
+| Desde las 2 pm | 8 241 kWh | 1,70 M | 3,28 M | 4,83 M |
+
+**Lectura:**
+- **Después de las 4 pm se produce solo ~7 % de la energía del día.** La sombra desde esa hora es tolerable.
+- **Refuerza el plan de usar los equipos de 9 am a 3 pm.** Con los hábitos actuales (aires de 2 a 5 pm) la sombra quita ~$210 000/año; con el plan, casi nada.
+- **Lo que hay que confirmar es si la sombra empieza antes,** a las 2–3 pm, o si también hay sombra en la mañana.
+
+**Recomendaciones:**
+1. **Podar** las ramas que pasan sobre el techo, en especial la del árbol junto a la canal. Las hojas ensucian los paneles y tapan la canal, y una rama que caiga puede romper el vidrio de un panel.
+2. **Si los árboles altos están al oeste,** poner más paneles en la cara **este**: por ejemplo los 12 al este (dos grupos de 6, uno en cada MPPT, caben en ~6,9 × 4,8 m). La cara oeste es la que más pierde en la tarde.
+3. **Estado del eternit:** las láminas se ven antiguas y con varios remiendos.
+   - Antes de instalar, revisar por debajo el estado de las láminas y las correas, y **cambiar las láminas rotas que van a quedar debajo de los paneles**. Después será difícil hacerlo sin desmontar todo: los paneles duran 25–30 años, más que lo que le queda a un techo viejo.
+   - ⚠️ Si el techo es anterior a 2021 puede contener **asbesto** (Ley 1968 de 2019). No lijar, cepillar ni lavar a presión; perforar en húmedo y con protección respiratoria; no caminar directamente sobre las láminas, porque se rompen y causan caídas.
+   - Si el eternit está muy deteriorado, gana sentido la idea de una estructura que **se apoye en muros o columnas** y no en las láminas, o cambiar las láminas de esa zona por cubierta nueva.
+

@@ -84,7 +84,8 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | Pendiente | ~10° asumida | ⚠️ |
 | Edad del techo / asbesto | — | ⏳ (si es anterior a 2021, podría tener asbesto) |
 | Correas (vigas) | ¿Madera o metal? | ⏳ |
-| Sombras | Principalmente árboles | ✅ · ⏳ posición, altura y si son propios |
+| Sombras | **Árboles altos alrededor de la casa** (frondosos y palmas); uno muy cerca del alero, con ramas sobre la canal. **A las 4:10 pm (noviembre) la sombra cubre todo el techo** (sol a 18° de altura desde el oeste-suroeste) | ✅ fotos 2026-11-09 · ⏳ hora en que empieza la sombra (fotos a la 1, 2 y 3 pm) y si hay sombra en la mañana (8–9 am) |
+| Estado del eternit (fotos) | Láminas onduladas **antiguas**, con líquenes/musgo; **varias láminas remendadas o reemplazadas** (piezas traslúcidas, parches blancos, un tramo de teja de otro color cerca de la cumbrera). Hay un panel solar pequeño existente sobre la cumbrera ⚠️ (¿lámpara o cámara?) | ✅ fotos 2026-11-09 · ⚠️ por su edad podría contener asbesto: no lijar, cepillar ni lavar a presión |
 
 ## 7. Decisiones tomadas
 | Fecha | Decisión |
@@ -96,6 +97,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Anteproyecto v1: **on-grid de 7 × ~620 W (4,3 kWp) en la cara este (~13 M COP)** + respaldo en fase 2 (inversor-cargador 48 V + batería de 2,4 kWh, ≈ 5,3 M). Ver [`04-anteproyecto.md`](04-anteproyecto.md) — *propuesta superada por la decisión del 2026-11-05* |
 
 ## 8. Pendientes del propietario
+0b. ⏳ **Sombra:** fotos del techo a las 8–9 am, 1 pm, 2 pm y 3 pm (un día despejado), para saber a qué hora empieza la sombra y de qué lado vienen los árboles. ⏳ Foto del techo por debajo (láminas y correas) y edad aproximada del techo.
 0. ⏳ **Antes de firmar:** revisar con el instalador los 12 puntos de [`06-plan-implementacion.md`](06-plan-implementacion.md) §2 (tensión 120/240 vs 208 V, funcionamiento sin batería, Wi-Fi, DPS y tierra, RETIE, trámite Air-e, cableado listo para batería, garantías).
 1. ⏳ Voltaje entre fases y entre cada fase y el neutro.
 2. ⏳ Fotos del medidor y la acometida. Del tablero: la etiqueta interior de cerca (corriente nominal de barras), dónde está el breaker principal y su amperaje, y una foto legible de los rótulos de cada breaker.
@@ -130,3 +132,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | **Decidió contratar la cotización** (12 × Ronma 630 W + SRNE 6,5 kW, sin batería). Quiere ver el comportamiento de la casa, identificar los equipos que más consumen, usarlos entre 9 am y 3 pm, e ir ahorrando para una batería | §7, §8, [`06-plan-implementacion.md`](06-plan-implementacion.md) |
 | 2026-11-06 | Preguntó el consumo en horas sin sol de la nevera, el congelador y 2 h de aire; si conviene usar bombillos inteligentes para medir la iluminación; y pidió un escenario con el Aire 3 encendido 5 h de noche | [`06-plan-implementacion.md`](06-plan-implementacion.md) §8; simulador v2 (modo "partir de mis facturas", botón Aire 3 5 h) |
 | 2026-11-08 | Confirmó que el techo cae al este y al oeste. En la familia se propone una estructura metálica sobre el techo con los paneles al sur a 10° (en vez de 6 + 6). Preguntó si yo había recomendado ponerlos todos al este y pidió un modelo visual | §6, §7; [`../09-orientacion/`](../09-orientacion/README.md) (maqueta 3D publicada) |
+| 2026-11-09 | 3 fotos del techo a las 4:10 pm: la sombra de los árboles cubre todo el techo. Se ven láminas de eternit antiguas con líquenes y varios remiendos, árboles altos muy cerca (uno sobre la canal) y un panel solar pequeño existente | §6; [`06-plan-implementacion.md`](06-plan-implementacion.md) §9; simulador v3 (selector de sombra en la tarde) |

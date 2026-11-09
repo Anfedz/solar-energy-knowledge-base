@@ -99,7 +99,8 @@ function simular(D, cfg) {
         nDias++;
         const o = (bloque[0] + d) * 24;
         for (let h = 0; h < 24; h++) {
-          const pv = (kwp.e * D.pvE[o + h] + kwp.o * D.pvO[o + h] + kwp.s * D.pvS[o + h]) * factorPV;
+          let pv = (kwp.e * D.pvE[o + h] + kwp.o * D.pvO[o + h] + kwp.s * D.pvS[o + h]) * factorPV;
+          if (cfg.sombraHoras) pv *= cfg.sombraHoras[h]; // fracción que llega por hora (1 = sin sombra extra)
           const ld = carga[h] + idle;
           pvProm[h] += pv;
           acc.carga += ld; acc.pv += pv;
