@@ -179,9 +179,23 @@ Simulación hora a hora con el sistema elegido y el horizonte de árboles (`07-d
 | 12 sur (estructura) | 10 259 kWh | 2,42 M | 3,57 M | 5,05 M |
 
 **Conclusiones:**
-- Los árboles del oeste quitan ~6 % de la producción anual, sobre todo después de las 4 pm. Es menos que el 10 % parejo que se había supuesto.
+- Los árboles del oeste quitan **~3 %** de la producción anual (6E+6O), sobre todo después de las 4 pm. Las tablas incluyen además un 3 % de pérdidas varias, que antes se había agrupado como "~6 %". En total es menos que el 10 % parejo que se había supuesto.
 - Con los árboles, **la cara este es la mejor**, incluso un poco más que el sur con estructura.
 - **El ahorro es igual en todos los montajes**, porque en el sistema sin inyección sobra energía al mediodía. La estructura al sur sigue sin justificarse por energía.
 - **Sugerencia práctica:** si da igual, preferir la cara **este** para los paneles cercanos al níspero del alero oeste, por ejemplo 8 este + 4 oeste, con los 4 del oeste lejos del árbol. Además, **podar** las ramas sobre el techo.
 - ⚠️ Es una estimación con fotos: depende de la hora exacta y del lente del celular. Para confirmarla: capturas de una app de trayectoria solar hacia el oeste y el este.
+
+#### Cuánto baja el ahorro por la sombra de los árboles (`escenario_resumen_sombra.js`)
+
+| Escenario | Producción sin → con árboles | Ahorro sin árboles | Ahorro con árboles | Diferencia |
+|---|---|---|---|---|
+| Elegido, hábitos actuales | 10 330 → 10 009 kWh (−3,1 %) | 2,49 M | 2,42 M | −$65 000 (−2,6 %) |
+| **Elegido, plan 9–15 + Aire 3 5 h** | 10 330 → 10 009 (−3,1 %) | 3,58 M | **3,57 M** | **−$5 000 (−0,1 %)** |
+| Elegido + 5 kWh, plan | 10 330 → 10 009 | 5,06 M | 5,05 M | −$12 000 (−0,2 %) |
+| Elegido + 10 kWh, plan | 10 330 → 10 009 | 5,70 M | 5,70 M | −$5 000 (−0,1 %) |
+| Elegido + 5 kWh, hábitos actuales | 10 330 → 10 009 | 4,06 M | 3,98 M | −$77 000 (−1,9 %) |
+| On-grid 8 este (hipotético) | 7 268 → 7 139 (−1,8 %) | 5,64 M | 5,58 M | −$52 000 (−0,9 %) |
+| On-grid 12 (hipotético) | 10 761 → 10 426 (−3,1 %) | 6,81 M | 6,70 M | −$107 000 (−1,6 %) |
+
+"Sin árboles" incluye el 3 % de pérdidas varias. Con el horizonte de las fotos, todos los escenarios quedan **igual o un poco mejor** que con el supuesto anterior del 10 % parejo.
 
