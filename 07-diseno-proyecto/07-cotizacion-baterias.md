@@ -182,3 +182,47 @@ Los tiempos de pago incluyen ~$0,4 M de instalación ⚠️.
 - [Dyness PowerBrick](https://www.solartraders.com/es/products/acumulador/dyness-powerbrick)
 - [Lista de compatibilidad Dyness (incluye SRNE)](https://enertik.com/wp-content/uploads/sites/3/documentos/folletos/dyness-compatible-list-lv-.pdf)
 
+## 9. GreenPoint tipo rack, cotizada por el propietario (2026-11-10)
+**Precios recibidos (COP):** 5 kWh por $4 200 000 y 10 kWh por $6 900 000. ⚠️ Falta confirmar si incluyen IVA, instalación y soporte. Ficha técnica en PDF (GreenPoint / GenixGreen, mayo de 2025):
+
+| Dato | ESS-KS7-16100 | **ESS-KS6-16200** | ESS-KS3-16280 |
+|---|---|---|---|
+| Energía nominal | 5,12 kWh | **10,24 kWh** | 14,34 kWh |
+| Capacidad | 100 Ah | 200 Ah | 280 Ah |
+| Descarga máxima | 100 A | **150 A (~7,7 kW)** | 200 A |
+| Ciclos | ≥ 6 000 (25 °C, 0,2C, 80 % DoD) | ídem | ídem |
+| Temperatura de carga / descarga | 0–55 °C / −20–55 °C | ídem | ídem |
+| Comunicación | RS485, USB, CAN; Wi-Fi opcional | ídem | ídem |
+| Certificaciones | Pack: IEC 62619, UN38.3. Celdas: UL1642, IEC 62619, CE | ídem | ídem |
+| Tamaño / peso | 440 × 440 × 132 mm / 44 kg | 468 × 475 × 235 mm / **81 kg** | 620 × 520 × 230 mm / 114 kg |
+| Paralelo | hasta 16 | ídem | ídem |
+| Garantía | **5 años** | 5 años | 5 años |
+| Precio cotizado | 4,2 M (0,82 M/kWh) | **6,9 M (0,67 M/kWh)** | — |
+
+**Lo destacable:** es la única opción, aparte de Pylontech, cuya ficha **lista SRNE entre las marcas compatibles**. Además tiene el mejor precio por kWh junto con la Felicity de 16 kWh, y tolera más calor (carga hasta 55 °C, frente a 45 °C de la Pytes).
+
+**Comparación con las finalistas** (aires 2–3 h c/u de noche; ~0,4 M de instalación ⚠️):
+
+| Opción | kWh | Precio | COP/kWh | Garantía | Corriente | SRNE en su lista | Noches cubiertas | Se paga en |
+|---|---|---|---|---|---|---|---|---|
+| **GreenPoint ESS-KS6-16200** | 10,24 | **6,9 M** | **0,67 M** | 5 años | 150 A | ✅ (la marca; el ASP no se nombra) | ~85–97 %* | **~2,7 años** |
+| 2 × Pytes E-BOX 48100R | 10,24 | 8,6 M | 0,84 M | 10 años | 100 A | Otros SRNE sí, el ASP no | 88–97 % | ~3,3 años |
+| Felicity FLA48314-EU | 16 | 10,8 M | 0,68 M | 10 años | ~160 A ⚠️ | Protocolo Pylontech ⚠️ | ~100 % | ~3,6 años |
+
+\* Al 90 % de descarga entrega lo mismo que 2 Pytes (~8,6 kWh útiles). Si se limita al 80 % para cuidar los ciclos, unos 7,6 kWh (81–91 % de las noches).
+
+**Lectura:**
+- Para el criterio "buena relación precio/kWh + cubrir la noche", la **GreenPoint de 10 kWh es la opción más rentable**: cuesta 1,7 M menos que 2 Pytes con la misma capacidad, una sola unidad de 150 A, y declara compatibilidad con SRNE.
+- **La diferencia es la garantía: 5 años frente a 10.**
+  - Con ~2,7 años de retorno, la garantía cubre casi dos veces la recuperación de la inversión.
+  - La vida esperada (6 000 ciclos, ~1 por día) es de más de 15 años si se cuida del calor.
+  - Si la marca tiene **soporte local en Colombia**, los 5 años pueden valer tanto como 10 años de una marca sin representación local.
+- **Si se prioriza la garantía larga:** Pytes 2× (10 años, +1,7 M) o Felicity 16 kWh (10 años, +3,9 M, más capacidad).
+
+**Preguntas para el vendedor de GreenPoint:**
+1. ¿El precio de $6,9 M incluye IVA, soporte o rack, cables y envío a Sabanalarga?
+2. ¿Confirma por escrito la comunicación con el **SRNE ASP4865U140-H**? ¿Qué protocolo (SRNE, PACE o Pylontech) y qué cable?
+3. ¿La garantía de 5 años es por años o por ciclos? ¿Quién la atiende en Colombia y dónde? ¿Hay capacidad mínima garantizada (por ejemplo, 70–80 %)?
+4. ¿La corriente continua es de 150 A (la ficha dice "Max. Discharge Current" y en otra parte "1C/1C continual")?
+5. ¿Desde cuándo vende la marca en Colombia? ¿Tiene referencias de instalaciones?
+
