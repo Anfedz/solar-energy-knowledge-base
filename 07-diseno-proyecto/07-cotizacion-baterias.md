@@ -257,3 +257,40 @@ Simulación hora a hora del sistema elegido con el horizonte de árboles (`escen
 - La **15 kWh** solo conviene si la cotizan por **≤ ~$8,5–9 M**, o si se valora el margen para el futuro.
 - La **5 kWh** no alcanza para la noche con las costumbres actuales.
 
+### 9.2 ¿En qué escenarios no alcanza la batería de 10 kWh? (consulta del 2026-11-10)
+Simulación día por día con 5 años de clima (`escenario_bateria10_dia_a_dia.js`). Batería de 10,24 kWh al 80 % de descarga: **~7,8 kWh útiles por noche**. Noche = 5 pm a 7 am.
+
+| Mes de consumo | Noche típica (aires 2 h / 3 h / hoy) | Noches en que **no alcanza** (2 h / 3 h / hoy) | Lo que falta esas noches |
+|---|---|---|---|
+| Oct | 6,8 / 7,5 / 7,7 kWh | 9 % / 28 % / 31 % | ~1 kWh |
+| Nov | 6,0 / 6,4 / 6,4 | 1 % / 2 % / 2 % | ~1,3 kWh |
+| Dic | 6,7 / 7,4 / 7,5 | 4 % / 12 % / 17 % | ~1 kWh |
+| Ene | 6,3 / 6,9 / 7,0 | 0 % / 1 % / 1 % | ~0,5 kWh |
+| **Feb** | 9,4 / 11,4 / 11,7 | **96 % / 100 % / 100 %** | 2,2–4,4 kWh |
+| Mar | 5,1 / 5,3 / 5,4 | 0 % | — |
+| **Abr** | 8,2 / 9,7 / 10,0 | 35 % / 97 % / 100 % | 1,3–2,3 kWh |
+| **May** | 8,7 / 10,4 / 10,7 | 97 % / 98 % / 100 % | 1,3–3,2 kWh |
+| **Jun** | 7,6 / 8,8 / 9,0 | 25 % / 97 % / 100 % | ~1,1–1,3 kWh |
+| **Jul** | 11,4 / 14,4 / 14,9 | **100 %** | **4,8–8,3 kWh** |
+| **Ago** | 9,7 / 11,9 / 12,2 | 98 % / 100 % / 100 % | 2,6–5,1 kWh |
+| Sep | 6,7 / 7,5 / 7,6 | 13 % / 29 % / 30 % | ~2,7–4,4 kWh |
+| **Año** | — | **40 % / 55 % / 56 %** | — |
+
+Los meses de consumo se deducen de las facturas: el mes de cada factura corresponde al consumo del mes anterior. Los meses más calurosos coinciden con las facturas más altas: mar, may–sep de 2026.
+
+**Cuándo no alcanza:**
+1. **Meses de calor con uso intenso de aire** (en estas facturas: feb, abr–ago). Las noches piden 9–15 kWh y la batería entrega ~7,8. Falta casi todas las noches, en promedio 1–5 kWh, y hasta ~8 kWh en el mes más caluroso.
+2. **El Aire 3 encendido toda la noche** (8 h) se comporta igual que 3 h por aire: es el caso más exigente.
+3. **Días nublados:** la batería no termina de llenarse y esa noche cubre menos. En temporada de lluvias (oct–nov) pesa más.
+4. **Cortes de luz largos con aires prendidos:** la batería solo tiene ~7,8 kWh. Solo con las cargas críticas (nevera, congelador, módem, PC, ~0,3–0,5 kW) dura 15 h o más.
+5. **Con los años:** al bajar al ~80–85 % de capacidad (5–8 años) entrega ~6,5 kWh por noche.
+
+**Cuándo sí alcanza:** en los meses frescos o lluviosos (oct–ene, mar, sep), cuando la noche pide 5–7,5 kWh, cubre casi todas las noches.
+
+**Qué pasa cuando no alcanza:** no hay apagón. El SRNE pasa la casa a la red de Air-e cuando la batería llega a su mínimo, y solo se paga lo que faltó: ~1–8 kWh, unos $1 000–8 500 por noche.
+
+**Cómo reducir las noches cortas:**
+- Usar la batería hasta el 90 % (entrega ~8,8 kWh).
+- Preenfriar las alcobas de 1 a 3 pm para usar menos aire de noche.
+- Pasar a la de 15 kWh (~11 kWh útiles), que aun así se quedaría corta en las noches más calurosas (más de 11 kWh).
+
