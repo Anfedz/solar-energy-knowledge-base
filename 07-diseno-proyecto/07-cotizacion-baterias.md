@@ -91,3 +91,52 @@ Los tiempos de pago incluyen ~$0,4 M de instalación ⚠️.
 
 **Medición recomendada para afinar:** leer el medidor de Air-e a las **5–6 pm** y a las **6–7 am** durante al menos 5–7 noches, anotando las horas de aire de cada noche. La diferencia es el consumo nocturno real.
 
+## 7. Pytes E-BOX 48100R: ficha y verificación (consulta del 2026-11-10)
+
+### 7.1 Ficha técnica oficial (Pytes, 2025)
+| Dato | Valor |
+|---|---|
+| Química / voltaje | LiFePO4, 51,2 V nominal (rango 47,5–57,6 V) |
+| Capacidad | 100 Ah = 5,12 kWh nominal; **4,608 kWh útiles** (90 % DoD) |
+| **Corriente de carga/descarga recomendada y máxima continua** | **50 A (2,56 kW) por módulo** |
+| Pico de descarga | 102 A (5,22 kW) durante 15 s |
+| Comunicación | CAN / RS485 (el protocolo según el inversor se elige con interruptores DIP) |
+| Eficiencia de ida y vuelta | 95 % |
+| Ciclos | 6 000 |
+| Temperatura de carga / descarga | 0–45 °C / −10–50 °C |
+| Tamaño y peso | 440 × 620 × 117 mm (2,6U de rack), **51 kg** por módulo |
+| Expansión | 16 módulos por grupo (81,9 kWh) |
+| Certificaciones | UL9540, UL9540A, UL1973, IEC 62619, CE, UN38.3, CEC |
+| Garantía | 10 años |
+
+⚠️ Algunos revendedores publican 75–100 A continuos (otras revisiones del producto). Para el diseño se toma el dato oficial: **50 A por módulo**.
+
+### 7.2 Implicaciones para la casa
+- **Hay que poner mínimo 2 módulos.** Un solo módulo entrega como máximo ~2,56 kW continuos. De noche, con dos aires a la vez, más luces, TV o PC, nevera y congelador, el consumo puede pasar de 2,5–3,5 kW. Con **2 módulos** (≈ 5,1 kW continuos y ~10 kW de pico por 15 s) hay margen, incluido el arranque del Olimpo de velocidad fija.
+- **Calor:** la garantía exige ambiente de **0–45 °C** en operación y **nunca más de 50 °C**. Bajo el techo de eternit, en la tarde, se puede pasar de 40 °C. La batería debe ir en el sitio **más fresco y ventilado** de la casa, lejos del techo y del sol, idealmente a 25–30 °C, que es donde más dura.
+- **Rayos:** la garantía **excluye daños por rayo**, otra razón para que el sistema tenga DPS y puesta a tierra.
+- **Montaje:** 51 kg por módulo. Requiere soporte o rack: Pytes ofrece el R-BOX para 2 módulos ⚠️ (preguntar precio).
+- **Versión:** la generación nueva es la **48100R-C16**. Para combinarla con módulos anteriores se necesita un LV-Hub, así que conviene **comprar los 2 módulos de la misma versión y al mismo tiempo**.
+- **No mezclar** con otras baterías: la garantía se pierde si se conecta con módulos de otro tipo.
+
+### 7.3 Compatibilidad con el SRNE ASP ⚠️ (no confirmada)
+- La lista oficial de Pytes (V1.1, 2025-05) incluye los **SRNE HF4850S80-H y HES4855S100-H** por **RS485** (DIP 101000, cable con pines 8B/7A). La lista europea incluye la serie **SRNE HF/HFP 48 V por CAN**.
+- **La serie ASP no aparece.** El ASP admite los protocolos SRNE, PACE y Pylontech (parámetro 33), así que es probable que funcione con la misma configuración que los HF/HES. Aun así, **hay que confirmarlo**: pedir a Solartex o a Pytes (ess_support@pytesgroup.com) la configuración DIP y el cable para el ASP4865U140-H.
+- Sin comunicación, la batería puede funcionar en modo por voltaje (L16), pero el inversor no conocería sus límites de 50 A.
+
+### 7.4 Garantía en Colombia ⚠️
+- El documento oficial de garantía (versión Europa) da **10 años o 6 000 ciclos al 90 % DoD (26,1 MWh), con 70 % de capacidad retenida**. Exige instalación por un profesional certificado y temperatura de operación de 0–45 °C, y excluye rayos, apertura del equipo y mezcla con otros módulos.
+- Esa garantía dice "instalado en Europa". Solartex anuncia "10 años otorgados directamente por el fabricante". **Pedir por escrito** quién responde en Colombia y cómo se tramita.
+
+### 7.5 Opinión de mercado
+- **No se encontraron reseñas independientes con fallas reportadas.**
+- **Lo que sí hay:** se vende ampliamente en EE. UU. y Europa con certificación UL9540 junto a inversores como Sol-Ark y Victron. Fuentes secundarias la describen como una opción de buen precio, con eficiencia real de 94,5–95 %.
+
+### 7.6 Fuentes
+- [Ficha técnica oficial Pytes E-BOX 48100R](https://pytesess.com/public/upload/20250319/3878cac27dd51f5e944cbf307c6116d5.pdf)
+- [Lista de compatibilidad Pytes V1.1 2025-05](https://ressupply.com/documents/pytes/Pytes_Inverter_Compatibility_List.pdf)
+- [Lista de compatibilidad Pytes, Europa](https://cdn.shopify.com/s/files/1/0549/8073/9127/files/Compatibility_List_of_Pytes_ESS_and_Inverters.pdf)
+- [Garantía Pytes, Europa](https://cdn.shopify.com/s/files/1/0549/8073/9127/files/Terms_of_Warranty_for_Europe.pdf)
+- [Solartex: precio y stock en Colombia](https://solartex.co/tienda/producto/bateria-de-litio-e-box-48100r-51-2v-100ah-pytes)
+- Revendedores con otras cifras de corriente: [Current Connected](https://www.currentconnected.com/product/pytes-e-box-48100r), [Victron (ficha Pytes)](https://victronenergy.com/live/_media/battery_compatibility:pytes_battery_datasheet.pdf), [Solar Traders](https://www.solartraders.com/en/products/batteries/pytes-e-box-48100r)
+
