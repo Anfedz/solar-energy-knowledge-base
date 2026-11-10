@@ -226,3 +226,34 @@ Los tiempos de pago incluyen ~$0,4 M de instalación ⚠️.
 4. ¿La corriente continua es de 150 A (la ficha dice "Max. Discharge Current" y en otra parte "1C/1C continual")?
 5. ¿Desde cuándo vende la marca en Colombia? ¿Tiene referencias de instalaciones?
 
+### 9.1 Comparación de los 3 modelos GreenPoint (consulta del 2026-11-10)
+Simulación hora a hora del sistema elegido con el horizonte de árboles (`escenario_greenpoint_3_modelos.js`). Se usa **80 % de descarga**, que es la condición de los 6 000 ciclos de la ficha.
+
+| Costumbre nocturna | Noche promedio | 5,12 kWh | 10,24 kWh | 14,34 kWh |
+|---|---|---|---|---|
+| Aires 3 h c/u | 8,9 kWh | cubre 44 % · paga 1,85 M · +1,42 M | cubre 83 % · paga 0,69 M · +2,58 M | cubre 97 % · paga 0,27 M · +3,00 M |
+| Aires 2 h c/u | 7,7 kWh | 52 % · 1,41 M · +1,40 M | 92 % · 0,37 M · +2,44 M | 103 % · 0,10 M · +2,70 M |
+| Hoy (Aire 3 toda la noche) | 9,2 kWh | 43 % · 1,92 M · +1,43 M | 81 % · 0,75 M · +2,59 M | 96 % · 0,31 M · +3,04 M |
+| Plan 9–15 + Aire 3 5 h | 6,5 kWh | 61 % · 0,84 M · +1,35 M | 97 % · 0,09 M · +2,10 M | 99 % · 0,06 M · +2,14 M |
+
+"Paga" = lo que se pagaría a Air-e al año por energía y alumbrado; "+X" = ahorro extra frente a no tener batería. Al 90 % de descarga, cada modelo cubre ~5 puntos más.
+
+**Se paga en** (con ~0,4 M de instalación ⚠️), con aires 2–3 h:
+- **5 kWh:** (4,2 + 0,4) / 1,4 ≈ **3,2 años**;
+- **10 kWh:** (6,9 + 0,4) / 2,5 ≈ **2,9 años**.
+
+**¿Cuánto debería costar la de 15 kWh para que valga la pena?**
+- Frente a la de 10 kWh, la de 15 kWh agrega **+0,26–0,45 M/año** con las costumbres actuales y casi nada (+0,04 M) con el plan de 9 am–3 pm.
+- **Para que esa diferencia se pague dentro de los 5 años de garantía,** la de 15 kWh debería costar **como máximo ~$8,2–9,1 M**: 6,9 M + 5 años × 0,26–0,45 M.
+- **Al mismo precio por kWh que la de 10** (0,67 M/kWh), costaría ~$9,6 M, y la diferencia tardaría **6–10 años** en pagarse.
+- **Argumentos a favor de la de 15 kWh:**
+  - **Degradación:** después de 5–8 años una batería puede quedar en ~80–85 % de su capacidad. La de 10 kWh se acercaría a la cobertura de una de 8,5 kWh; la de 15 kWh mantiene margen.
+  - **Noches muy calurosas,** cargas futuras (por ejemplo, un carro eléctrico) y cortes largos.
+  - **Más potencia:** 200 A frente a 150 A.
+- **En contra:** pesa 114 kg y es más cara.
+
+**Conclusión:**
+- La **10 kWh** es el punto óptimo de costo/beneficio.
+- La **15 kWh** solo conviene si la cotizan por **≤ ~$8,5–9 M**, o si se valora el margen para el futuro.
+- La **5 kWh** no alcanza para la noche con las costumbres actuales.
+
