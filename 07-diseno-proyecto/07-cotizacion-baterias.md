@@ -57,3 +57,37 @@ La instalación cubre el cable de batería (~35–50 mm²), el breaker DC de ~16
 - ¿El precio incluye IVA? ¿Hay stock en Barranquilla, o cuánto cuesta el envío a Sabanalarga?
 - ¿Garantía en Colombia? ¿Con quién se tramita?
 - ¿Cuántos módulos se pueden poner en paralelo y hasta cuándo seguirá disponible el modelo?
+
+## 6. Elección según el consumo nocturno (consulta del 2026-11-10)
+**Criterio del propietario:** buena garantía, buena relación precio/kWh, y que cubra **como mínimo la noche con las costumbres actuales**: cada aire 2–3 h, más iluminación y computadores.
+
+Consumo de **5 pm a 7 am** (simulación `escenario_bateria_noche.js`, ajustada a las facturas e incluyendo nevera, congelador, módem y el inversor en vacío):
+
+| Costumbre | Noche promedio | Mes más caluroso | Mes más fresco |
+|---|---|---|---|
+| Aires 3 h c/u | 9,0 kWh | 14,4 kWh | 5,3 kWh |
+| Aires 2 h c/u | 7,7 kWh | 11,4 kWh | 5,1 kWh |
+
+Energía útil ≈ capacidad × 90 % (profundidad de descarga) × 93 % (inversor). Así, 10,24 kWh nominales entregan ~8,6 kWh a la casa.
+
+| Batería | Costo | Noches del año cubiertas (3 h / 2 h) | Pagas/año (3 h / 2 h) | Ahorro extra frente a sin batería | Se paga en |
+|---|---|---|---|---|---|
+| 1× Pytes 5,12 kWh | 4,30 M | 50 % / 58 % | 1,68 / 1,24 M | +1,6 M | 2,9 años |
+| Felicity FLA48171 8,75 kWh | 6,74 M | 81 % / 91 % | 0,75 / 0,41 M | +2,5 M | 2,9 años |
+| **2× Pytes E-BOX 48100R (10,24 kWh)** | **8,59 M** | **88 % / 97 %** | **0,52 / 0,25 M** | **+2,6–2,8 M** | **~3,3 años** |
+| 3× Pylontech US3000C (10,65 kWh) | 11,97 M | 90 % / 98 % | 0,47 / 0,22 M | +2,6–2,8 M | ~4,5 años |
+| 3× Pytes (15,36 kWh) | 12,89 M | 100 % | 0,13 / 0,06 M | +2,7–3,1 M | ~4,5 años |
+
+Los tiempos de pago incluyen ~$0,4 M de instalación ⚠️.
+
+**Recomendación: 2 × Pytes E-BOX 48100R (10,24 kWh, ~$8,6 M + instalación).**
+- **Garantía:** 10 años del fabricante, la mejor del grupo.
+- **Precio:** 0,84 M/kWh, de los mejores con garantía documentada.
+- **Cobertura:** el 88–97 % de las noches del año. Solo en las noches más calurosas (11–14 kWh) entra algo de red al final.
+- **Un tercer módulo** cubre el 100 %, pero suma solo ~$0,3–0,4 M/año por $4,3 M más: no se justifica al inicio. Se puede agregar después si hace falta.
+- Con 2 módulos, la corriente disponible de la batería (~200 A) alcanza para los picos del inversor de 6,5 kW.
+- ⚠️ **Condición:** Solartex debe confirmar por escrito que el BMS de Pytes comunica con el SRNE ASP (protocolo Pylontech por CAN o RS485).
+- **Si no lo confirma:** 2 × Felicity FLA-EU 5,12 kWh (~9,9 M, hasta 10 años de garantía; confirmar el protocolo igual) o 3 × Pylontech US3000C (compatibilidad nativa, ~12 M).
+
+**Medición recomendada para afinar:** leer el medidor de Air-e a las **5–6 pm** y a las **6–7 am** durante al menos 5–7 noches, anotando las horas de aire de cada noche. La diferencia es el consumo nocturno real.
+

@@ -97,6 +97,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Anteproyecto v1: **on-grid de 7 × ~620 W (4,3 kWp) en la cara este (~13 M COP)** + respaldo en fase 2 (inversor-cargador 48 V + batería de 2,4 kWh, ≈ 5,3 M). Ver [`04-anteproyecto.md`](04-anteproyecto.md) — *propuesta superada por la decisión del 2026-11-05* |
 
 ## 8. Pendientes del propietario
+0c. ⏳ **Lecturas del medidor de Air-e** a las 5–6 pm y a las 6–7 am durante 5–7 noches (con horas de aire de cada noche), para dimensionar la batería con el consumo nocturno real.
 0b. ⏳ **Sombra:** fotos del techo a las 8–9 am, 1 pm, 2 pm y 3 pm (un día despejado), para saber a qué hora empieza la sombra y de qué lado vienen los árboles. ⏳ Foto del techo por debajo (láminas y correas) y edad aproximada del techo.
 0. ⏳ **Antes de firmar:** revisar con el instalador los 12 puntos de [`06-plan-implementacion.md`](06-plan-implementacion.md) §2 (tensión 120/240 vs 208 V, funcionamiento sin batería, Wi-Fi, DPS y tierra, RETIE, trámite Air-e, cableado listo para batería, garantías).
 1. ⏳ Voltaje entre fases y entre cada fase y el neutro.
@@ -139,3 +140,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-10 | Preguntó si conviene la batería para aprovechar la energía del mediodía | [`06-plan-implementacion.md`](06-plan-implementacion.md) §10: sí; óptimo 5–7,5 kWh con el plan (se paga en ~3,5–3,8 años) |
 | 2026-11-10 | Preguntó si con venta de energía se ahorraría más. Informó costos de esa opción: ~7 M de instalación y certificación y ~10 M de inversor ⚠️ (fuente no indicada) | [`06-plan-implementacion.md`](06-plan-implementacion.md) §11 |
 | 2026-11-10 | Pidió cotización de baterías | [`07-cotizacion-baterias.md`](07-cotizacion-baterias.md): según el manual, el SRNE acepta los protocolos PACE, Ruida, Aoguan, Oliter, Sunwoda, Daqin, SRNE, Pylontech y Vilion, y funciona sin batería (NOb); 11 opciones con precio; recomendadas Pylontech US3000C, Pytes E-BOX 5,12 kWh y Felicity 8,75 kWh |
+| 2026-11-10 | Criterio para la batería: buena garantía y buena relación precio/kWh, que cubra como mínimo la noche con las costumbres actuales (aires 2–3 h c/u + iluminación + computadores). Propuso leer el medidor a las 6 pm y a las 6 am | [`07-cotizacion-baterias.md`](07-cotizacion-baterias.md) §6: recomendado 2 × Pytes E-BOX 48100R (10,24 kWh, ~8,6 M), sujeto a confirmar compatibilidad. ⏳ Lecturas del medidor de varias noches |
