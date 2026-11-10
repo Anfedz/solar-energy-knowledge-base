@@ -199,3 +199,30 @@ Simulación hora a hora con el sistema elegido y el horizonte de árboles (`07-d
 
 "Sin árboles" incluye el 3 % de pérdidas varias. Con el horizonte de las fotos, todos los escenarios quedan **igual o un poco mejor** que con el supuesto anterior del 10 % parejo.
 
+## 10. ¿Qué tamaño de batería? (consulta del 2026-11-10)
+Simulación hora a hora del sistema elegido, con el horizonte de árboles de las fotos (`escenario_tamano_bateria.js`). Costo supuesto: ~$960 000/kWh más $300 000 de instalación ⚠️ (cotizar al comprar).
+
+| Batería | Costo | Plan 9–15: ahorro/año | Pagas/año | Se paga en | Hábitos actuales: ahorro/año | Se paga en |
+|---|---|---|---|---|---|---|
+| 0 | — | 3,57 M | 2,20 M | — | 2,42 M | — |
+| 2,5 kWh | 2,7 M | 4,36 M | 1,41 M | 3,4 años | 3,23 M | 3,3 años |
+| **5 kWh** | 5,1 M | **5,05 M** | 0,72 M | **3,5 años** | 3,98 M | 3,3 años |
+| **7,5 kWh** | 7,5 M | **5,57 M** | 0,20 M | 3,8 años | 4,66 M | 3,3 años |
+| 10 kWh | 9,9 M | 5,70 M | 0,07 M | 4,7 años | 5,16 M | 3,6 años |
+| 15 kWh | 14,7 M | 5,72 M | 0,05 M | 6,8 años | 5,60 M | 4,6 años |
+
+**Lectura:**
+- La batería **sí es la forma de aprovechar lo que sobra al mediodía**: con el plan, sin batería se desperdician ~6 400 kWh/año.
+  - Con 5 kWh, la batería entrega ~4,4 kWh cada noche y el desperdicio baja a ~4 600 kWh/año.
+  - Con 7,5 kWh entrega ~6 kWh por noche.
+- **Punto óptimo con el plan: 5 a 7,5 kWh.** Por encima de 7,5 kWh casi no suma, porque el consumo nocturno ya quedó cubierto.
+- **Si los hábitos no cambian** (más consumo nocturno), conviene llegar a ~10 kWh.
+- **Ruta sugerida:** primero 5 kWh de una marca **apilable**; después del primer año, ver en la app cuánto se descarga cada noche. Si llega vacía a la mañana, agregar ~2,5–5 kWh.
+- **Vida útil:** una LiFePO4 hace ~1 ciclo por día; con ~6 000 ciclos dura más de 15 años, mucho más que los 3,5 años en que se paga. Para que dure, debe ir **a la sombra y ventilada**: el calor es lo que más la envejece.
+- **El SRNE carga hasta 140 A (~6,7 kW).** Al mediodía sobran 2–4 kW, así que una batería de 5 kWh se llena hacia la 1–2 pm de un día despejado.
+- Aun con batería sigue sobrando energía en días de poco consumo. Otras formas de usarla al mediodía:
+  - preenfriar las alcobas;
+  - congelar botellas de agua en el congelador para que el compresor trabaje menos de noche;
+  - bombear agua al tanque, si hay bomba;
+  - a futuro, cargar un carro eléctrico.
+
