@@ -140,3 +140,45 @@ Los tiempos de pago incluyen ~$0,4 M de instalación ⚠️.
 - [Solartex: precio y stock en Colombia](https://solartex.co/tienda/producto/bateria-de-litio-e-box-48100r-51-2v-100ah-pytes)
 - Revendedores con otras cifras de corriente: [Current Connected](https://www.currentconnected.com/product/pytes-e-box-48100r), [Victron (ficha Pytes)](https://victronenergy.com/live/_media/battery_compatibility:pytes_battery_datasheet.pdf), [Solar Traders](https://www.solartraders.com/en/products/batteries/pytes-e-box-48100r)
 
+## 8. Más opciones y comparación final (consulta del 2026-11-10)
+**Requisitos:** compatible con el SRNE (idealmente protocolo Pylontech), ≥ 5 kW continuos para la noche, ~9–14 kWh, buena garantía y buen precio por kWh.
+
+| Opción | kWh | Precio COP | COP/kWh | Garantía | Corriente continua | Protocolo / compatibilidad SRNE | Noches cubiertas* |
+|---|---|---|---|---|---|---|---|
+| **Felicity FLA48314-EU** (Autosolar, en stock) | **16** (95 % DoD) | **10 818 231** con IVA | **0,68 M** | **10 años**, 8 000 ciclos | ~160 A ≈ 8 kW ⚠️ (dato de revendedor) | Pylontech (según Felicity) ⚠️ confirmar con SRNE | ~100 % |
+| **2 × Pytes E-BOX 48100R** (Solartex, en stock) | 10,24 | 8 594 000 | 0,84 M | 10 años, 6 000 ciclos | 2 × 50 A ≈ 5,1 kW | SRNE HF/HES en la lista; ASP no ⚠️ | 88–97 % |
+| Felicity FLA48171-EU (Autosolar) | 8,75 | 6 743 314 | 0,77 M | ⚠️ sin dato | ⚠️ sin dato | Pylontech ⚠️ | 81–91 % |
+| 2 × Must LP16-48100 (Ineldec, con IVA) | 10,24 | 8 700 000 | 0,85 M | 5 años | ⚠️ sin dato | Protocolo seleccionable ⚠️ | 88–97 % |
+| 2 × Deye SE-F5 (Ineldec, con IVA) | 10,24 | 9 600 000 | 0,94 M | 5 años | ⚠️ | Deye suele usar protocolo Pylontech ⚠️ | 88–97 % |
+| 3 × Pylontech US3000C (Solartex) | 10,65 | 11 974 800 | 1,12 M | ⚠️ sin dato en la tienda | ⚠️ | ✅ Pylontech, nativo | 90–98 % |
+| Felicity LPBF48200-H (Autosolar) | 10 | 9 321 666 | 0,93 M | ⚠️ | ⚠️ | ⚠️ ficha con errores (dice "12 V") | — |
+| Deye SE-G5.1 Pro / Dyness BX51100 / Dyness PowerBrick 14,3 kWh | — | sin precio en Colombia | — | 10 años | 100 A | Pylontech; Dyness incluye SRNE en su lista | — |
+
+\* Con aires 2–3 h c/u de noche (sección 6).
+
+**Lectura:**
+1. **Felicity FLA48314-EU (16 kWh):** el **menor precio por kWh** (0,68 M), 10 años de garantía y 8 000 ciclos.
+   - Cubre todas las noches, incluso las más calurosas, y deja margen para crecer (por ejemplo, un carro eléctrico).
+   - Con ~160 A continuos ⚠️, maneja toda la carga nocturna con holgura.
+   - **En contra:** pesa **122 kg** (va en el piso, se instala entre 2–3 personas), es una sola unidad y cuesta ~2,2 M más que 2 Pytes.
+   - Ahorro estimado ~5,6 M/año (+~3,1 M frente a sin batería): se paga en ~3,6 años.
+2. **2 × Pytes E-BOX 48100R (10,24 kWh):** la de **mejor retorno** (~3,3 años) y menor inversión con garantía de 10 años. Cubre el 88–97 % de las noches. Modular: se puede agregar un tercer módulo.
+3. **Felicity FLA48171-EU (8,75 kWh, 6,7 M):** opción económica si la garantía resulta ser de 10 años. Cubre algo menos (81–91 %).
+4. **Pylontech US3000C:** la única con compatibilidad nativa garantizada, pero la más cara por kWh.
+
+**Recomendación según el criterio del propietario** (buena garantía, buen precio por kWh, cubrir la noche):
+- **Primera opción: Felicity FLA48314-EU de 16 kWh,** si Autosolar confirma (a) la comunicación con el SRNE ASP por protocolo Pylontech, (b) la garantía de 10 años en Colombia y (c) la corriente continua de 160 A.
+- **Si se prefiere menor inversión o modularidad:** 2 × Pytes E-BOX, con las mismas confirmaciones.
+- **En ambos casos:** ubicación fresca y ventilada (≤ 45 °C; ideal 25–30 °C), DPS y puesta a tierra.
+
+**Fuentes:**
+- [Autosolar: Felicity FLA48314-EU](https://autosolar.co/baterias-de-litio/bateria-litio-felicity-solar-16kwh-512v-314a-fla48314-eu)
+- [Solartech: 160 A continuos](https://solartech.eu/products/lifepo4-battery-fla48314-eu-16kwh-felicity-solar)
+- [ENF: ficha FLA48314-EU](https://www.enfsolar.com/pv/storage-system-datasheet/18427)
+- [Autosolar: Felicity LPBF48200-H](https://autosolar.co/baterias-de-litio/bateria-litio-felicity-solar-10kwh-512v-200a-lpbf48200-h)
+- Felicity usa protocolo Pylontech: [lista de compatibilidad FLA (Solarbex)](https://solarbex.com/wp-content/uploads/2026/05/FLA48171-EU-Lista-Compatibilidad.pdf)
+- [Deye SE-G5.1 Pro-B](https://www.solartraders.com/es/products/acumulador/sistema-de-acumulacion/deye-se-g5-1-pro-b)
+- [Dyness BX51100, ficha](https://enertik.com/wp-content/uploads/sites/3/documentos/folletos/bx51100-datasheet.pdf)
+- [Dyness PowerBrick](https://www.solartraders.com/es/products/acumulador/dyness-powerbrick)
+- [Lista de compatibilidad Dyness (incluye SRNE)](https://enertik.com/wp-content/uploads/sites/3/documentos/folletos/dyness-compatible-list-lv-.pdf)
+
