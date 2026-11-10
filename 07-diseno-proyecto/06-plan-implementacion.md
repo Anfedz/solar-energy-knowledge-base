@@ -226,3 +226,26 @@ Simulación hora a hora del sistema elegido, con el horizonte de árboles de las
   - bombear agua al tanque, si hay bomba;
   - a futuro, cargar un carro eléctrico.
 
+## 11. ¿Y si se vendieran excedentes? (consulta del 2026-11-10)
+Costos que reporta el propietario para la opción con venta: **~7 M de instalación y certificación** y **~10 M de inversor** ⚠️ (fuente no documentada). Ahorros de la simulación hora a hora con el horizonte de árboles (`escenario_venta_vs_sin_inyeccion.js`):
+
+| Opción | Inversión aprox. | Ahorro/año (hábitos actuales) | Ahorro/año (plan 9–15) | Plan, si la bolsa no paga | Se paga en (plan) | Neto 10 años* |
+|---|---|---|---|---|---|---|
+| Elegido, sin inyección | ~15,5 M | 2,42 M | 3,57 M | 3,57 M | 4,3 años | ~20 M |
+| Elegido + 5 kWh | ~20,6 M | 3,98 M | 5,05 M | 5,05 M | 4,1 años | ~30 M |
+| Con venta, inversor de 10 M (cifra del propietario) + 7 M | ~23,2 M | 6,70 M | 6,93 M | 5,48 M | 3,3 años | ~46 M |
+| Con venta, inversor de red sencillo de fase partida (2,2–3,9 M, ver `03-mercado-y-equipos`) + 7 M | ~15,4–17,1 M | 6,70 M | 6,93 M | 5,48 M | 2,4 años | ~53 M |
+| Híbrido con venta + 5 kWh | ~28,3 M | 6,70 M | 6,93 M | 5,68 M | 4,1 años | ~41 M |
+
+\* Ahorro de 10 años menos la inversión, sin alzas de tarifa ni degradación.
+
+**Lectura:**
+- **Sí: con venta se ahorra casi el doble** que sin inyección (6,9 frente a 3,6 M/año), aun con los costos reportados. El crédito 1:1 convierte en ahorro casi toda la energía del mediodía que hoy se pierde.
+- **Un inversor de ~10 M es probablemente un híbrido** (venta + batería). Para solo vender basta un inversor de red de fase partida de 2,2–3,9 M, verificando si la red es 208 o 240 V.
+- **Con venta, la batería casi no suma** (6,93 M con o sin ella): la red hace de batería.
+- **Ventajas reales del sistema elegido:**
+  - no depende de que Air-e apruebe la entrega de excedentes (empresa intervenida, trámites lentos, capacidad del circuito);
+  - no depende del pago del excedente neto a bolsa: sin ese pago, la opción con venta baja de 6,93 a 5,48 M;
+  - con batería da **respaldo en cortes**, cosa que un inversor de red sencillo no hace (se apaga cuando se va la luz).
+- **Ruta de mejora futura ⚠️ (a diseñar con el instalador):** conservar el SRNE con batería para las cargas críticas y agregar un **inversor de red pequeño** del lado de la red para una parte de los paneles, con trámite AGPE con excedentes y medidor bidireccional. Así se combina crédito 1:1 con respaldo.
+
