@@ -501,7 +501,7 @@ const CARGAS0 = () => [
   { id: "coc", nombre: "Cocina: microondas, plancha", tipo: "base", critico: false, activo: true, rangos: [R(7, 8, 400), R(12, 13, 400)] },
   { id: "lav", nombre: "Lavadora Mabe", tipo: "base", critico: false, activo: true, rangos: [R(9, 10, 300)] },
   { id: "imp3d", nombre: "Impresora 3D", tipo: "base", critico: false, activo: true, rangos: [R(10, 18, 50)] },
-  { id: "aban", nombre: "Abanicos (3)", tipo: "base", critico: true, activo: false, rangos: [R(13, 17, 180)] },
+  { id: "aban", nombre: "Abanicos (3, todo el día)", tipo: "base", critico: true, activo: true, rangos: [R(7, 23, 180)] },
   { id: "a1", nombre: "Aire 1 · Olimpo 12 000 BTU (fijo)", tipo: "clima", critico: false, activo: true, rangos: AIRES_ACTUAL.a1.map((r) => ({ ...r })) },
   { id: "a2", nombre: "Aire 2 · LG 12 000 BTU inverter", tipo: "clima", critico: false, activo: true, rangos: AIRES_ACTUAL.a2.map((r) => ({ ...r })) },
   { id: "a3", nombre: "Aire 3 · LG 9 000 BTU inverter", tipo: "clima", critico: false, activo: true, rangos: AIRES_ACTUAL.a3.map((r) => ({ ...r })) },
@@ -528,7 +528,7 @@ const DEFAULT = () => ({
   modoConsumo: "habitos", cargas: CARGAS0(), extras: EXTRAS0(), mesDia: 9,
 });
 
-const KEY = "simSolarSabanalarga.v3";
+const KEY = "simSolarSabanalarga.v4";
 let S;
 try { S = JSON.parse(localStorage.getItem(KEY)) || DEFAULT(); } catch (e) { S = DEFAULT(); }
 if (!S.cargas) S = DEFAULT();

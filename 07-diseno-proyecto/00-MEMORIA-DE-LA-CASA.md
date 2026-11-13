@@ -68,7 +68,8 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | **Aire 2 (habitación) — LG VM122C7, DUAL Inverter** | Split **12 000 BTU**: nominal 3 517 W de frío / **1 060 W** de entrada / 4,8 A; rango de frío 703–4 044 W; entrada máx. **1 460 W** / 6,6 A; **220 V** monofásico, 50/60 Hz; R410A 0,85 kg; fusible máx. 15 A. Compresor inverter (arranque suave, consumo bajo en carga parcial) | No | ✅ fotos de la placa y el frente 2026-11-05 · ✅ uso: **2–3 h de día + 2 h de noche** |
 | **Aire 3 (habitación) — LG VM092C6, DUAL Inverter** | Split **9 000 BTU**: nominal 2 638 W de frío / **790 W** de entrada / 4,30 A; rango de frío 879–3 311 W; entrada máx. **1 270 W** / 7,20 A; **220 V** monofásico; R410A 0,60 kg; fusible máx. 15 A | No | ✅ fotos de la placa y el frente 2026-11-05 · ✅ uso: **toda la noche, ~23 h a 7 h (a veces más) + 2–3 h de día** → es el aire que más horas trabaja |
 | Módem / router | ¿El internet sigue durante un corte? | Deseable | ⏳ prueba en el próximo corte |
-| Abanicos | — | Deseable | ⏳ cantidad |
+| **Abanicos** | **Van todo el día** (reportado 2026-11-13). Estimado: 3 × ~60 W × ~16 h ≈ 2,9 kWh/día (~90 kWh/mes) | Deseable | ✅ uso · ⏳ cantidad exacta, tipo (techo o pie) y si van de noche |
+| Herramientas eléctricas | Hay herramientas; uso ocasional | No | ⏳ si alguna es de alto consumo |
 | Computador(es) | — | Deseable (PC) | ⏳ ¿escritorio o portátil? |
 | Impresora 3D | — | No | ⏳ horas/semana |
 | **Lavadora Mabe LMC70203WDAB0** | Automática, 20 kg, etiqueta RETIQ **A**, **9,4 kWh/mes** (14 ciclos/mes ≈ 0,67 kWh/ciclo), factor 121 l/kWh/ciclo. Conviene lavar en horas de sol | No | ✅ foto de la etiqueta 2026-11-05 · ⏳ ¿hay una segunda lavadora? |
@@ -97,7 +98,7 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-05 | Anteproyecto v1: **on-grid de 7 × ~620 W (4,3 kWp) en la cara este (~13 M COP)** + respaldo en fase 2 (inversor-cargador 48 V + batería de 2,4 kWh, ≈ 5,3 M). Ver [`04-anteproyecto.md`](04-anteproyecto.md) — *propuesta superada por la decisión del 2026-11-05* |
 
 ## 8. Pendientes del propietario
-0d. ⏳ ¿Hay **bomba de agua, ducha eléctrica, calentador o estufa eléctrica**? ¿Los computadores son de escritorio (¿gamer?) o portátiles, y cuántas horas se usan? ¿Cuántas horas al día van los abanicos?
+0d. ✅ No hay bomba de agua; hay herramientas; los abanicos van todo el día. ⏳ ¿Hay ducha, calentador o estufa eléctrica? ¿Cuántos abanicos y de qué tipo, y van de noche? ¿Los computadores son de escritorio o portátiles, y cuántas horas se usan?
 0c. ⏳ **Lecturas del medidor de Air-e** a las 5–6 pm y a las 6–7 am durante 5–7 noches (con horas de aire de cada noche), para dimensionar la batería con el consumo nocturno real.
 0b. ⏳ **Sombra:** fotos del techo a las 8–9 am, 1 pm, 2 pm y 3 pm (un día despejado), para saber a qué hora empieza la sombra y de qué lado vienen los árboles. ⏳ Foto del techo por debajo (láminas y correas) y edad aproximada del techo.
 0. ⏳ **Antes de firmar:** revisar con el instalador los 12 puntos de [`06-plan-implementacion.md`](06-plan-implementacion.md) §2 (tensión 120/240 vs 208 V, funcionamiento sin batería, Wi-Fi, DPS y tierra, RETIE, trámite Air-e, cableado listo para batería, garantías).
@@ -148,3 +149,4 @@ Inventario detallado: [`inventario-cargas-propietario.csv`](inventario-cargas-pr
 | 2026-11-10 | Pidió comparar los 3 modelos GreenPoint (5, 10 y 15 kWh); está preguntando el precio de la de 15 kWh | [`07-cotizacion-baterias.md`](07-cotizacion-baterias.md) §9.1: la de 10 kWh es la óptima; la de 15 kWh se justifica si cuesta ≤ ~8,5–9 M. ⏳ Precio de la ESS-KS3-16280 |
 | 2026-11-10 | Preguntó en qué escenarios no alcanzaría la batería de 10 kWh | [`07-cotizacion-baterias.md`](07-cotizacion-baterias.md) §9.2: no alcanza en meses de calor (noches de 9–15 kWh), con el Aire 3 toda la noche, en días nublados, en cortes largos con aires y con los años |
 | 2026-11-13 | Preguntó cuánto gasta cada aire por hora, la nevera y el congelador, y qué equipos explican el consumo | [`03-analisis-consumo.md`](03-analisis-consumo.md) §7: aires ~45–50 % del año (hasta ~66 % en meses de calor); consumo fijo ~9 kWh/día. ⏳ Preguntar por bomba de agua, ducha o calentador eléctrico y tipo de PC |
+| 2026-11-13 | Los abanicos van todo el día. No hay bomba eléctrica; hay herramientas. Opina que el aire debe ser el principal consumidor | §5; [`03-analisis-consumo.md`](03-analisis-consumo.md) §7.5; inventario; simulador (abanicos activos) |

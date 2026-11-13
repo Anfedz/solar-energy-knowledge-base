@@ -132,3 +132,24 @@ Un aire de velocidad fija trabaja ~75–85 % del tiempo a plena potencia. Un inv
 - **Computador e impresora 3D:** un enchufe medidor (tipo Shelly o Tapo, ~$60–150 mil ⚠️) durante una semana.
 - **Lecturas de 6 pm y 6 am** varias noches, como ya se planeó.
 
+### 7.5 Actualización: abanicos todo el día (2026-11-13)
+El propietario informa que **los abanicos van todo el día**, que **no hay bomba de agua** y que hay **herramientas** de uso ocasional.
+
+- **Abanicos:** 3 × ~60 W × ~16 h ≈ **2,9 kWh/día ≈ 90 kWh/mes ≈ $90 000/mes**. Si también van de noche, ~4 kWh/día. Explican buena parte de los ~6 kWh/día del consumo fijo que no cuadraban.
+- **Consumo fijo revisado:** ~**10–12 kWh/día**.
+  - Composición: nevera y congelador 2,3–3,0; abanicos 2,2–4,3; computadores y TV ~2; espera ~1; luces ~0,75; cocina ~0,5–0,8; impresora 3D ~0,4; lavadora 0,3.
+  - Los meses frescos de las facturas (11–13 kWh/día) lo confirman. Abril (9,1) probablemente tuvo menos ocupación o menos abanicos.
+- **Peso de los aires revisado:** ~**30–45 % del consumo anual**, y **~45–65 % en los meses de calor** (mar, may–sep). Siguen siendo **el mayor consumo individual por categoría**, sobre todo el Aire 3 por sus horas.
+- **Ranking anual aproximado:**
+  1. aires, ~1 900–2 700 kWh;
+  2. **abanicos, ~800–1 200 kWh**;
+  3. nevera y congelador, ~840–1 090 kWh;
+  4. computadores y TV, ~730 kWh;
+  5. aparatos en espera, ~400–500 kWh;
+  6. luces, ~270 kWh;
+  7. cocina, ~200–300 kWh;
+  8. impresora 3D, ~150 kWh o más;
+  9. lavadora, ~110 kWh.
+- **Con el sistema solar:** los abanicos **de día** quedan casi gratis, porque en el sistema sin inyección sobra energía al mediodía. Los abanicos **de noche** suman ~0,06 kWh por hora cada uno a lo que debe cubrir la batería.
+- **Ahorro posible:** abanicos de techo con motor **DC (BLDC)**, de ~25–35 W, gastan ~50 % menos que los de motor convencional ⚠️ (precio no investigado). Rinde sobre todo para los que funcionan de noche.
+
