@@ -78,3 +78,57 @@ Un aire de velocidad fija trabaja ~75–85 % del tiempo a plena potencia. Un inv
 - **Mientras tanto:** usar más el Aire 2 o 3 que el 1, con el termostato a 24–25 °C, filtros limpios y la puerta cerrada.
 - **Para afinar:** necesito las horas reales de uso de cada aire (⏳). Con eso recalibro la fracción diurna y el balance mensual del anteproyecto.
 
+## 7. ¿En qué se va la energía? Desagregación estimada (2026-11-13)
+
+**Método:** el piso de las facturas es abr-2026, con **9,1 kWh/día** y casi sin aire. Eso es lo que la casa gasta sin climatización. Lo que pasa de ese piso cada mes es, sobre todo, aire acondicionado. El reparto interno sale del inventario (etiquetas y placas) y de los horarios reportados ⚠️. Costo a ~$1 030/kWh (CU $936 + 10 % de alumbrado).
+
+### 7.1 Consumo fijo (todo el año): ~8–9 kWh/día ≈ 250–275 kWh/mes
+
+| Equipo | kWh/día | kWh/mes | % del consumo fijo | Base |
+|---|---|---|---|---|
+| Nevera + congelador | 2,3–3,0 | 70–91 | ~30 % | Etiquetas (+30 % por calor) |
+| Computadores y TV | ~2,0 ⚠️ | ~60 | ~23 % | Supuesto: 120 W de día 8 h + 250 W de noche 4 h. **Un PC de escritorio potente puede gastar 2–3 veces más** |
+| Módem, cargadores, aparatos en espera | ~1,0–1,5 ⚠️ | 30–45 | ~15 % | Supuesto de 40–60 W permanentes |
+| Abanicos | ~0,5–2 ⚠️ | 15–60 | 5–20 % | No medido (3 abanicos de ~60 W) |
+| Iluminación | ~0,75 ⚠️ | ~23 | ~9 % | Supuesto: 150 W durante 5 h |
+| Cocina: microondas, plancha | ~0,5–0,8 ⚠️ | 15–24 | ~7 % | Supuesto |
+| Impresora 3D | ~0,4 o más ⚠️ | 12+ | ~5 % | Una impresión larga: 1–3 kWh |
+| **Lavadora** | **0,3** | **9,4** | **~3 %** | Etiqueta |
+| Impresora Epson | 0,02 | 0,7 | ~0 % | Etiqueta |
+
+### 7.2 Aires acondicionados: lo que varía mes a mes
+
+| Factura | kWh/día | Fijo | **Aires (aprox.)** | % aires |
+|---|---|---|---|---|
+| abr-26 (mínimo) | 9,1 | ~9 | ~0 | ~0 % |
+| nov-25 / ene-26 | 13,2–13,4 | ~9 | ~4 | ~30 % |
+| oct-26 | 13,3 | ~9 | ~4 | ~32 % |
+| may-26 / jun-26 | 17,7–19,1 | ~9 | ~9–10 | ~50 % |
+| mar-26 | 20,9 | ~9 | ~12 | ~57 % |
+| sep-26 | 21,9 | ~9 | ~13 | ~59 % |
+| **ago-26 (máximo)** | **26,8** | ~9 | **~18** | **~66 %** |
+| **Año (5 887 kWh)** | 16,2 | ~8,5–9 | ~7–8 | **~45–50 %** |
+
+**Reparto entre los aires** (proporcional a horas × potencia reportadas ⚠️), sobre ~2 600–2 800 kWh/año de aire:
+
+| Aire | Uso reportado | kWh/día con uso completo | % del aire | kWh/año aprox. | Costo/año aprox. |
+|---|---|---|---|---|---|
+| **Aire 3 · LG 9 000 inverter** | toda la noche (8 h) + 2–3 h de día | ~4,8 | ~41 % | ~1 100 | ~$1,1 M |
+| **Aire 1 · Olimpo 12 000 (fijo)** | 2–3 h de día + 2 h de noche | ~4,0 | ~34 % | ~920 | ~$0,95 M |
+| Aire 2 · LG 12 000 inverter | 2–3 h de día + 2 h de noche | ~2,9 | ~25 % | ~680 | ~$0,7 M |
+
+### 7.3 Conclusiones
+1. **Los 3 aires explican casi toda la diferencia entre meses.** Son ~45–50 % del consumo del año y hasta ~2/3 en los meses calurosos. El que más gasta es el **Aire 3**, por las horas: toda la noche. El más ineficiente por hora es el **Olimpo**.
+2. **El consumo fijo de ~9 kWh/día es alto** para lo que explican la nevera y el congelador (~2,5–3). Quedan **~6 kWh/día** repartidos entre computadores, TV, aparatos en espera, abanicos, luces, cocina e impresora 3D.
+   - Es la parte con más incertidumbre: puede haber algo no inventariado (bomba de agua, ducha o calentador eléctrico, PC de alto consumo, aparato viejo).
+3. **La lavadora no es:** ~9 kWh/mes, el 3 % del fijo.
+4. **La nevera y el congelador juntos** gastan al año lo mismo que un aire (~840–1 090 kWh), pero no se pueden reducir mucho: ya son clase A.
+
+### 7.4 Mediciones para confirmar (sin comprar nada)
+- **Consumo de fondo:** una noche, con todo apagado salvo la nevera y el congelador, leer el medidor al inicio y 1 hora después.
+  - Si da **~0,13 kWh**, el fondo es normal.
+  - Si da **0,25 kWh o más**, hay algo prendido todo el tiempo.
+- **Cada aire:** prender solo ese aire 1 hora y leer el medidor antes y después (restar ~0,13 kWh de la nevera y el congelador).
+- **Computador e impresora 3D:** un enchufe medidor (tipo Shelly o Tapo, ~$60–150 mil ⚠️) durante una semana.
+- **Lecturas de 6 pm y 6 am** varias noches, como ya se planeó.
+
