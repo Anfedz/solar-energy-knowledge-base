@@ -96,5 +96,6 @@ Para regenerar los datos de radiación: `cd 06-datos && python3 -I procesar_dato
 | Diseño de detalle (strings, unifilar, protecciones, estructura) | ⏳ falta: voltaje medido, fotos del medidor, el tablero, el techo y los árboles |
 | Análisis de cotización y simulador | ✅ [`05-analisis-cotizacion.md`](07-diseno-proyecto/05-analisis-cotizacion.md), [`08-simulador/`](08-simulador/README.md) |
 | **Decisión** | ✅ Cotización de 12 × Ronma 630 W + SRNE 6,5 kW (sin batería); plan de implementación, hábitos de 9 am–3 pm y batería: [`06-plan-implementacion.md`](07-diseno-proyecto/06-plan-implementacion.md) |
-| Instalación y monitoreo | ⏳ |
+| **Instalación** | ✅ 2026-11-20 (12 × Ronma 630 W + SRNE ASP4865U140-H, sin batería; 01 = SUB, 08 = NOb). ⚠️ En revisión por ruido o vibración del ventilador |
+| Monitoreo (Wi-Fi, lecturas del medidor) | ⏳ |
 | Trámites (RETIE, Air-e, UPME) | ⏳ |
