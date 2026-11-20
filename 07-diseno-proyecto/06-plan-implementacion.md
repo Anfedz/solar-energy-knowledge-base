@@ -30,7 +30,7 @@
 | # | Punto | Por qué |
 |---|---|---|
 | 1 | **Medir la tensión entre fases.** El SRNE es de fase partida 120/240 V. Si la red es **120/208 V**, el instalador debe confirmar por escrito que el equipo funciona así (o cambiar de modelo) | Si no es compatible, el bypass a la red puede fallar |
-| 2 | ✅ El manual confirma que el SRNE **funciona sin batería** (parámetro 08 = NOb). Falta confirmar si **mezcla** solar y red o **conmuta** | Es la diferencia entre 2,5 y 2,1 M/año de ahorro |
+| 2 | ✅ **Funciona sin batería y mezcla solar + red.** El manual ASP serie U (parámetro 08 = NOb; modo de salida UTI: *"the grid power and photovoltaic mixed load"*) y el folleto oficial SRNE 2026 (serie ASP 4–10 kW U, incluido el ASP4865U140-H: *"Support self-use/without battery output mode… In the without battery mode (anti-backflow), the mains electricity will be used to supplement the solar power"*). Configurar: 08 = NOb y 01 = UTI o SUB (no SOL/SBU, que dependen del voltaje de batería) | Es la diferencia entre 2,5 y 2,1 M/año de ahorro |
 | 3 | **Módulo Wi-Fi del SRNE incluido** y configurado en tu celular | Es la herramienta principal de tu plan de medir; en la cotización es opcional |
 | 4 | **DPS (protección contra rayos) en DC y en AC + puesta a tierra** | Tu zona tiene 10–30 descargas/km²·año. No aparecen en la cotización |
 | 5 | **Protecciones DC reales:** breakers DC de ≥ 500 V con certificado RETIE (no breakers AC) | $75 000 por protección DC parece bajo |
@@ -248,4 +248,27 @@ Costos que reporta el propietario para la opción con venta: **~7 M de instalaci
   - no depende del pago del excedente neto a bolsa: sin ese pago, la opción con venta baja de 6,93 a 5,48 M;
   - con batería da **respaldo en cortes**, cosa que un inversor de red sencillo no hace (se apaga cuando se va la luz).
 - **Ruta de mejora futura ⚠️ (a diseñar con el instalador):** conservar el SRNE con batería para las cargas críticas y agregar un **inversor de red pequeño** del lado de la red para una parte de los paneles, con trámite AGPE con excedentes y medidor bidireccional. Así se combina crédito 1:1 con respaldo.
+
+## 12. Funcionamiento sin batería: confirmado en documentos oficiales (2026-11-20)
+- **Manual SRNE ASP 4–6,5 kW serie U V1.1:**
+  - **Parámetro 08**, tipo de batería = **NOb, "No battery"**.
+  - **Parámetro 01**, modo de salida:
+    - **UTI** (por defecto): *"Photovoltaic energy priority with the load, photovoltaic is not enough, the grid power and photovoltaic mixed load"*. La solar tiene prioridad y, si no alcanza, **se mezcla con la red**.
+    - **SUB:** *"excess solar energy and grid will hybrid load"*.
+    - **SOL y SBU** cambian entre inversor y red según el voltaje de la batería (parámetros 04 y 05), así que **no son adecuados sin batería**.
+  - **Características (2.2):** *"Provide 2 charge modes: only PV and grid + PV"*, *"two output modes: mains bypass output and inverter output"*, *"energy-saving mode, reducing no-load energy losses"*.
+  - **Hoja de datos:** *"Load Capacity of Motors 5HP"* (folleto) y bypass de 45 A.
+- **Folleto oficial SRNE "Solar Storage Inverter US for Residential" V5.1 (enero de 2026):**
+  - La serie **ASP 4–10 kW U** (ASP4840, 4850, 4860, **4865U140-H**, 4880, 48100) dice *"Support self-use/without battery output mode"*.
+  - Modo sin batería: *"In the without battery mode (anti-backflow), the mains electricity will be used to supplement the solar power to power the household load"*. Es decir, la red **complementa** la solar y el equipo **no inyecta** a la red (anti-backflow = cero inyección).
+- **Consecuencias:**
+  - El escenario A' ("conmuta") del análisis de la cotización queda como **poco probable**. El ahorro esperado sin batería es el del escenario A (~2,4–2,5 M/año con hábitos actuales; ~3,5 M con el plan 9–15).
+  - El anti-backflow sirve como función de no inyección para el trámite de **AGPE sin excedentes** ante Air-e. Pedir al instalador el manual o la ficha que lo acredite.
+- **Sin confirmar** (no se encontraron reportes de usuarios del ASP sin batería):
+  - comportamiento durante un **corte de red** sin batería;
+  - consumo en vacío;
+  - estabilidad con nubes o con el arranque del aire de velocidad fija.
+- **Fuentes:**
+  - [Manual ASP 4–6,5 kW U V1.1](https://www.srnesolar.com/userfiles/files/2025/09/01/ASP%204-6.5KW%20%20U%20series_solar%20storage%20inverter_V1.1.pdf)
+  - [Folleto SRNE US Residential V5.1](https://www.srnesolar.com/userfiles/files/2026/01/20/SRNE_Solar%20Storage%20Inverter_US_%20for%20Residential_Brochure_V5.1_compressed.pdf)
 
