@@ -354,3 +354,15 @@ Documentos compartidos por el propietario: ficha técnica FLA-EU y manual del us
 - La Felicity ofrece **la mayor capacidad, la mejor vida en ciclos y 10 años de garantía**, al menor precio por kWh útil (~0,71 M por kWh útil). Cubre todas las noches, incluso las más calurosas.
 - **En contra:** solo tiene certificación de transporte, la comunicación con el SRNE requiere un cable hecho a medida (riesgo de configuración) y pesa 121,5 kg.
 
+### 10.5 Configuración del SRNE al instalar la batería (con y sin cable de comunicación) — 2026-11-23
+- ⚠️ **Cambiar el modo de salida 01 de SUB a SBU.** En SUB y UTI el manual dice *"the battery is discharged only when off the grid"*: la batería solo serviría de respaldo. En **SBU** la casa usa primero la solar, luego la batería y al final la red.
+- **Con cable de comunicación** (recomendado):
+  - 08 = L16; 32 = CAN (o 485); 33 = PYL.
+  - El paso entre batería y red se controla por % de carga: **61** = pasar a la red (por ejemplo 10–20 %) y **62** = volver a la batería (por ejemplo 90–100 %). Solo funciona con BMS comunicado.
+  - Además se ve el % de carga en la pantalla y el inversor respeta los límites del BMS.
+- **Sin cable** (permitido por Felicity, Apéndice I):
+  - 08 = USER (o L16); 07 = 80 A; 09 = 57,6 V; 11 = 57,6 V (o algo menos para cuidar la batería ⚠️); 12 y 15 ≈ 48 V; 14 ≈ 49 V ⚠️.
+  - El paso entre batería y red se controla por **voltaje**: **04** ≈ 48,5–49 V ⚠️ y **05** ≈ 55–57,6 V ⚠️. Es impreciso por la curva plana del LFP.
+  - No se ve el % de carga en el SRNE, y la batería se protege cortando por su cuenta.
+- Manual SRNE: parámetros 01 y 04–07 en la pág. 44 del PDF; 08–15 en la pág. 45; 32–33 en la pág. 48; 60–62 en la sección de ajustes de SOC.
+
