@@ -294,3 +294,63 @@ Los meses de consumo se deducen de las facturas: el mes de cada factura correspo
 - Preenfriar las alcobas de 1 a 3 pm para usar menos aire de noche.
 - Pasar a la de 15 kWh (~11 kWh útiles), que aun así se quedaría corta en las noches más calurosas (más de 11 kWh).
 
+## 10. Felicity FLA48314-EU: ficha y manual oficiales revisados (2026-11-23)
+Documentos compartidos por el propietario: ficha técnica FLA-EU y manual del usuario FLA48314-EU (rev. 1.0, abril de 2026).
+
+### 10.1 Datos verificados
+| Dato | Valor oficial |
+|---|---|
+| Energía / voltaje | 16 kWh, 51,2 V (44,8–57,6 V) |
+| **Corriente continua de carga/descarga** | **160 A** (varía con la temperatura y el % de carga); pico de 300 A por 15 s; 8 000 W |
+| Descarga | **≥ 95 %** (≈ 15,2 kWh útiles) |
+| **Ciclos** | **≥ 8 000** (25 °C, 0,5C, **90 % de descarga**, 70 % de capacidad al final) |
+| Temperatura de carga / descarga | 0–55 °C / −20–55 °C; **ideal 20–30 °C** |
+| Comunicación | RS485 / CAN; Wi-Fi y Bluetooth incorporados |
+| Protección | BMS, breaker, **fusible externo reemplazable**, **extinción de incendios por aerosol**; IP21 |
+| Instalación | **En el piso, con ruedas**; 121,5 kg; 435 × 880 × 247 mm |
+| Garantía | **10 años**, según la política de garantía de Felicity |
+| Certificación | **Solo UN38.3** ⚠️ (no figuran IEC 62619 ni UL) |
+| Expansión | hasta 15 en paralelo (240 kWh) |
+
+### 10.2 Compatibilidad con el SRNE ASP4865U140-H
+- El manual **no trae lista de inversores compatibles** ni selección de protocolo en pantalla. Felicity indica en otros documentos que usa **protocolo Pylontech**. El SRNE admite **PYL** (parámetro 33, página 48 del PDF de su manual).
+- **Los pines del conector no coinciden** (manual Felicity, pág. 16; manual SRNE, sección 6.4, pág. 56 del PDF), así que hace falta un **cable personalizado**:
+
+| Señal | Batería Felicity (RJ45) | SRNE ASP (RJ45) |
+|---|---|---|
+| CAN-H | pin 4 (CANH-PCS) | pin 4 |
+| CAN-L | pin 3 (CANL-PCS) | **pin 5** |
+| RS485-B | pin 5 | **pin 1** (u 8) |
+| RS485-A | pin 6 | **pin 2** (o 7) |
+
+- **Configuración sugerida en el SRNE:**
+  - 08 = L16 (LFP de 16 celdas) en lugar de NOb;
+  - 32 = CAN (o 485 con el cable correspondiente);
+  - 33 = PYL.
+  - El cable azul "para otras marcas" que trae la caja puede servir, pero **hay que verificar su orden de pines** ⚠️.
+- **Si no hay comunicación** (Apéndice I del manual): carga máxima y flotación a 57,6 V, corriente máxima 160 A × N, corte a 48 V. Cargar a 80 A constantes hasta 57,6 V y luego a 57,6 V hasta que la corriente baje a 14 A.
+
+### 10.3 Instalación según el manual
+- **Lugar:** interior, sin sol, viento ni polvo; lejos del mar y de humedad alta; piso **plano y nivelado**; sin materiales inflamables.
+- **Puesta a tierra:** el manual pide **menos de 1 Ω**. Es más exigente que lo usual; revisar la malla de tierra.
+- **DIP para una sola batería:** **1 y 5 en ON**.
+- **Encendido:** inversor → breaker de la batería en ON → botón de la batería.
+- **Apagado:** inversor → mantener el botón 3 s → breaker en OFF.
+- **Incluye:** 2 cables de potencia de 50 mm² (160 A), cable RS485 gris (para inversores Felicity), cable azul (otras marcas), cable negro (paralelo), terminales para cables personalizados y fusible de repuesto.
+- **Precauciones:**
+  - no mezclar con otras baterías;
+  - recargar en menos de 18 h si se descarga por completo;
+  - en almacenamiento, recargar cada 6 meses por encima del 80 %;
+  - no usar con controladores PWM.
+
+### 10.4 Comparación actualizada
+| Opción | Precio | Útil aprox. | Ciclos | Garantía | Certificación | Compatibilidad con SRNE |
+|---|---|---|---|---|---|---|
+| **Felicity FLA48314-EU 16 kWh** | 10,8 M (con IVA, Autosolar) | ~15,2 kWh | **8 000 al 90 %** | **10 años** | UN38.3 | Protocolo Pylontech + cable personalizado ⚠️ |
+| GreenPoint ESS-KS6-16200 10 kWh | 6,9 M (cotizada) | ~8–9 kWh | 6 000 al 80 % | 5 años | IEC 62619, UN38.3 | SRNE en su lista de marcas |
+| 2 × Pytes E-BOX 48100R | 8,6 M | ~9,2 kWh | 6 000 al 90 % | 10 años | UL9540, UL1973, IEC 62619 | SRNE HF/HES en su lista; ASP no |
+
+**Lectura:**
+- La Felicity ofrece **la mayor capacidad, la mejor vida en ciclos y 10 años de garantía**, al menor precio por kWh útil (~0,71 M por kWh útil). Cubre todas las noches, incluso las más calurosas.
+- **En contra:** solo tiene certificación de transporte, la comunicación con el SRNE requiere un cable hecho a medida (riesgo de configuración) y pesa 121,5 kg.
+
