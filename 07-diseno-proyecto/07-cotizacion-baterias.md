@@ -366,3 +366,21 @@ Documentos compartidos por el propietario: ficha técnica FLA-EU y manual del us
   - No se ve el % de carga en el SRNE, y la batería se protege cortando por su cuenta.
 - Manual SRNE: parámetros 01 y 04–07 en la pág. 44 del PDF; 08–15 en la pág. 45; 32–33 en la pág. 48; 60–62 en la sección de ajustes de SOC.
 
+## 11. Oferta Powertek Solar, Black Week del 23 al 27 de noviembre de 2026 (captura del propietario, 2026-11-24)
+| Felicity (Powertek) | Antes | **Oferta** | COP/kWh |
+|---|---|---|---|
+| **16 kWh 48 V** (de piso con ruedas: FLA48314-EU o FLB48314TG1 ⚠️ confirmar) | 7 125 000 | **6 600 000** | **0,41 M** |
+| 5,12 kWh 48 V | 3 125 000 | 2 760 000 | 0,54 M |
+| 2,56 kWh 12 V / 1,28 kWh 12 V | — | 1 680 000 / 840 000 | (12 V: no sirven para el SRNE de 48 V) |
+
+- **Lectura:** la Felicity de 16 kWh a **$6,6 M** es la **mejor opción de todo el análisis**.
+  - Cuesta menos que la GreenPoint de 10 kWh (6,9 M), con 60 % más capacidad (~15 kWh útiles), 10 años de garantía frente a 5, y 8 000 ciclos.
+  - Cubre ~100 % de las noches. Se paga en **~2,4 años** (~2,7 si el IVA va aparte: 6,6 M × 1,19 ≈ 7,85 M).
+- **Vendedor:** Powertek Solar, aparentemente de Cali. Figura en publicaciones como distribuidor autorizado de Canadian Solar y vendedor de Deye. No se encontró sitio web oficial ⚠️.
+- **Confirmar antes de comprar:** referencia exacta, IVA, flete Cali → Sabanalarga (~122 kg), garantía de 10 años en Colombia y quién la atiende, y cables incluidos (2 de 50 mm² y los de comunicación).
+- **Tiempos:** se puede comprar para asegurar el precio, pero **conectarla después de resolver el ruido del inversor**. Guardada: lugar fresco y seco, recargar cada 6 meses por encima del 80 %.
+- **Fuentes de referencia del modelo:**
+  - [Felicity FLA48314-EU (NKON)](https://www.nkon.nl/en/felicity-fla48314-eu-16kwh.html)
+  - [Felicity FLB48314TG1 (Solar Traders)](https://www.solartraders.com/es/products/acumulador/felicity-solar-flb48314tg1)
+  - [Manual FLB48314TG1 (Solarbex)](https://solarbex.com/wp-content/uploads/2026/03/Manual-Felicity-16-kW-51.2-V-FLB48314TG1-7.pdf)
+
