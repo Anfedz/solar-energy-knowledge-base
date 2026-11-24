@@ -384,3 +384,20 @@ Documentos compartidos por el propietario: ficha técnica FLA-EU y manual del us
   - [Felicity FLB48314TG1 (Solar Traders)](https://www.solartraders.com/es/products/acumulador/felicity-solar-flb48314tg1)
   - [Manual FLB48314TG1 (Solarbex)](https://solarbex.com/wp-content/uploads/2026/03/Manual-Felicity-16-kW-51.2-V-FLB48314TG1-7.pdf)
 
+### 11.1 Confirmación del producto y química (2026-11-24)
+- **Página de Powertek:** https://www.powerteksolar.com/producto/bateria-de-litio-16kwh-48v-felicity-solar/ (la única batería de 16 kWh de su listado).
+  - Referencia **FLA48314-EU**. La ficha técnica y el manual revisados en la §10 se descargaron de ahí.
+  - Garantía de 10 años (no dice quién la da).
+  - **La página no muestra precio ni si incluye IVA.**
+  - Tienda en **Yumbo (Valle)**: Cra 32 No 9-71 Bod 5, Arroyohondo; tel. +57 (602) 6941094, WhatsApp +57 315 492 1329, info@powerteksolar.com.
+- **Precio:** oferta $6,6 M; sin descuento $7 125 000.
+  - Aun sin descuento: **~0,47 M por kWh útil**, frente a ~0,80 de la GreenPoint de 10 kWh y ~0,93 de 2 Pytes.
+  - Sigue siendo **la mejor opción**. Se paga en ~2,5 años, con instalación y flete.
+- **Química:** el **LiFePO4 (LFP)** es la mejor opción residencial hoy.
+  - Frente al plomo-ácido: hay que comprar el doble de capacidad, dura 3–5 años con calor y sale más caro por kWh entregado.
+  - Frente al NMC: menor seguridad térmica, menos ciclos y más sensible al calor.
+  - Sodio-ion: tecnología emergente, poca oferta en Colombia ⚠️.
+  - De flujo: solo para instalaciones comerciales.
+  - Detalle técnico en `04-tecnico-cientifico/baterias-tecnologia-y-vida-util.md`.
+- **Vida útil estimada:** con ~0,45–0,6 ciclos por día, los 8 000 ciclos equivalen a 36–48 años. En la práctica la limita el **envejecimiento por tiempo y calor**: **12–15 años o más** si se ubica en un lugar fresco (20–30 °C). Fin de vida = 70 % de capacidad (~11 kWh).
+
